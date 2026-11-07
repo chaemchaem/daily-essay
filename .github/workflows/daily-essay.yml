@@ -1,0 +1,131 @@
+name: 논점 — 일일 논술 발행
+
+# 논점(daily-essay) 예약 작업. 서버(GitHub Actions)에서 실행되므로 브라우저를 닫아도 동작한다.
+# cron은 UTC 기준이다(한국시간 = UTC+9). GitHub 예약 실행은 혼잡 시 수 분~수십 분 늦게 시작될 수 있어
+# 생성은 발행 3시간 전에 시작하고, 발행 작업은 09:00 직전에 시작해 정각까지 기다린다.
+on:
+  schedule:
+    - cron: "5 21 * * *"   # 06:05 KST — 수집·선별·작성·검토(주말·공휴일 포함 매일)
+    - cron: "47 23 * * *"  # 08:47 KST — 09:00까지 기다렸다가 검토 완료된 주제만 공개
+    - cron: "40 1 * * *"   # 10:40 KST — 오늘 실패분·누락 날짜 복구(재시도 상한 있음)
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "관리자 실행"
+        type: choice
+        default: daily
+        options: [daily, retry, publish, recover, status, pause, resume, probe-sources, eval-adversarial, rebuild-public]
+      date:
+        description: "대상 발행호 날짜(YYYY-MM-DD, 비우면 오늘 KST)"
+        required: false
+        default: ""
+      reason:
+        description: "일시 중지 사유 등 메모"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+# 같은 작업이 겹쳐 실행되지 않게 한다(대기열 처리, 취소 없음). 코드 내부 잠금(만료 포함)이 2차 방어선이다.
+concurrency:
+  group: daily-essay
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: pnpm 설정
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+          run_install: false
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 의존성 설치
+        run: pnpm install --frozen-lockfile
+
+      - name: 실행할 작업 결정
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_ACTION: ${{ inputs.action }}
+          INPUT_DATE: ${{ inputs.date }}
+        run: |
+          if [ "$EVENT" = "schedule" ]; then
+            case "$SCHEDULE" in
+              "5 21 * * *")  echo "cmd=daily --kind scheduled --trigger cron" >> "$GITHUB_OUTPUT" ;;
+              "47 23 * * *") echo "cmd=publish --wait" >> "$GITHUB_OUTPUT" ;;
+              "40 1 * * *")  echo "cmd=recover --trigger cron" >> "$GITHUB_OUTPUT" ;;
+              *) echo "알 수 없는 일정: $SCHEDULE"; exit 1 ;;
+            esac
+          else
+            if [ -n "$INPUT_DATE" ] && ! echo "$INPUT_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then echo "날짜 형식 오류"; exit 1; fi
+            DATE_ARG=""; [ -n "$INPUT_DATE" ] && DATE_ARG="--date $INPUT_DATE"
+            case "$INPUT_ACTION" in
+              daily)  echo "cmd=daily --kind manual --trigger workflow_dispatch $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
+              retry)  echo "cmd=daily --kind retry --trigger workflow_dispatch $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
+              publish) echo "cmd=publish $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
+              *) echo "cmd=$INPUT_ACTION" >> "$GITHUB_OUTPUT" ;;
+            esac
+          fi
+          echo "kst_now=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')"
+
+      - name: 실행
+        timeout-minutes: 270
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NJ_INTERNAL_KEY: ${{ secrets.NJ_INTERNAL_KEY }}
+          NJ_PAUSED: ${{ vars.NJ_PAUSED }}
+          NJ_SITE_NAME: ${{ vars.NJ_SITE_NAME }}
+          NJ_TOPICS_MIN: ${{ vars.NJ_TOPICS_MIN }}
+          NJ_TOPICS_MAX: ${{ vars.NJ_TOPICS_MAX }}
+          NJ_ANSWER_MIN_CHARS: ${{ vars.NJ_ANSWER_MIN_CHARS }}
+          NJ_ANSWER_MAX_CHARS: ${{ vars.NJ_ANSWER_MAX_CHARS }}
+          NJ_DAILY_USD_CAP: ${{ vars.NJ_DAILY_USD_CAP }}
+          NJ_MAX_REVISIONS: ${{ vars.NJ_MAX_REVISIONS }}
+          NJ_TOPIC_CONCURRENCY: ${{ vars.NJ_TOPIC_CONCURRENCY }}
+          NJ_WRITER_PROVIDER: ${{ vars.NJ_WRITER_PROVIDER }}
+          NJ_WRITER_MODEL: ${{ vars.NJ_WRITER_MODEL }}
+          NJ_REVIEWER_PROVIDER: ${{ vars.NJ_REVIEWER_PROVIDER }}
+          NJ_REVIEWER_MODEL: ${{ vars.NJ_REVIEWER_MODEL }}
+          NJ_FACTS_MODEL: ${{ vars.NJ_FACTS_MODEL }}
+          NJ_TRIAGE_MODEL: ${{ vars.NJ_TRIAGE_MODEL }}
+          NJ_OPENAI_PRICE_IN: ${{ vars.NJ_OPENAI_PRICE_IN }}
+          NJ_OPENAI_PRICE_OUT: ${{ vars.NJ_OPENAI_PRICE_OUT }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          REASON: ${{ inputs.reason }}
+        run: |
+          if [ "${{ steps.plan.outputs.cmd }}" = "pause" ]; then
+            node src/cli.js pause --reason "${REASON:-관리자 일시 중지}"
+          else
+            node src/cli.js ${{ steps.plan.outputs.cmd }}
+          fi
+
+      # 실패·시간 초과여도 단계별 결과(체크포인트)와 실패 상태를 커밋해 다음 실행이 이어서 처리하고
+      # 화면에 '지연·실패'가 표시되게 한다. 다른 실행과 커밋이 겹칠 수 있어 rebase 후 재시도한다.
+      - name: 결과 커밋
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for p in data/public data/internal data/state config/control.json docs/adversarial-report.md; do [ -e "$p" ] && git add "$p"; done
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          git commit -m "chore(daily-essay): ${{ steps.plan.outputs.cmd }} $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M KST')"
+          for i in 1 2 3 4; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((2 ** i))
+          done
+          echo "::error::푸시 실패"; exit 1

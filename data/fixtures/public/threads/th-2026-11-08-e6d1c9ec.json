@@ -1,0 +1,35 @@
+{
+  "id": "th-2026-11-08-e6d1c9ec",
+  "title": "[테스트] 가온시 시립도서관 야간 운영 축소 계획",
+  "category": "society",
+  "firstDate": "2026-11-08",
+  "lastDate": "2026-11-09",
+  "topics": [
+    {
+      "id": "2026-11-08-e6d1c9ec",
+      "issueDate": "2026-11-08",
+      "title": "[테스트] 무인 대출기는 야간 도서관을 대신할 수 있는가",
+      "kind": "new"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-11-09",
+      "summary": "[테스트] 노조가 반대 서명을 제출했으나 정책 단계나 논점은 바뀌지 않았다.",
+      "articles": [
+        {
+          "title": "[테스트] 가온시 도서관 노조, 야간 운영 중단 반대 서명 제출",
+          "outlet": "한겨레",
+          "url": "https://fixture.test/hani-all/lib-sign",
+          "publishedAt": "2026-11-08T15:00:00+09:00"
+        },
+        {
+          "title": "[테스트] 가온시 도서관 노조, 야간 운영 중단 반대 서명 제출",
+          "outlet": "SBS",
+          "url": "https://fixture.test/sbs-society/lib-sign",
+          "publishedAt": "2026-11-08T15:00:00+09:00"
+        }
+      ]
+    }
+  ]
+}

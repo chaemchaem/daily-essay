@@ -1,0 +1,16 @@
+{
+  "_doc": "역할별 LLM 제공자·모델. 환경변수 NJ_<ROLE>_PROVIDER / NJ_<ROLE>_MODEL 로 덮어쓸 수 있다. 검토 역할을 다른 제공자로 바꾸면 화면에 '다른 모델 검토'로 표시되고, 같은 모델이면 '같은 모델의 별도 호출'로 정직하게 표시된다.",
+  "roles": {
+    "triage":   { "provider": "anthropic", "model": "claude-opus-5-5", "effort": "medium" },
+    "facts":    { "provider": "anthropic", "model": "claude-opus-5-5", "effort": "high" },
+    "writer":   { "provider": "anthropic", "model": "claude-opus-5-5", "effort": "high" },
+    "reviewer": { "provider": "anthropic", "model": "claude-opus-5-5", "effort": "high" }
+  },
+  "pricingUsdPerMTok": {
+    "_source": "Anthropic 공식 가격표(claude-api 참조, 2026-10 기준). OpenAI 모델을 쓰면 NJ_OPENAI_PRICE_IN / NJ_OPENAI_PRICE_OUT 로 단가를 지정해야 비용이 추정된다.",
+    "claude-opus-5-5":   { "input": 4.0,  "output": 20.0, "cacheRead": 0.2 },
+    "claude-sonnet-5-5": { "input": 2.0,  "output": 10.0, "cacheRead": 0.2 },
+    "claude-haiku-5-5":  { "input": 0.1,  "output": 0.5 },
+    "claude-fable-5-1":  { "input": 10.0, "output": 50.0, "cacheRead": 0.25 }
+  }
+}

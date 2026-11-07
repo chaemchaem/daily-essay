@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-09",
+  "number": 2,
+  "state": "all_held",
+  "stateLabel": "검토 통과 주제 없음",
+  "window": {
+    "primaryStart": "2026-11-08T00:00:00+09:00",
+    "primaryEnd": "2026-11-09T00:00:00+09:00",
+    "overlapStart": "2026-11-06T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-09T06:10:00+09:00",
+  "generatedAt": "2026-11-09T06:10:00+09:00",
+  "publishedAt": null,
+  "recovered": null,
+  "topics": [],
+  "counts": {
+    "published": 0,
+    "held": 1,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 4
+  },
+  "heldSummary": [
+    {
+      "reason": "검토 미통과(수정 상한 도달 또는 차단 항목)",
+      "count": 1
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [
+    {
+      "threadId": "th-2026-11-08-e6d1c9ec",
+      "summary": "[테스트] 노조가 반대 서명을 제출했으나 정책 단계나 논점은 바뀌지 않았다.",
+      "eventDate": "2026-11-08"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-09T09:00:20+09:00",
+      "change": "상태 기록: all_held"
+    }
+  ],
+  "test": true
+}

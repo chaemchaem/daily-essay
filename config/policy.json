@@ -1,0 +1,65 @@
+{
+  "policyVersion": "2026-11-07.1",
+  "schedule": {
+    "publishAtKst": "09:00",
+    "generateStartKst": "06:05",
+    "note": "실제 실행 시각은 .github/workflows/daily-essay.yml의 cron이 결정한다. 이 값은 지연 판단과 화면 표시용이다."
+  },
+  "window": {
+    "primaryHours": 24,
+    "overlapHours": 72
+  },
+  "topics": {
+    "targetMin": 3,
+    "targetMax": 5,
+    "candidateClustersForTriage": 40,
+    "minSelectionScore": 3.2,
+    "maxPerCategoryPerIssue": 2,
+    "categoryLookbackDays": 7,
+    "categoryOverweightShare": 0.35,
+    "duplicateQuestionSimilarity": 0.42
+  },
+  "answer": {
+    "minChars": 1500,
+    "maxChars": 2000,
+    "countMode": "공백 포함, 줄바꿈 제외",
+    "minParagraphs": 4,
+    "maxParagraphs": 9
+  },
+  "quality": {
+    "maxRevisionRounds": 2,
+    "requireIndependentSources": 2,
+    "blockingSeverities": ["critical"],
+    "blockingMajorTypes": [
+      "factual_error",
+      "unsupported_key_evidence",
+      "internal_contradiction",
+      "requirement_missing",
+      "source_misrepresentation",
+      "fabricated_detail",
+      "status_misstated"
+    ]
+  },
+  "budget": {
+    "dailyUsdCap": 20,
+    "dailyOutputTokenCap": 1600000,
+    "estimatedUsdPerTopic": 3.0,
+    "estimatedUsdSelection": 1.0
+  },
+  "runtime": {
+    "topicConcurrency": 2,
+    "llmTimeoutMs": 900000,
+    "llmMaxRetries": 3,
+    "schemaRepairAttempts": 1,
+    "lockTtlMinutes": 240,
+    "articleFetchConcurrency": 4,
+    "articleFetchTimeoutMs": 10000,
+    "articleMaxBytes": 2500000,
+    "feedFetchTimeoutMs": 12000
+  },
+  "recovery": {
+    "autoRecoverMissing": true,
+    "maxRecoverPerRun": 1,
+    "recoverLookbackDays": 7
+  }
+}
