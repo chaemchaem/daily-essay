@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-11-09T09:00:20+09:00",
+  "paused": false,
+  "pausedReason": null,
+  "schedule": {
+    "publishAtKst": "09:00",
+    "generateStartKst": "06:05",
+    "timezone": "Asia/Seoul",
+    "daily": true
+  },
+  "nextScheduledPublish": "2026-11-10T09:00:00+09:00",
+  "lastSuccessfulPublish": {
+    "date": "2026-11-08",
+    "publishedAt": "2026-11-08T09:00:20+09:00",
+    "count": 1
+  },
+  "today": {
+    "date": "2026-11-09",
+    "state": "all_held",
+    "stateLabel": "검토 통과 주제 없음",
+    "published": 0,
+    "held": 1,
+    "failedStage": null,
+    "message": null
+  },
+  "lock": null,
+  "recentRuns": [
+    {
+      "id": "2026-11-09T0610-scheduled-2026-11-09",
+      "kind": "scheduled",
+      "targetDate": "2026-11-09",
+      "startedAt": "2026-11-09T06:10:00+09:00",
+      "finishedAt": "2026-11-09T06:10:00+09:00",
+      "outcome": "all_held",
+      "outcomeLabel": "검토 통과 주제 없음",
+      "failedStep": null,
+      "trigger": "fixture"
+    },
+    {
+      "id": "2026-11-08T0610-scheduled-2026-11-08",
+      "kind": "scheduled",
+      "targetDate": "2026-11-08",
+      "startedAt": "2026-11-08T06:10:00+09:00",
+      "finishedAt": "2026-11-08T06:10:00+09:00",
+      "outcome": "ready",
+      "outcomeLabel": "발행 대기",
+      "failedStep": null,
+      "trigger": "fixture"
+    }
+  ],
+  "models": {
+    "writer": "작성과 같은 모델(claude-opus-5-5)을 별도 역할·별도 호출로 검토 — 독립 검증은 아님"
+  },
+  "promptVersions": {
+    "triage": "1.0.0",
+    "facts": "1.0.0",
+    "question": "1.0.0",
+    "design": "1.0.0",
+    "draft": "1.0.0",
+    "factcheck": "1.0.0",
+    "critique": "1.0.0",
+    "revise": "1.0.0",
+    "companion": "1.0.0",
+    "final": "1.0.0"
+  },
+  "policyVersion": "2026-11-07.1",
+  "test": true
+}

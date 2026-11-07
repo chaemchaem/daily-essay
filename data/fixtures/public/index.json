@@ -1,0 +1,81 @@
+{
+  "site": {
+    "name": "논점",
+    "tagline": "어제의 사건을 오늘의 논술로",
+    "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
+    "launchDate": "2026-11-08"
+  },
+  "generatedAt": "2026-11-09T09:00:20+09:00",
+  "latestPublished": "2026-11-08",
+  "issues": [
+    {
+      "date": "2026-11-09",
+      "number": 2,
+      "state": "all_held",
+      "stateLabel": "검토 통과 주제 없음",
+      "count": 0,
+      "held": 1,
+      "topics": []
+    },
+    {
+      "date": "2026-11-08",
+      "number": 1,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-08-e6d1c9ec",
+          "title": "[테스트] 무인 대출기는 야간 도서관을 대신할 수 있는가",
+          "category": "society",
+          "categoryLabel": "사회",
+          "kind": "new"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "politics",
+      "label": "정치"
+    },
+    {
+      "id": "economy",
+      "label": "경제"
+    },
+    {
+      "id": "society",
+      "label": "사회"
+    },
+    {
+      "id": "world",
+      "label": "국제"
+    },
+    {
+      "id": "scitech",
+      "label": "과학기술"
+    },
+    {
+      "id": "environment",
+      "label": "환경"
+    },
+    {
+      "id": "education",
+      "label": "교육"
+    },
+    {
+      "id": "labor",
+      "label": "노동"
+    },
+    {
+      "id": "culture",
+      "label": "문화"
+    },
+    {
+      "id": "ethics",
+      "label": "법·윤리"
+    }
+  ],
+  "test": true
+}

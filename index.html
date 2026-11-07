@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>논점</title>
+    <meta name="description" content="실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131416" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- 제목: Hahmlet, 본문: Noto Serif KR, 인터페이스: IBM Plex Sans KR, 수치: IBM Plex Mono (모두 SIL OFL) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;500;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;700&display=swap" />
+    <!-- ASSET_VERSION: CSS/JS를 바꾸면 두 ?v= 값을 함께 올린다 -->
+    <link rel="stylesheet" href="assets/style.css?v=1" />
+    <script type="module" src="assets/app.js?v=1"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
+    <div id="test-banner" class="test-banner" hidden>
+      테스트 데이터입니다 — 가상의 도시·기사로 만든 견본이며 실제 사건이 아닙니다.
+    </div>
+    <header class="masthead">
+      <div class="wrap mast-top">
+        <p class="mast-date" id="mast-date">&nbsp;</p>
+        <a class="mast-status" id="mast-status" href="#/status">운영 현황</a>
+      </div>
+      <div class="wrap mast-main">
+        <a class="wordmark" href="#/" aria-label="논점 첫 화면">
+          <span class="wordmark-text" data-site-name>논점</span><span class="wordmark-dot" aria-hidden="true"></span>
+        </a>
+        <p class="mast-tagline" data-site-tagline>어제의 사건을 오늘의 논술로</p>
+      </div>
+      <nav class="wrap nav" aria-label="주요 메뉴">
+        <a href="#/" data-nav="home">오늘 호</a>
+        <a href="#/archive" data-nav="archive">지난 호</a>
+        <a href="#/week" data-nav="week">최근 7일</a>
+        <a href="#/search" data-nav="search">검색</a>
+        <a href="#/me" data-nav="me">내 공부</a>
+        <a href="#/about" data-nav="about">발행 원칙</a>
+      </nav>
+    </header>
+    <main id="main" class="wrap main" tabindex="-1">
+      <p class="loading">불러오는 중…</p>
+    </main>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <p><span data-site-name>논점</span>은 공개된 보도와 공식 자료를 바탕으로 자동 생성·검토한 학습 자료입니다. 답안은 하나의 모범 예시이며 유일한 정답이 아닙니다.</p>
+        <p><a href="#/about">발행 원칙과 검토 방식</a> · <a href="#/status">운영 현황</a></p>
+      </div>
+    </footer>
+    <noscript><p class="wrap">이 사이트는 자바스크립트가 필요합니다.</p></noscript>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+node_modules/
+.pnpm-store/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# 암호화하지 않은 내부 기록·임시 본문 캐시는 커밋하지 않는다
+data/internal-local/
+data/tmp/
+data/fixtures/internal-local/
+data/fixtures/tmp/
+data/fixtures/state/
