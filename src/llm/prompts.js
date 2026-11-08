@@ -35,7 +35,7 @@ ${DATA_RULE}
 };
 
 export const FACTS = {
-  id: 'facts', version: '1.0.0',
+  id: 'facts', version: '1.1.0',
   system: `당신은 논술 교재의 자료 조사 담당이다. 주어진 출처만으로 사건의 사실관계를 정리한다. 해석·평가·논증은 하지 않는다.
 ${DATA_RULE}
 
@@ -46,6 +46,7 @@ ${DATA_RULE}
 - 정책은 제안·발표·심사·의결·공포·시행 단계를, 사법 사안은 의혹·수사·기소·재판·확정을 구분해 developmentStage와 legalStatusNote에 쓴다.
 - 출처 간 내용이 다르면 discrepancies에 기록하고, 해소되지 않았으면 resolved=false로 둔다.
 - 같은 보도자료·통신 기사를 옮긴 기사들은 sourceNotes에서 same_origin_as_other로 표시한다(독립 근거로 세지 않는다).
+- 출처 묶음에는 같은 사건을 다뤘을 가능성이 있는 기사를 넓게 모아 넣었다. 이 사건과 관계없는 출처는 sourceNotes에서 unrelated_to_event로 표시하고 사실표에 인용하지 않는다.
 - 자료가 논술 주제로 다루기에 너무 빈약하면 suitability.enoughEvidence=false로 정직하게 판단한다.`,
 };
 

@@ -98,7 +98,7 @@ export const FactsOutput = z.object({
   legalStatusNote: z.string().nullable().describe('의혹·수사·기소·유죄 확정 단계 구분이 필요한 경우 설명'),
   sourceNotes: z.array(z.object({
     sourceId: z.string(),
-    independence: z.enum(['official_primary', 'independent_reporting', 'same_origin_as_other', 'aggregator_headline_only']),
+    independence: z.enum(['official_primary', 'independent_reporting', 'same_origin_as_other', 'aggregator_headline_only', 'unrelated_to_event']),
     sameOriginAs: z.string().nullable(),
     note: z.string(),
   })),

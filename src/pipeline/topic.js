@@ -7,6 +7,7 @@ import * as S from '../llm/schemas.js';
 import { checkAnswer, checkQuestion, checkFacts, checkCompanion } from './checks.js';
 import { evaluateGate, isBlockingIssue } from './gate.js';
 import { buildSourcePack, packForRecord, renderSources } from './sources.js';
+import { findRelated } from './related.js';
 import { readInternal, writeInternal } from '../lib/store.js';
 import { splitParagraphs, countChars } from '../lib/text.js';
 import { toKstIso, nowMs } from '../lib/time.js';
@@ -81,7 +82,11 @@ export async function runTopic(t, ctx) {
     // ── ① 자료 수집과 사실 정리 ──
     let pack = ctx.packCache?.get(t.id);
     if (!t.stages.facts?.done || !pack) {
-      const arts = t.cluster.articleIds.map((id) => ctx.articlesById.get(id)).filter(Boolean);
+      const seed = t.cluster.articleIds.map((id) => ctx.articlesById.get(id)).filter(Boolean);
+      // 같은 사건을 다룬 다른 언론사 기사를 수집 기사 전체에서 더 찾는다(사실 정리 단계가 무관한 것은 걸러낸다).
+      const related = findRelated({ seedArticles: seed, eventSummary: t.selection.eventSummary, all: [...ctx.articlesById.values()], max: 6 });
+      t.relatedArticleIds = related.map((a) => a.id);
+      const arts = [...seed, ...related];
       pack = await buildSourcePack(arts, { policy, allowHosts: ctx.allowHosts, fetcher: ctx.fetcher });
       ctx.packCache?.set(t.id, pack);
       t.sourcePack = packForRecord(pack);

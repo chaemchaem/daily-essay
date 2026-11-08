@@ -53,7 +53,7 @@
   },
   "promptVersions": {
     "triage": "1.0.0",
-    "facts": "1.0.0",
+    "facts": "1.1.0",
     "question": "1.0.0",
     "design": "1.0.0",
     "draft": "1.0.0",

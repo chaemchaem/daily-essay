@@ -1,11 +1,11 @@
 {
-  "id": "2026-11-08-e6d1c9ec",
+  "id": "2026-11-08-77ae78d5",
   "version": 1,
   "issueDate": "2026-11-08",
   "category": "society",
   "categoryLabel": "사회",
   "kind": "new",
-  "threadId": "th-2026-11-08-e6d1c9ec",
+  "threadId": "th-2026-11-08-77ae78d5",
   "title": "[테스트] 무인 대출기는 야간 도서관을 대신할 수 있는가",
   "headline": "[테스트] 가온시 시립도서관 야간 운영 축소 계획",
   "dates": {
@@ -491,9 +491,9 @@
     {
       "id": "S1",
       "title": "[테스트] 가온시, 시립도서관 5곳 야간 운영 중단…무인 대출기 20대 설치",
-      "outlet": "대한민국 정책브리핑",
-      "url": "https://fixture.test/korea-policy/lib",
-      "type": "official",
+      "outlet": "연합뉴스",
+      "url": "https://fixture.test/yna-society/lib",
+      "type": "wire",
       "publishedAt": "2026-11-07T10:30:00+09:00",
       "pageModifiedAt": null,
       "checkedAt": "2026-11-08T06:10:00+09:00",
@@ -512,9 +512,9 @@
     {
       "id": "S2",
       "title": "[테스트] 가온시, 시립도서관 5곳 야간 운영 중단…무인 대출기 20대 설치",
-      "outlet": "연합뉴스",
-      "url": "https://fixture.test/yna-society/lib",
-      "type": "wire",
+      "outlet": "한겨레",
+      "url": "https://fixture.test/hani-all/lib",
+      "type": "press",
       "publishedAt": "2026-11-07T10:30:00+09:00",
       "pageModifiedAt": null,
       "checkedAt": "2026-11-08T06:10:00+09:00",
@@ -531,9 +531,9 @@
     },
     {
       "id": "S3",
-      "title": "[테스트] 가온시, 시립도서관 5곳 야간 운영 중단…무인 대출기 20대 설치",
-      "outlet": "한겨레",
-      "url": "https://fixture.test/hani-all/lib",
+      "title": "[테스트] 가온시 시립도서관 5곳 야간 운영 중단 발표",
+      "outlet": "경향신문",
+      "url": "https://fixture.test/khan-all/lib",
       "type": "press",
       "publishedAt": "2026-11-07T10:30:00+09:00",
       "pageModifiedAt": null,
@@ -551,21 +551,6 @@
     },
     {
       "id": "S4",
-      "title": "[테스트] 가온시 시립도서관 5곳 야간 운영 중단 발표",
-      "outlet": "경향신문",
-      "url": "https://fixture.test/khan-all/lib",
-      "type": "press",
-      "publishedAt": "2026-11-07T10:30:00+09:00",
-      "pageModifiedAt": null,
-      "checkedAt": "2026-11-08T06:10:00+09:00",
-      "access": "full_text",
-      "accessLabel": "본문 확인",
-      "independence": null,
-      "independenceLabel": null,
-      "supportsFacts": []
-    },
-    {
-      "id": "S5",
       "title": "[테스트] 가온시 시립도서관 5곳 야간 운영 중단 발표",
       "outlet": "테스트일보",
       "url": "https://fixture.test/gnews-kr-nation/lib",
@@ -813,13 +798,13 @@
     ],
     "summary": "[테스트 데이터] 답안의 수치 5개와 기관 입장 2건을 원출처와 대조했다. 초안 결론의 상투적 문구를 지적해 수정했고, 수정 후 결론이 본론의 판단 기준과 일치하는지 다시 확인했다. 시의 절감액과 이용자 구성 수치는 시 자료에만 근거한 주장으로 표시했다.",
     "accessCaveat": [
-      "S5 테스트일보: 발췌·요약만 확인"
+      "S4 테스트일보: 발췌·요약만 확인"
     ],
     "factsCheck": {
       "problems": [],
       "independence": {
         "independentGroups": 3,
-        "hasOfficial": true,
+        "hasOfficial": false,
         "fullTextSources": 3,
         "enough": true
       }
@@ -828,7 +813,7 @@
       "mock"
     ],
     "promptVersions": [
-      "facts@1.0.0",
+      "facts@1.1.0",
       "question@1.0.0",
       "design@1.0.0",
       "draft@1.0.0",

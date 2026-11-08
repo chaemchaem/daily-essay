@@ -1,13 +1,13 @@
 // 같은 사건을 다룬 기사 묶기(1차, 규칙 기반). 제목 문자 bigram 유사도로 묶고,
 // 의미상 같은 사건인지의 최종 판단과 기존 이슈 묶음(thread) 연결은 LLM 선별 단계가 한다.
-import { bigrams, jaccard, containment } from '../lib/text.js';
+import { bigrams, jaccard, containment, wordTokens } from '../lib/text.js';
 import { sha1 } from '../lib/crypto.js';
 
 export function clusterArticles(articles, { threshold = 0.34, containThreshold = 0.62 } = {}) {
   const items = articles
     .slice()
     .sort((a, b) => (a.publishedAtMs || 0) - (b.publishedAtMs || 0))
-    .map((a) => ({ a, g: bigrams(a.title) }));
+    .map((a) => ({ a, g: bigrams(a.title), w: wordTokens(a.title) }));
   const clusters = [];
   for (const it of items) {
     let best = null;
@@ -19,6 +19,11 @@ export function clusterArticles(articles, { threshold = 0.34, containThreshold =
         const j = jaccard(it.g, m.g);
         const k = containment(it.g, m.g);
         s = Math.max(s, j >= threshold ? j : k >= containThreshold && Math.min(it.g.size, m.g.size) >= 8 ? k * 0.9 : 0);
+        // 제목 표현이 달라도 핵심어가 3개 이상 겹치고 짧은 쪽의 절반 이상이면 같은 사건 후보
+        let shared = 0;
+        for (const x of it.w) if (m.w.has(x)) shared += 1;
+        const minW = Math.min(it.w.size, m.w.size) || 1;
+        if (shared >= 3 && shared / minW >= 0.5) s = Math.max(s, 0.3 + shared * 0.05);
       }
       if (s > bestScore) { bestScore = s; best = c; }
     }

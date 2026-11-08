@@ -10,7 +10,7 @@ export const STAGE_LABELS = {
 };
 export const FACT_KIND_LABELS = { confirmed: '확인된 사실', party_claim: '당사자 주장', scheduled: '예정', estimate_or_forecast: '전망·추정' };
 export const ACCESS_LABELS = { full_text: '본문 확인', excerpt_only: '발췌·요약만 확인', headline_only: '제목만 확인' };
-export const INDEPENDENCE_LABELS = { official_primary: '공식 원자료', independent_reporting: '독립 보도', same_origin_as_other: '다른 출처와 같은 원문(독립 근거 아님)', aggregator_headline_only: '검색 묶음 제목' };
+export const INDEPENDENCE_LABELS = { official_primary: '공식 원자료', independent_reporting: '독립 보도', same_origin_as_other: '다른 출처와 같은 원문(독립 근거 아님)', aggregator_headline_only: '검색 묶음 제목', unrelated_to_event: '이 사건과 무관(사용 안 함)' };
 export const CHECKLIST_LABELS = {
   requirements_covered: '발문 요구사항 충족', concept_consistency: '핵심 개념 의미 유지', premises_explicit: '전제 명시', no_unwarranted_generalization: '근거 없는 일반화 없음',
   no_causal_leap: '인과관계 비약 없음', no_circular_reasoning: '순환논증 없음', no_straw_man: '허수아비 반박 없음', no_false_dilemma: '거짓 양자택일 없음',
