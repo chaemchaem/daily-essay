@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T11:42:31+09:00",
+  "generatedAt": "2026-11-08T16:55:52+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -37,5 +37,9 @@
     "final": "1.0.0"
   },
   "policyVersion": "2026-11-07.1",
-  "test": false
+  "test": false,
+  "setupMissing": [
+    "ANTHROPIC_API_KEY (또는 OPENAI_API_KEY + NJ_<ROLE>_PROVIDER=openai)",
+    "NJ_INTERNAL_KEY (공개 저장소에 내부 기록을 암호화해 커밋하기 위해 필요)"
+  ]
 }
