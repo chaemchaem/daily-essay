@@ -123,7 +123,7 @@ export async function runDaily({ date, kind = 'manual', trigger = 'local', fetch
       step('cluster', 'done', `${clusters.length}개 후보 묶음`);
       let triaged = issue.steps.triage?.done ? readInternal(`selections/${date}-triage.json`).results : null;
       if (!triaged) {
-        if (!budget.canAfford(policy.budget.estimatedUsdSelection)) { const e = new Error('비용 상한으로 선별을 시작하지 않음'); e.code = 'budget_exceeded'; throw e; }
+        if (!budget.canAfford(policy.budget.estimatedUsdSelection, policy.budget.estimatedCallsSelection || 0)) { const e = new Error('비용·호출 상한으로 선별을 시작하지 않음'); e.code = 'budget_exceeded'; throw e; }
         step('triage', 'started');
         const tr = await triage({ clusters, articlesById, threads: recentThreads(threads, date), window: win, issueDate: date, budget, policy });
         triaged = tr.results;
@@ -172,9 +172,9 @@ export async function runDaily({ date, kind = 'manual', trigger = 'local', fetch
       if (!t || ['ready', 'published'].includes(t.status)) return;
       if (t.status === 'held' && kind !== 'retry') return;
       if (t.status === 'held' && kind === 'retry') return; // 보류 판정은 재시도해도 같은 원고로 뒤집지 않는다(새 근거가 필요).
-      if (!budget.canAfford(policy.budget.estimatedUsdPerTopic)) {
+      if (!budget.canAfford(policy.budget.estimatedUsdPerTopic, policy.budget.estimatedCallsPerTopic || 0)) {
         t.status = 'deferred_budget';
-        t.error = { stage: null, message: `일일 비용 상한($${policy.budget.dailyUsdCap})에 가까워 이 주제는 작성하지 않음(검토 생략 없음)`, at: toKstIso(nowMs()) };
+        t.error = { stage: null, message: `일일 비용·호출 상한(남은 호출 ${budget.remainingCalls()}회)에 가까워 이 주제는 작성하지 않음(검토 생략 없음)`, at: toKstIso(nowMs()) };
         saveTopic(t);
         return;
       }

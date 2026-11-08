@@ -21,7 +21,7 @@ GitHub Actions (예약·수동 실행, 서버에서 동작)
 | 위치 | 역할 |
 |---|---|
 | `src/collect/` | RSS·공식 발표 피드 수집, 시각 정규화(KST), 같은 사건 1차 묶기 |
-| `src/llm/` | 제공자 교체 가능한 LLM 계층(Anthropic·OpenAI), 단계별 zod 스키마, 프롬프트(버전 기록), 일일 비용 상한 |
+| `src/llm/` | 제공자 교체 가능한 LLM 계층(기본 Google Gemini 무료 등급, 선택: Anthropic·OpenAI), 단계별 zod 스키마, 프롬프트(버전 기록), 일일 비용 상한 |
 | `src/pipeline/` | 일일 오케스트레이터(잠금·체크포인트·재개), 선별·선정, 주제별 단계 기계, 코드 검사, 발행 차단 게이트 |
 | `src/publish/` | 공개 데이터 생성, 버전·정정 이력, 운영 현황 |
 | `src/eval/` | 테스트 전용 가상 데이터·LLM 대역, 결함 주입 검증 |
@@ -55,13 +55,13 @@ Node.js 22.9+ 와 pnpm 11.7이 필요합니다.
 ```bash
 pnpm install --frozen-lockfile
 cp .env.example .env                    # 값 채우기(커밋 금지)
-pnpm test                               # 오프라인 테스트(35개, API 키 불필요)
+pnpm test                               # 오프라인 테스트(43개, API 키 불필요)
 pnpm fixture:site                       # 가상 데이터로 전체 파이프라인 실행 → data/fixtures/public
 pnpm probe                              # 수집원 응답 확인
-pnpm daily -- --date 2026-11-08         # 실제 생성(API 키 필요, 비용 발생)
+pnpm daily -- --date 2026-11-08         # 실제 생성(GEMINI_API_KEY 필요, 무료 등급이면 비용 없음)
 pnpm publish -- --date 2026-11-08       # 발행 시각이 지났으면 공개
 pnpm status                             # 운영 현황·누락 날짜
-pnpm eval:adversarial                   # 결함 주입 사례를 실제 검토 모델로 검증(비용 발생)
+pnpm eval:adversarial                   # 결함 주입 사례를 실제 검토 모델로 검증(무료 한도 약 20회 사용)
 ```
 
 화면 확인: `pnpm start` → `http://127.0.0.1:4174/` (견본 데이터는 `?data=fixtures`).
@@ -69,27 +69,33 @@ pnpm eval:adversarial                   # 결함 주입 사례를 실제 검토 
 ## 배포·운영 설정(사용자가 해야 하는 일)
 
 1. **GitHub Secrets** (Settings → Secrets and variables → Actions → Secrets)
-   - `ANTHROPIC_API_KEY` — 필수. Anthropic Console에서 발급.
+   - `GEMINI_API_KEY` — 필수. https://aistudio.google.com 에서 발급. **결제가 연결되지 않은 프로젝트**에서 만든 키여야 무료 등급으로만 동작합니다.
    - `NJ_INTERNAL_KEY` — 필수. `openssl rand -base64 32`로 만든 24자 이상 문자열. 공개 저장소에 내부 기록을 암호화해 커밋하는 데 씁니다. 잃어버리면 이전 내부 기록을 읽을 수 없습니다.
-   - `OPENAI_API_KEY` — 선택. 검토 역할을 다른 회사 모델로 분리할 때만.
+   - `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` — 선택(유료). 역할별 제공자를 바꿀 때만.
 2. **워크플로 활성화**: `.github/workflows/daily-essay.yml`이 기본 브랜치(main)에 있어야 예약 실행이 등록됩니다. 병합 후 Actions 탭에서 "논점 — 일일 논술 발행"을 한 번 수동 실행(action=daily)해 첫 호를 만들고 결과를 확인하세요.
 3. **GitHub Pages**: Settings → Pages → Build and deployment → Source를 **Deploy from a branch**, 브랜치 `main` / 폴더 `/ (root)`로 지정하면 `https://chaemchaem.github.io/daily-essay/`에서 열립니다.
-4. (선택) **Variables**: `NJ_TOPICS_MIN/MAX`, `NJ_DAILY_USD_CAP`, `NJ_ANSWER_MIN/MAX_CHARS`, `NJ_PAUSED`, 역할별 모델(`NJ_REVIEWER_PROVIDER` 등). 목록은 `.env.example`.
+4. (선택) **Variables**: `NJ_TOPICS_MIN/MAX`, `NJ_DAILY_CALL_CAP`, `NJ_GEMINI_MODEL`, `NJ_DAILY_USD_CAP`, `NJ_ANSWER_MIN/MAX_CHARS`, `NJ_PAUSED`, 역할별 모델(`NJ_REVIEWER_PROVIDER` 등). 목록은 `.env.example`.
 
 관리 작업은 [docs/OPERATIONS.md](docs/OPERATIONS.md)를 보세요.
 
 ## 모델과 비용
 
-- 기본: 모든 역할 `claude-opus-5-5`(Anthropic 공식 SDK, 스트리밍, structured outputs, 적응형 사고 + effort, 안전 분류기 거절 시 서버 측 대체 모델 `fallbacks: "default"`). 모델·단가 출처는 `config/models.json`.
-- 검토 역할을 같은 모델로 하면 화면에 **"같은 모델의 별도 호출 — 독립 검증은 아님"**으로 표시합니다. 다른 회사 모델로 바꾸면 그에 맞게 표시됩니다.
-- **추정 비용**(실측 전 추정치): 주제 1개당 LLM 호출 12~16회. 입력 약 20만~25만 토큰($4/M), 출력(사고 토큰 포함) 약 10만~13만 토큰($20/M) → **주제당 약 $3(±50%)**, 선별 약 $0.7. 하루 4개 발행 기준 **약 $10~18/일**, 월 $300~550. 실제 사용량은 실행 기록(`runs/*`)과 주제별 `usage`에 남으므로 첫 주 실측으로 조정하세요. `NJ_DAILY_USD_CAP`(기본 $20)에 가까워지면 새 주제 작성을 멈춥니다(검토는 생략하지 않음). 비용을 줄이려면 작성·검토 모델을 `claude-sonnet-5-5`($2/$10)로 바꾸는 선택지가 있으나 품질 영향은 직접 비교해 판단해야 합니다.
-- GitHub Actions: 공개 저장소는 무료. 비공개 저장소는 하루 1~3시간 실행 기준 월 30~90시간이 사용량에 잡힙니다.
+- **기본은 무료**: 모든 역할에 Google Gemini API의 **무료 등급**을 씁니다(공식 SDK `@google/genai`). 비용은 0원이고, 대신 무료 한도 안에서 돌도록 다음처럼 맞춰 두었습니다.
+  - 하루 발행 1~2편(`config/policy.json` → `topics`), 주제는 한 번에 하나씩 처리
+  - 하루 호출 상한 60회(`budget.dailyCallCap`), 주제 하나를 시작하기 전 남은 호출이 18회 이상인지 확인
+  - 호출 사이 13초 간격(`NJ_GEMINI_MIN_INTERVAL_MS`)으로 분당 제한을 피함
+- **모델 이름을 코드에 박아 두지 않습니다.** 실행할 때 키로 쓸 수 있는 모델 목록을 조회해, 작성·검토는 pro 계열 최신 안정판을, 선별은 flash 계열을 고릅니다. 어떤 모델이 하루 무료 한도를 다 쓰면 그날은 다음 후보(예: flash)로 내려가고, 모두 소진되면 남은 주제는 검토를 생략하지 않고 **작성 보류**("비용·무료 한도로 작성 보류")로 남깁니다. 특정 모델을 고정하려면 저장소 변수 `NJ_GEMINI_MODEL`에 정확한 이름을 넣으세요.
+- **무료로 유지하려면**: API 키를 만든 Google 프로젝트에 결제(Billing)를 연결하지 마세요. 결제가 연결된 프로젝트의 키는 유료 요금이 붙습니다. Gemini 앱 구독(Google AI Pro 등)은 API 사용과 별개입니다.
+- **알아둘 점**: Google 정책상 무료 등급으로 보낸 내용은 서비스 개선에 쓰일 수 있습니다(보내는 내용은 공개 기사와 생성 글입니다). 무료 등급의 모델 종류와 한도는 Google이 바꿀 수 있어, 한도가 줄면 하루 발행 편수가 줄거나 보류가 늘 수 있습니다.
+- 작성과 검토를 같은 모델이 하므로 화면에 **"같은 모델의 별도 호출 — 독립 검증은 아님"**으로 표시합니다.
+- 유료 모델로 바꾸고 싶으면 `config/models.json`의 역할별 `provider`를 `anthropic`(또는 `openai`)으로 바꾸고 해당 키를 등록하면 됩니다. 이때는 `NJ_DAILY_USD_CAP`(기본 $20)이 함께 적용됩니다.
+- GitHub Actions와 Pages: 공개 저장소는 무료입니다.
 
 ## 검증한 것과 하지 못한 것
 
-- ✅ 오프라인 테스트 35개: KST 날짜 경계·해외 시각 변환, SSRF 차단, RSS 파싱, 코드 검사(수치·인용 날조, 분량, 요구사항, 상투적 결론, 중복), 게이트 차단 규칙, 선정 규칙(후속/중복/늦은 사건/분야 편중), 전체 흐름(09시 전 비공개 → 09시 발행, 재실행 중복 없음, 수집 실패 시 직전 호 유지, LLM 오류 후 실패 단계부터 재개, 잠금·만료 회수, 비용 상한, 일시 중지, 누락 날짜 복구, 정정 버전, 내부 기록 암호화).
+- ✅ 오프라인 테스트 43개(Gemini 모델 자동 선택·한도 소진 시 대체·스키마 거부 시 대체·호출 상한 포함): KST 날짜 경계·해외 시각 변환, SSRF 차단, RSS 파싱, 코드 검사(수치·인용 날조, 분량, 요구사항, 상투적 결론, 중복), 게이트 차단 규칙, 선정 규칙(후속/중복/늦은 사건/분야 편중), 전체 흐름(09시 전 비공개 → 09시 발행, 재실행 중복 없음, 수집 실패 시 직전 호 유지, LLM 오류 후 실패 단계부터 재개, 잠금·만료 회수, 비용 상한, 일시 중지, 누락 날짜 복구, 정정 버전, 내부 기록 암호화).
 - ✅ 가상 데이터로 실제 파이프라인 코드 전체 실행 → `data/fixtures/public` (화면 견본, 모든 항목 `test: true`, 화면 상단 경고 띠).
-- ⏳ 실제 뉴스 수집과 실제 LLM 호출은 개발 환경의 네트워크 제한과 API 키 부재로 **아직 한 번도 실행하지 않았습니다.** 첫 실행 결과는 Actions 로그와 `운영 현황` 화면에서 확인해야 합니다.
+- ⏳ 실제 뉴스 수집과 실제 Gemini 호출은 개발 환경의 네트워크 제한과 API 키 부재로 **아직 한 번도 실행하지 않았습니다.** 첫 실행 결과는 Actions 로그와 `운영 현황` 화면에서 확인해야 합니다.
 - ⏳ `pnpm eval:adversarial`(결함 8종을 실제 검토 모델이 잡는지)은 키가 있어야 실행되며 결과는 `docs/adversarial-report.md`에 기록됩니다. 코드 검사로 잡히는 결함(수치·인용 날조)은 오프라인 테스트로 확인했습니다.
 
 ## 남은 한계

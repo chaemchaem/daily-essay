@@ -11,7 +11,7 @@
 | `status` | 운영 현황 갱신, 누락 날짜 출력 |
 | `pause` / `resume` | 예약 실행 일시 중지·재개(`config/control.json`). 수동 실행은 계속 가능. 저장소 변수 `NJ_PAUSED=true`로도 중지 가능 |
 | `probe-sources` | 수집원별 응답·최신 기사 시각 확인 |
-| `eval-adversarial` | 결함 주입 사례 검증(비용 발생) → `docs/adversarial-report.md` |
+| `eval-adversarial` | 결함 주입 사례 검증(무료 한도 약 20회 사용) → `docs/adversarial-report.md` |
 | `rebuild-public` | 공개 목록·검색·상태 재생성 |
 
 ## 예약 일정 (UTC cron → KST)
@@ -29,7 +29,7 @@
 - 화면에는 직전 정상 발행호가 유지되고, 오늘 호는 "수집 실패" 또는 "생성 실패"로 표시됩니다("주제 없음"과 구분).
 - 10:40 복구 작업이 자동으로 한 번 재시도합니다. 그래도 실패하면 Actions 로그의 `[daily] 실패 @단계` 줄을 확인하고 `retry`를 실행하세요.
 - 잠금: 다른 실행이 잡고 있으면 새 실행은 `lock_held`로 끝납니다. 잠금은 240분 뒤 만료되며 다음 실행이 회수합니다.
-- 비용 상한(`NJ_DAILY_USD_CAP`)에 도달하면 남은 주제는 `deferred_budget`이 됩니다. 다음 날 `retry`하거나 상한을 조정하세요.
+- 하루 호출 상한(`NJ_DAILY_CALL_CAP`)이나 Gemini 무료 한도에 도달하면 남은 주제는 `deferred_budget`(작성 보류)이 됩니다. 다음 날 `retry`하거나 상한을 조정하세요.
 
 ## 정정
 

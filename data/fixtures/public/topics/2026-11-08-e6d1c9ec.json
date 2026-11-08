@@ -667,7 +667,7 @@
   "review": {
     "independence": {
       "level": "same_model_separate_call",
-      "label": "작성과 같은 모델(claude-opus-5-5)을 별도 역할·별도 호출로 검토 — 독립 검증은 아님"
+      "label": "작성과 같은 모델(Gemini pro 계열(실행 시 자동 선택))을 별도 역할·별도 호출로 검토 — 독립 검증은 아님"
     },
     "stages": [
       "자료 수집과 사실 정리",
@@ -838,7 +838,7 @@
       "companion@1.0.0",
       "final@1.0.0"
     ],
-    "policyVersion": "2026-11-07.1",
+    "policyVersion": "2026-11-08.1-gemini-free",
     "limits": "자동 검토는 제공된 출처 범위 안에서만 사실을 확인합니다. 출처 자체의 오류, 원문 비공개 자료, 미묘한 맥락 왜곡은 놓칠 수 있습니다."
   },
   "usage": {
