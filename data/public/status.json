@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T18:53:41+09:00",
+  "generatedAt": "2026-11-08T22:01:04+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -9,18 +9,33 @@
     "daily": true
   },
   "nextScheduledPublish": "2026-11-09T09:00:00+09:00",
-  "lastSuccessfulPublish": null,
+  "lastSuccessfulPublish": {
+    "date": "2026-11-08",
+    "publishedAt": "2026-11-08T22:01:04+09:00",
+    "count": 1
+  },
   "today": {
     "date": "2026-11-08",
-    "state": "all_held",
-    "stateLabel": "검토 통과 주제 없음",
-    "published": 0,
-    "held": 5,
-    "failedStage": null,
-    "message": null
+    "state": "partial",
+    "stateLabel": "일부 발행",
+    "published": 1,
+    "held": 3,
+    "failedStage": "topics",
+    "message": "작업 중 오류가 발생해 재시도가 필요합니다."
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-08T2107-retry-2026-11-08",
+      "kind": "retry",
+      "targetDate": "2026-11-08",
+      "startedAt": "2026-11-08T21:07:04+09:00",
+      "finishedAt": "2026-11-08T22:01:04+09:00",
+      "outcome": "partial",
+      "outcomeLabel": "일부 발행",
+      "failedStep": null,
+      "trigger": "workflow_dispatch"
+    },
     {
       "id": "2026-11-08T1836-manual-2026-11-08",
       "kind": "manual",
@@ -38,7 +53,7 @@
   },
   "promptVersions": {
     "triage": "1.0.0",
-    "facts": "1.0.0",
+    "facts": "1.1.0",
     "question": "1.0.0",
     "design": "1.0.0",
     "draft": "1.0.0",

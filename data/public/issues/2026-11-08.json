@@ -1,29 +1,49 @@
 {
   "date": "2026-11-08",
   "number": 1,
-  "state": "all_held",
-  "stateLabel": "검토 통과 주제 없음",
+  "state": "partial",
+  "stateLabel": "일부 발행",
   "window": {
     "primaryStart": "2026-11-07T00:00:00+09:00",
     "primaryEnd": "2026-11-08T00:00:00+09:00",
     "overlapStart": "2026-11-05T00:00:00+09:00"
   },
   "infoCutoff": "2026-11-08T18:36:13+09:00",
-  "generatedAt": "2026-11-08T18:53:41+09:00",
-  "publishedAt": null,
+  "generatedAt": "2026-11-08T22:01:04+09:00",
+  "publishedAt": "2026-11-08T22:01:04+09:00",
   "recovered": null,
-  "topics": [],
+  "topics": [
+    {
+      "id": "2026-11-08-ad7d88d7",
+      "title": "초광역권 전략산업 특구 추진과 노동법상 예외 적용의 정당성 및 노동권 보장 범위",
+      "headline": "양대노총 '특구법 철회' 집회 및 여야 장외 집회 개최",
+      "category": "labor",
+      "categoryLabel": "노동",
+      "kind": "new",
+      "questionType": "가치 충돌형",
+      "prompt": "초광역권 전략산업 특구 내 노동관계법 적용 예외 설정 논란을 바탕으로, 국가 전략산업 육성 및 지역 경제 활성화라는 정책적 명분과 노동법의 보편적 적용 및 노동권 보장이라는 가치 간의 충돌 구조를 분석하고, 바람직한 제도적 조율 방안을 논하시오.",
+      "chars": 1839,
+      "lateEntry": null,
+      "threadId": "th-2026-11-08-ad7d88d7",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
   "counts": {
-    "published": 0,
-    "held": 5,
-    "failed": 0,
+    "published": 1,
+    "held": 3,
+    "failed": 1,
     "deferredBudget": 0,
     "candidates": 30
   },
   "heldSummary": [
     {
+      "reason": "검토 미통과(수정 상한 도달 또는 차단 항목)",
+      "count": 1
+    },
+    {
       "reason": "근거 부족",
-      "count": 5
+      "count": 2
     }
   ],
   "noTopicReason": null,
@@ -33,6 +53,11 @@
       "version": 1,
       "at": "2026-11-08T18:53:41+09:00",
       "change": "상태 기록: all_held"
+    },
+    {
+      "version": 2,
+      "at": "2026-11-08T22:01:04+09:00",
+      "change": "주제 1건 발행"
     }
   ],
   "test": false
