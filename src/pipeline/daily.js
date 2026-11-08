@@ -45,7 +45,7 @@ async function pool(items, n, fn) {
  * @param {Function} [o.fetcher] 테스트용 피드 조회 함수
  * @param {Function} [o.articleFetcher] 테스트용 기사 조회 함수
  */
-export async function runDaily({ date, kind = 'manual', trigger = 'local', fetcher, articleFetcher, publishNow = false } = {}) {
+export async function runDaily({ date, kind = 'manual', trigger = 'local', fetcher, articleFetcher, publishNow = false, redoEvidenceHolds = false } = {}) {
   const policy = loadPolicy();
   const sources = loadSources();
   const control = loadControl();
@@ -171,8 +171,21 @@ export async function runDaily({ date, kind = 'manual', trigger = 'local', fetch
     const processTopic = async (id) => {
       const t = loadTopic(id);
       if (!t || ['ready', 'published'].includes(t.status)) return;
-      if (t.status === 'held' && kind !== 'retry') return;
-      if (t.status === 'held' && kind === 'retry') return; // 보류 판정은 재시도해도 같은 원고로 뒤집지 않는다(새 근거가 필요).
+      if (t.status === 'held') {
+        // 보류 판정은 같은 근거로 뒤집지 않는다. 단, '근거·자료 부족' 보류는 근거 수집 방식이 바뀌었을 때
+        // 관리자가 명시적으로 요청하면(redoEvidenceHolds) 사실 정리부터 다시 한다. 이력은 남긴다.
+        const evidenceHold = /근거 부족|자료 부족/.test(t.holdReasons?.[0] || '');
+        if (!(kind === 'retry' && redoEvidenceHolds && evidenceHold)) return;
+        t.redoHistory = [...(t.redoHistory || []), { at: toKstIso(nowMs()), previousHoldReasons: t.holdReasons, reason: '근거 수집 방식 변경 후 재시도' }];
+        t.stages = {};
+        t.rounds = [];
+        t.holdReasons = [];
+        t.facts = null;
+        t.factsCheck = null;
+        t.sourcePack = null;
+        t.status = 'pending';
+        saveTopic(t);
+      }
       if (!budget.canAfford(policy.budget.estimatedUsdPerTopic, policy.budget.estimatedCallsPerTopic || 0)) {
         t.status = 'deferred_budget';
         t.error = { stage: null, message: `일일 비용·호출 상한(남은 호출 ${budget.remainingCalls()}회)에 가까워 이 주제는 작성하지 않음(검토 생략 없음)`, at: toKstIso(nowMs()) };

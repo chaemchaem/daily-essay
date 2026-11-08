@@ -1,0 +1,47 @@
+{
+  "id": "th-2026-11-08-77ae78d5",
+  "title": "[테스트] 가온시 시립도서관 야간 운영 축소 계획",
+  "category": "society",
+  "firstDate": "2026-11-08",
+  "lastDate": "2026-11-09",
+  "topics": [
+    {
+      "id": "2026-11-08-77ae78d5",
+      "issueDate": "2026-11-08",
+      "title": "[테스트] 무인 대출기는 야간 도서관을 대신할 수 있는가",
+      "kind": "new"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-11-09",
+      "summary": "[테스트] 노조가 반대 서명을 제출했으나 정책 단계나 논점은 바뀌지 않았다.",
+      "articles": [
+        {
+          "title": "[테스트] 가온시, 시립도서관 5곳 야간 운영 중단…무인 대출기 20대 설치",
+          "outlet": "연합뉴스",
+          "url": "https://fixture.test/yna-society/lib",
+          "publishedAt": "2026-11-07T10:30:00+09:00"
+        },
+        {
+          "title": "[테스트] 가온시, 시립도서관 5곳 야간 운영 중단…무인 대출기 20대 설치",
+          "outlet": "한겨레",
+          "url": "https://fixture.test/hani-all/lib",
+          "publishedAt": "2026-11-07T10:30:00+09:00"
+        },
+        {
+          "title": "[테스트] 가온시 시립도서관 5곳 야간 운영 중단 발표",
+          "outlet": "경향신문",
+          "url": "https://fixture.test/khan-all/lib",
+          "publishedAt": "2026-11-07T10:30:00+09:00"
+        },
+        {
+          "title": "[테스트] 가온시 시립도서관 5곳 야간 운영 중단 발표",
+          "outlet": "테스트일보",
+          "url": "https://fixture.test/gnews-kr-nation/lib",
+          "publishedAt": "2026-11-07T10:30:00+09:00"
+        }
+      ]
+    }
+  ]
+}

@@ -90,3 +90,16 @@ export function decodeEntities(s) {
     return NAMED[e.toLowerCase()] ?? m;
   });
 }
+
+// 한국어 조사·영어 불용어를 떼어 낸 핵심어 집합(2글자 이상). 언론사마다 다른 제목에서 같은 사건을 찾는 데 쓴다.
+const PARTICLE_RE = /(으로써|으로서|에서는|에게서|으로|에서|에게|까지|부터|보다|처럼|이며|이고|은|는|이|가|을|를|의|에|와|과|도|로|만)$/;
+const STOP = new Set(['기자', '뉴스', '속보', '단독', '종합', '영상', '사진', '포토', '오늘', '어제', '내일', '관련', '이번', '올해', '지난', '결국', '논란', '발표', '전망',
+  'the', 'and', 'for', 'with', 'from', 'that', 'this', 'after', 'over', 'says', 'said', 'new', 'into', 'about', 'what', 'how', 'will', 'are', 'has', 'have', 'was', 'its']);
+export function wordTokens(s) {
+  const out = new Set();
+  for (const raw of normalizeForCompare(s).split(/\s+/)) {
+    const w = raw.replace(PARTICLE_RE, '');
+    if (w.length >= 2 && !STOP.has(w) && !/^\d+$/.test(w)) out.add(w);
+  }
+  return out;
+}

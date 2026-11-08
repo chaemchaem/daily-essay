@@ -17,7 +17,7 @@ const { values } = parseArgs({
   options: {
     date: { type: 'string' }, kind: { type: 'string' }, trigger: { type: 'string' }, 'publish-now': { type: 'boolean' },
     wait: { type: 'boolean' }, max: { type: 'string' }, reason: { type: 'string' }, by: { type: 'string' },
-    topic: { type: 'string' }, 'answer-file': { type: 'string' }, notice: { type: 'string' }, json: { type: 'boolean' },
+    topic: { type: 'string' }, 'redo-evidence-holds': { type: 'boolean' }, 'answer-file': { type: 'string' }, notice: { type: 'string' }, json: { type: 'boolean' },
   },
   allowPositionals: true,
 });
@@ -43,7 +43,7 @@ function requireKeysForGeneration() {
 const commands = {
   async daily() {
     requireKeysForGeneration();
-    const run = await runDaily({ date: values.date, kind: values.kind || 'manual', trigger: values.trigger || 'local', publishNow: values['publish-now'] });
+    const run = await runDaily({ date: values.date, kind: values.kind || 'manual', trigger: values.trigger || 'local', publishNow: values['publish-now'], redoEvidenceHolds: values['redo-evidence-holds'] });
     log(JSON.stringify({ run: run.id, outcome: run.outcome, failedStep: run.failedStep || null, budget: run.budget }, null, 1));
     if (['failed_collect', 'failed_generation', 'lock_held'].includes(run.outcome)) process.exitCode = 1;
   },

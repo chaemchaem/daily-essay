@@ -183,7 +183,8 @@ export function checkQuestion({ question, policy, recent = [] }) {
 
 /** 사실표 정합성: 존재하지 않는 출처 ID 제거, 출처 없는 확인 사실 제거, 독립 출처 수 계산 */
 export function checkFacts({ facts, sourcePack, policy }) {
-  const ids = new Set(sourcePack.map((s) => s.sid));
+  const unrelated = new Set((facts.sourceNotes || []).filter((n) => n.independence === 'unrelated_to_event').map((n) => n.sourceId));
+  const ids = new Set(sourcePack.map((s) => s.sid).filter((sid) => !unrelated.has(sid)));
   const problems = [];
   const cleaned = [];
   for (const f of facts.facts) {
