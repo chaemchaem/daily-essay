@@ -1,0 +1,6 @@
+packages:
+  - "."
+
+# protobufjs 설치 스크립트는 버전 안내용이라 실행하지 않는다(@google/genai 의존성).
+allowBuilds:
+  protobufjs: false

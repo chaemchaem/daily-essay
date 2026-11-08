@@ -11,6 +11,7 @@ export class Budget {
   constructor(policy) {
     this.cap = policy.budget.dailyUsdCap;
     this.tokenCap = policy.budget.dailyOutputTokenCap;
+    this.callCap = policy.budget.dailyCallCap ?? Infinity;
     this.date = kstDateOf(nowMs());
     this.file = `ledger/budget-${this.date}.json`;
     this.state = readInternal(this.file, { date: this.date, usd: 0, usdUnknownCalls: 0, inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, calls: 0 });
@@ -18,12 +19,14 @@ export class Budget {
   remainingUsd() { return this.cap - this.state.usd; }
   remainingOutputTokens() { return this.tokenCap - this.state.outputTokens; }
   /** 작업 단위(주제 1개 등)를 시작해도 되는지. 시작 후 중간에 끊기는 것을 막기 위해 미리 확인한다. */
-  canAfford(estimatedUsd) {
-    return this.remainingUsd() >= estimatedUsd && this.remainingOutputTokens() > 60000;
+  remainingCalls() { return this.callCap - this.state.calls; }
+  canAfford(estimatedUsd, estimatedCalls = 0) {
+    return this.remainingUsd() >= estimatedUsd && this.remainingOutputTokens() > 60000 && this.remainingCalls() >= estimatedCalls;
   }
   assertCall() {
     if (this.state.usd >= this.cap) throw new BudgetExceededError(`일일 비용 상한($${this.cap}) 도달`);
     if (this.state.outputTokens >= this.tokenCap) throw new BudgetExceededError(`일일 출력 토큰 상한(${this.tokenCap}) 도달`);
+    if (this.state.calls >= this.callCap) throw new BudgetExceededError(`일일 호출 상한(${this.callCap}회) 도달`);
   }
   record(usage) {
     this.state.calls += 1;

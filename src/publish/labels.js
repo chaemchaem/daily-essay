@@ -21,5 +21,5 @@ export const CHECKLIST_LABELS = {
 export const VERDICT_LABELS = { supported: '뒷받침됨', partially_supported: '부분적으로 뒷받침', unsupported: '근거 없음', contradicted: '출처와 어긋남', not_a_factual_claim: '사실 진술 아님(판단·분석)' };
 export const ISSUE_STATE_LABELS = {
   published: '발행', partial: '일부 발행', ready: '발행 대기', generating: '작성·검토 중', no_qualifying_topics: '기준 통과 주제 없음',
-  all_held: '검토 통과 주제 없음', failed_collect: '수집 실패', failed_generation: '생성 실패', paused: '일시 중지', budget_deferred: '비용 상한으로 작성 보류', delayed: '발행 지연', scheduled: '예정',
+  all_held: '검토 통과 주제 없음', failed_collect: '수집 실패', failed_generation: '생성 실패', paused: '일시 중지', budget_deferred: '비용·무료 한도로 작성 보류', delayed: '발행 지연', scheduled: '예정',
 };

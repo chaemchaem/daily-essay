@@ -207,7 +207,7 @@ export async function runTopic(t, ctx) {
     return t;
   } catch (err) {
     if (err.calls) t.calls.push(...err.calls);
-    t.status = err.code === 'budget_exceeded' ? 'deferred_budget' : 'failed';
+    t.status = ['budget_exceeded', 'quota_exhausted'].includes(err.code) ? 'deferred_budget' : 'failed';
     t.error = { stage: t.currentStage, message: errorSummary(err), code: err.code || null, at: toKstIso(nowMs()) };
     saveTopic(t);
     log(`[topic] ${t.id} ${t.status} @${t.currentStage}: ${err.message}`);

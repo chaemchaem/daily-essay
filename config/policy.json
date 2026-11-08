@@ -1,5 +1,5 @@
 {
-  "policyVersion": "2026-11-07.1",
+  "policyVersion": "2026-11-08.1-gemini-free",
   "schedule": {
     "publishAtKst": "09:00",
     "generateStartKst": "06:05",
@@ -10,9 +10,9 @@
     "overlapHours": 72
   },
   "topics": {
-    "targetMin": 3,
-    "targetMax": 5,
-    "candidateClustersForTriage": 40,
+    "targetMin": 1,
+    "targetMax": 2,
+    "candidateClustersForTriage": 30,
     "minSelectionScore": 3.2,
     "maxPerCategoryPerIssue": 2,
     "categoryLookbackDays": 7,
@@ -29,7 +29,9 @@
   "quality": {
     "maxRevisionRounds": 2,
     "requireIndependentSources": 2,
-    "blockingSeverities": ["critical"],
+    "blockingSeverities": [
+      "critical"
+    ],
     "blockingMajorTypes": [
       "factual_error",
       "unsupported_key_evidence",
@@ -44,10 +46,14 @@
     "dailyUsdCap": 20,
     "dailyOutputTokenCap": 1600000,
     "estimatedUsdPerTopic": 3.0,
-    "estimatedUsdSelection": 1.0
+    "estimatedUsdSelection": 1.0,
+    "dailyCallCap": 60,
+    "estimatedCallsPerTopic": 18,
+    "estimatedCallsSelection": 3,
+    "_note": "무료 등급 운영: 비용 대신 하루 호출 수로 제한한다. 유료 모델로 바꾸면 dailyUsdCap이 함께 적용된다."
   },
   "runtime": {
-    "topicConcurrency": 2,
+    "topicConcurrency": 1,
     "llmTimeoutMs": 900000,
     "llmMaxRetries": 3,
     "schemaRepairAttempts": 1,

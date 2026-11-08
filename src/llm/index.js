@@ -3,6 +3,7 @@
 import { loadModels } from '../lib/config.js';
 import { callAnthropic, isRetryableAnthropic } from './anthropic.js';
 import { callOpenAI, isRetryableOpenAI } from './openai.js';
+import { callGemini, isRetryableGemini } from './gemini.js';
 import { log } from '../lib/log.js';
 
 const mockHandlers = new Map();
@@ -31,9 +32,13 @@ export function estimateCost(model, usage) {
 }
 
 /** 검토 독립성 표시. 같은 모델이면 '같은 모델의 별도 호출'로만 표기한다. */
+const modelLabel = (m) => (String(m).startsWith('auto:') ? `Gemini ${m.slice(5)} 계열(실행 시 자동 선택)` : m);
+
 export function reviewIndependence() {
-  const w = resolveRole('writer');
-  const r = resolveRole('reviewer');
+  const w0 = resolveRole('writer');
+  const r0 = resolveRole('reviewer');
+  const w = { ...w0, model: modelLabel(w0.model) };
+  const r = { ...r0, model: modelLabel(r0.model) };
   if (w.provider !== r.provider) return { level: 'different_provider', label: `작성(${w.model})과 다른 회사 모델(${r.model})이 검토` };
   if (w.model !== r.model) return { level: 'different_model', label: `작성(${w.model})과 다른 모델(${r.model})이 검토` };
   return { level: 'same_model_separate_call', label: `작성과 같은 모델(${w.model})을 별도 역할·별도 호출로 검토 — 독립 검증은 아님` };
@@ -76,6 +81,8 @@ export async function callLLM({ role, stage, promptDef, prompt, schema, budget, 
           out = { text: typeof out === 'string' ? out : JSON.stringify(out), servedModel: 'mock', usage: { inputTokens: 0, outputTokens: 0 }, stopReason: 'end_turn' };
         } else if (r.provider === 'anthropic') {
           out = await callAnthropic({ model: r.model, effort: r.effort, system: promptDef.system, prompt: attemptPrompt, schema, maxTokens, timeoutMs: policy.runtime.llmTimeoutMs, maxRetries: 2 });
+        } else if (r.provider === 'gemini') {
+          out = await callGemini({ model: r.model, system: promptDef.system, prompt: attemptPrompt, schema, maxTokens, timeoutMs: policy.runtime.llmTimeoutMs });
         } else if (r.provider === 'openai') {
           out = await callOpenAI({ model: r.model, effort: r.effort, system: promptDef.system, prompt: attemptPrompt, schema, schemaName: stage, maxTokens, timeoutMs: policy.runtime.llmTimeoutMs });
         } else {
@@ -86,9 +93,9 @@ export async function callLLM({ role, stage, promptDef, prompt, schema, budget, 
         calls.push({ stage, role, provider: r.provider, requestedModel: r.model, servedModel: out.servedModel, effort: r.effort, promptId: promptDef.id, promptVersion: promptDef.version, usage: out.usage, costUsd, ms: Date.now() - started, at: new Date().toISOString(), repair });
         break;
       } catch (err) {
-        const retryable = r.provider === 'anthropic' ? isRetryableAnthropic(err) : r.provider === 'openai' ? isRetryableOpenAI(err) : false;
+        const retryable = r.provider === 'anthropic' ? isRetryableAnthropic(err) : r.provider === 'openai' ? isRetryableOpenAI(err) : r.provider === 'gemini' ? isRetryableGemini(err) : false;
         if (!retryable || attempt >= policy.runtime.llmMaxRetries) throw err;
-        const wait = Math.min(60000, 4000 * 2 ** attempt);
+        const wait = r.provider === 'gemini' ? 30000 * (attempt + 1) : Math.min(60000, 4000 * 2 ** attempt);
         log(`[llm] ${stage} 재시도 ${attempt + 1} (${err.message}) ${wait}ms 대기`);
         await sleep(wait);
       }

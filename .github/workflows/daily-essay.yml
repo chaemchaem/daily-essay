@@ -85,6 +85,7 @@ jobs:
       - name: 실행
         timeout-minutes: 270
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           NJ_INTERNAL_KEY: ${{ secrets.NJ_INTERNAL_KEY }}
@@ -95,6 +96,9 @@ jobs:
           NJ_ANSWER_MIN_CHARS: ${{ vars.NJ_ANSWER_MIN_CHARS }}
           NJ_ANSWER_MAX_CHARS: ${{ vars.NJ_ANSWER_MAX_CHARS }}
           NJ_DAILY_USD_CAP: ${{ vars.NJ_DAILY_USD_CAP }}
+          NJ_DAILY_CALL_CAP: ${{ vars.NJ_DAILY_CALL_CAP }}
+          NJ_GEMINI_MODEL: ${{ vars.NJ_GEMINI_MODEL }}
+          NJ_GEMINI_MIN_INTERVAL_MS: ${{ vars.NJ_GEMINI_MIN_INTERVAL_MS }}
           NJ_MAX_REVISIONS: ${{ vars.NJ_MAX_REVISIONS }}
           NJ_TOPIC_CONCURRENCY: ${{ vars.NJ_TOPIC_CONCURRENCY }}
           NJ_WRITER_PROVIDER: ${{ vars.NJ_WRITER_PROVIDER }}

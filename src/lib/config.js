@@ -22,6 +22,7 @@ export function loadPolicy() {
   if (num(env.NJ_ANSWER_MIN_CHARS) !== undefined) p.answer.minChars = num(env.NJ_ANSWER_MIN_CHARS);
   if (num(env.NJ_ANSWER_MAX_CHARS) !== undefined) p.answer.maxChars = num(env.NJ_ANSWER_MAX_CHARS);
   if (num(env.NJ_DAILY_USD_CAP) !== undefined) p.budget.dailyUsdCap = num(env.NJ_DAILY_USD_CAP);
+  if (num(env.NJ_DAILY_CALL_CAP) !== undefined) p.budget.dailyCallCap = num(env.NJ_DAILY_CALL_CAP);
   if (num(env.NJ_MAX_REVISIONS) !== undefined) p.quality.maxRevisionRounds = num(env.NJ_MAX_REVISIONS);
   if (num(env.NJ_TOPIC_CONCURRENCY) !== undefined) p.runtime.topicConcurrency = num(env.NJ_TOPIC_CONCURRENCY);
   if (p.topics.targetMin > p.topics.targetMax) throw new Error('topics.targetMin이 targetMax보다 큽니다.');

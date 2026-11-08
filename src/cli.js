@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { runDaily, runPublish, findMissingDates } from './pipeline/daily.js';
 import { writeStatus, rebuildIndexes, applyCorrection } from './publish/publish.js';
-import { loadControl, writeControl, loadSources, loadPolicy } from './lib/config.js';
+import { loadControl, writeControl, loadSources, loadPolicy, loadModels } from './lib/config.js';
 import { safeFetch } from './lib/safe-fetch.js';
 import { parseFeed } from './collect/rss.js';
 import { toKstIso, nowMs, assertDate } from './lib/time.js';
@@ -25,7 +25,12 @@ if (values.date) assertDate(values.date);
 
 function requireKeysForGeneration() {
   const missing = [];
-  if (!process.env.ANTHROPIC_API_KEY && !process.env.OPENAI_API_KEY && !process.env.NJ_LLM_PROVIDER_OVERRIDE) missing.push('ANTHROPIC_API_KEY (또는 OPENAI_API_KEY + NJ_<ROLE>_PROVIDER=openai)');
+  const providers = new Set(Object.values(loadModels().roles).map((r) => r.provider));
+  if (!process.env.NJ_LLM_PROVIDER_OVERRIDE) {
+    if (providers.has('gemini') && !process.env.GEMINI_API_KEY) missing.push('GEMINI_API_KEY');
+    if (providers.has('anthropic') && !process.env.ANTHROPIC_API_KEY) missing.push('ANTHROPIC_API_KEY');
+    if (providers.has('openai') && !process.env.OPENAI_API_KEY) missing.push('OPENAI_API_KEY');
+  }
   if (process.env.GITHUB_ACTIONS && !encryptionEnabled()) missing.push('NJ_INTERNAL_KEY (공개 저장소에 내부 기록을 암호화해 커밋하기 위해 필요)');
   if (missing.length) {
     // 운영 현황 화면에 '설정 필요'를 남겨, 자동화가 동작하는 것처럼 보이지 않게 한다.
