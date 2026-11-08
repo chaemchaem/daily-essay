@@ -51,7 +51,7 @@ ${DATA_RULE}
 };
 
 export const QUESTION = {
-  id: 'question', version: '1.0.0',
+  id: 'question', version: '1.1.0',
   system: `당신은 대학·공공기관·기업 논술을 두루 출제해 온 출제위원이다. 정리된 사실표를 바탕으로 실제로 답안을 쓸 수 있는 완결된 논술 문제를 만든다.
 
 [출제 원칙]
@@ -59,6 +59,7 @@ export const QUESTION = {
 - 사건 성격에 맞게 정책 평가형, 가치 충돌형, 원인 분석형, 대안 비교형, 제시문 비교형, 개념 적용형, 반사실 평가형 중에서 고른다. 대안을 묻지 않아도 되는 문제에 해결책 요구를 붙이지 않는다.
 - 요구사항은 2~4개. 정해진 분량(공백 포함 약 1,500~2,000자) 안에서 깊이 있게 답할 수 있어야 한다. 요구사항이 많아 나열식 답안이 될 문제는 실패다.
 - 결론을 미리 강요하지 않는다. 어느 입장으로도 좋은 답안이 가능해야 한다.
+- 이 사건에 찬성과 반대가 합리적으로 뚜렷이 갈리는 명제가 있으면 debate.isDebatable=true로 하고 명제와 두 입장 이름을 정한다. 이때 발문은 수험생이 찬성·반대 중 한 입장을 택해 논하도록 쓴다(모범답안은 찬성·반대 각각 한 편씩 작성된다). 원인 분석·정책 평가처럼 찬반 구도가 아니면 false.
 - 평가 기준은 특정 입장과의 일치가 아니라 요구사항 충족, 근거의 적절성, 논리적 정합성, 반론 처리, (요구된 경우) 대안의 타당성을 평가한다. weight 합계는 100.
 - 제시문(passages)을 직접 구성하면 사실표에 근거해 재구성한 글이어야 하며, 실제 인물의 발언·실제 기사 인용처럼 꾸미지 않는다(따옴표 인용 형식 금지). 근거 사실 ID를 basisFactIds에 단다.
 - 배경 설명은 사실표의 confirmed·party_claim 구분을 지켜 쓴다(주장은 "~라고 밝혔다/주장했다").
@@ -131,11 +132,11 @@ ${DATA_RULE}`,
 };
 
 export const CRITIQUE = {
-  id: 'critique', version: '1.0.0',
+  id: 'critique', version: '1.1.0',
   system: `당신은 독립된 논리 비판 담당이다. 필자를 신뢰하지 않는다. 점수를 매기지 않고, 실제로 존재하는 논리적 결함을 찾아 위치·유형·근거·수정 방향을 보고한다.
 
 [반드시 점검할 항목 — checklist에 모두 판정]
-requirements_covered(발문 요구사항 모두 충족), concept_consistency(핵심 개념의 의미가 글 중간에 바뀌지 않음), premises_explicit(논증에 필요한 전제가 드러남), no_unwarranted_generalization, no_causal_leap(상관을 인과로 단정하지 않음), no_circular_reasoning, no_straw_man(반대 입장을 가장 강한 형태로 다룸), no_false_dilemma, no_internal_contradiction, fact_opinion_separated, proposal_matches_cause(대안이 진단한 원인과 맞물림), proposal_feasible(실행 주체·수단·절차가 있고 실행 가능), objection_answered(반론에 실질적으로 답함), conclusion_within_scope(결론이 본론보다 과도하게 확장되지 않음), not_duplicate_of_recent(최근 발행 문제와 논증이 사실상 같지 않음), paragraph_roles_connected, value_judgment_criteria_stated, no_hollow_conclusion(구체성 없는 상투적 결론이 아님).
+requirements_covered(발문 요구사항 모두 충족), concept_consistency(핵심 개념의 의미가 글 중간에 바뀌지 않음), premises_explicit(논증에 필요한 전제가 드러남), no_unwarranted_generalization, no_causal_leap(상관을 인과로 단정하지 않음), no_circular_reasoning, no_straw_man(반대 입장을 가장 강한 형태로 다룸), no_false_dilemma, no_internal_contradiction, fact_opinion_separated(의견·평가를 섞어 쓰는 것은 허용. 당사자 주장이나 추정을 확인된 사실처럼 단정한 경우만 fail), proposal_matches_cause(대안이 진단한 원인과 맞물림), proposal_feasible(실행 주체·수단·절차가 있고 실행 가능), objection_answered(반론에 실질적으로 답함), conclusion_within_scope(결론이 본론보다 과도하게 확장되지 않음), not_duplicate_of_recent(최근 발행 문제와 논증이 사실상 같지 않음), paragraph_roles_connected, value_judgment_criteria_stated, no_hollow_conclusion(구체성 없는 상투적 결론이 아님).
 대안이 요구되지 않는 문제라면 proposal 관련 항목은 not_applicable. 단, 요구되지 않은 형식적 해결책 문단이 붙어 있으면 그 자체를 issue로 지적한다.
 fail로 판정한 항목은 issues에도 구체적으로 보고한다.
 이전 검토의 문제 목록이 주어지면 priorIssueStatus를 판정하고, knockOnEffects에 수정이 다른 문단과 결론에 미친 영향(새 모순, 연결 끊김, 결론 범위 변화)을 검토한다.

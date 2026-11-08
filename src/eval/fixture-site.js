@@ -9,6 +9,7 @@ export async function buildFixtureSite({ dir = path.join(PKG_ROOT, 'data', 'fixt
   process.env.NJ_DATA_DIR = dir;
   process.env.NJ_TEST_DATA = '1';
   process.env.NJ_LLM_PROVIDER_OVERRIDE = 'mock';
+  process.env.NJ_MOCK_DEBATE = '1';
   delete process.env.NJ_INTERNAL_KEY;
   const { setMockHandler } = await import('../llm/index.js');
   const { mockHandler } = await import('./mock-llm.js');

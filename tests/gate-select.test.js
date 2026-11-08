@@ -62,7 +62,7 @@ test('선정: 기사 수가 아니라 평가 점수, 후속 변화 유형, 날�
     tr('low', { scores: { publicSignificance: 2, valueConflict: 2, arguability: 2, evidenceAvailability: 3, conceptualTransfer: 2 } }),
     tr('gossip', { exclude: true, excludeReason: '연예' }),
   ];
-  const d = decide({ triaged, clustersById: clustersById(triaged.map((t) => t.clusterId)), recentCategories: [], policy: { ...policy, topics: { ...policy.topics, maxPerCategoryPerIssue: 9 } }, window: win });
+  const d = decide({ triaged, clustersById: clustersById(triaged.map((t) => t.clusterId)), recentCategories: [], policy: { ...policy, topics: { ...policy.topics, maxPerCategoryPerIssue: 9, targetMax: 5 } }, window: win });
   const by = Object.fromEntries(d.decisions.map((x) => [x.clusterId, x.decision]));
   assert.equal(by.new1, 'selected');
   assert.equal(by.follow, 'selected');

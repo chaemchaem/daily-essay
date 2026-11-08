@@ -58,18 +58,24 @@ export async function mockHandler({ stage, prompt }) {
   const round = Number((stage.match(/_r(\d+)$/) || [])[1] || 0);
   if (stage === 'facts') return topic === 'library' ? F.LIB_FACTS : F.SCOOTER_FACTS;
   if (stage.startsWith('question')) {
-    if (topic === 'library') return F.LIB_QUESTION;
-    return { ...F.LIB_QUESTION, title: '[테스트] 보도 위의 킥보드, 누구의 공간인가', background: F.SCOOTER_FACTS.whatHappened, passages: [], prompt: '나래시 조례안이 보행 안전과 이동 수단 선택의 자유 사이에서 어떤 선택을 했는지 평가하고, 그 선택이 정당화되는 조건을 논하시오.', requirements: [{ id: 'R1', text: '충돌하는 두 가치를 정의할 것' }, { id: 'R2', text: '조례안의 선택이 정당화되는 조건을 제시할 것' }] };
+    if (topic === 'library') {
+      // NJ_MOCK_DEBATE=1이면 찬반형으로 출제(견본·테스트용): 찬성 답안은 사실 검증을 통과하지 못해 빠지고 반대 답안만 실린다.
+      const debate = process.env.NJ_MOCK_DEBATE === '1'
+        ? { isDebatable: true, proposition: '가온시는 시립도서관 5곳의 야간 운영 중단 계획을 그대로 시행해야 한다', proLabel: '찬성 — 계획대로 시행', conLabel: '반대 — 일괄 중단 대신 거점 유지', reason: '재정 효율과 접근성 가운데 무엇을 우선할지에 따라 입장이 갈린다' }
+        : { isDebatable: false, proposition: '', proLabel: '', conLabel: '', reason: '평가형 문제' };
+      return { ...F.LIB_QUESTION, debate, ...(debate.isDebatable ? { prompt: `${F.LIB_QUESTION.prompt.replace(/제시하시오\.$/, '')} 이때 계획을 그대로 시행해야 한다는 명제에 찬성 또는 반대 입장을 택해 논하시오.` } : {}) };
+    }
+    return { ...F.LIB_QUESTION, title: '[테스트] 보도 위의 킥보드, 누구의 공간인가', background: F.SCOOTER_FACTS.whatHappened, passages: [], prompt: '나래시 조례안이 보행 안전과 이동 수단 선택의 자유 사이에서 어떤 선택을 했는지 평가하고, 그 선택이 정당화되는 조건을 논하시오.', requirements: [{ id: 'R1', text: '충돌하는 두 가치를 정의할 것' }, { id: 'R2', text: '조례안의 선택이 정당화되는 조건을 제시할 것' }], debate: { isDebatable: false, proposition: '', proLabel: '', conLabel: '', reason: '' } };
   }
-  if (stage === 'design') return F.LIB_DESIGN;
-  if (stage === 'draft') {
+  if (stage.startsWith('design')) return F.LIB_DESIGN;
+  if (stage.startsWith('draft')) {
     if (topic === 'library') return { text: F.LIB_DRAFT, paragraphRoles: F.LIB_ROLES };
     const n = scooterText().split('\n\n').length;
     return { text: scooterText(), paragraphRoles: Array.from({ length: n }, (_, i) => ({ index: i + 1, role: i === 0 ? 'introduction' : 'argument', requirementIds: i === 0 ? ['R1'] : ['R2'], factIds: ['F1'] })) };
   }
   if (stage.startsWith('factcheck')) {
     const prior = priorIds(prompt);
-    if (topic === 'scooter') {
+    if (topic === 'scooter' || stage.startsWith('factcheck_pro')) {
       return { priorIssueStatus: prior.map((id) => ({ issueId: id, status: 'unresolved', note: '같은 문장이 그대로 남아 있음' })),
         claims: [{ paragraph: 2, quote: '시행 첫해 견인 건수가 3배로 늘어날 것이 분명하다.', kind: 'statistical', verdict: 'unsupported', factIds: [], sourceIds: [], note: '출처에 견인 건수 전망이 없음' }],
         issues: [{ location: { paragraph: 2, quote: '견인 건수가 3배로 늘어날 것이 분명하다' }, type: 'fabricated_detail', severity: 'critical', evidence: '사실표와 원출처에 없는 수치이며 전망을 확정처럼 서술', fixDirection: '삭제하거나 확인된 사실로 대체' }],
@@ -100,8 +106,8 @@ export async function mockHandler({ stage, prompt }) {
     if (topic === 'scooter') { const n = scooterText().split('\n\n').length; return { text: scooterText(), paragraphRoles: Array.from({ length: n }, (_, i) => ({ index: i + 1, role: 'argument', requirementIds: i === 0 ? ['R1'] : ['R2'], factIds: ['F1'] })), changes: [], notAddressed: [{ issueId: 'R0-F1', reason: '(테스트) 수정하지 않음' }], ripple: '없음' }; }
     return { text: F.LIB_ANSWER, paragraphRoles: F.LIB_ROLES, changes: [{ issueIds: ['R0-L1', 'R0-C1'], description: '결론 문단의 상투적 문구("사회적 합의", "모두의 관심과 노력")를 삭제하고, 본론의 판단 기준과 거점 운영안의 조건을 결론에 반영했다.', paragraphsTouched: [7] }], notAddressed: [], ripple: '결론이 5문단의 판단 기준, 6문단의 대안과 같은 범위를 유지하도록 맞췄다.' };
   }
-  if (stage === 'companion') return F.LIB_COMPANION;
-  if (stage === 'final') {
+  if (stage.startsWith('companion')) return F.LIB_COMPANION;
+  if (stage.startsWith('final')) {
     return { decision: 'publish', blockingIssues: [], companionIssues: [], remainingUncertainties: ['지점별 야간 이용 실적이 공개되지 않아, 답안의 조건부 결론이 실제 수치로 검증되지 않았다.', '절감액 9억 원은 시의 주장이며 산정 근거는 확인하지 못했다.'],
       publicReviewSummary: '[테스트 데이터] 답안의 수치 5개와 기관 입장 2건을 원출처와 대조했다. 초안 결론의 상투적 문구를 지적해 수정했고, 수정 후 결론이 본론의 판단 기준과 일치하는지 다시 확인했다. 시의 절감액과 이용자 구성 수치는 시 자료에만 근거한 주장으로 표시했다.' };
   }

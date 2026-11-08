@@ -125,6 +125,13 @@ export const QuestionOutput = z.object({
   timeMinutes: z.number().int(),
   intent: z.string(),
   rubric: z.array(z.object({ criterion: z.string(), description: z.string(), weight: z.number().int() })),
+  debate: z.object({
+    isDebatable: z.boolean().describe('합리적인 찬성·반대 입장이 뚜렷이 갈리는 명제가 있으면 true'),
+    proposition: z.string().describe('찬반을 가를 명제 한 문장(예: "정부는 ~해야 한다"). 해당 없으면 빈 문자열'),
+    proLabel: z.string().describe('찬성 입장 이름(예: "찬성 — 도입해야 한다")'),
+    conLabel: z.string().describe('반대 입장 이름'),
+    reason: z.string(),
+  }),
   stanceNeutrality: z.string().describe('특정 결론을 강요하지 않음을 어떻게 보장했는지'),
   notGeneric: z.string().describe('어디에나 붙일 수 있는 문제가 아닌 이유'),
 });

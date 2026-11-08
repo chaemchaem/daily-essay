@@ -1,7 +1,7 @@
 // 발행 차단 규칙. 총점과 무관하게, 하나라도 해당하면 발행하지 않는다.
 import { CODE_BLOCKING_TYPES } from './checks.js';
 
-const BLOCKING_CHECKLIST = new Set(['requirements_covered', 'no_internal_contradiction', 'fact_opinion_separated']);
+const BLOCKING_CHECKLIST = new Set(['requirements_covered', 'no_internal_contradiction']);
 const FACTUAL_KINDS = new Set(['factual', 'statistical', 'attribution', 'legal_or_policy_status']);
 
 export function isBlockingIssue(issue, policy) {

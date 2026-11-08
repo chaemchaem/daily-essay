@@ -84,7 +84,7 @@ test('정상 흐름: 06시 생성 → 09시 이전엔 비공개 → 09시 발행
   assert.equal(iss2.followUpNews.length, 1, '새 문제가 필요 없는 변화는 후속 소식으로');
   const held = readInternal(`topics/${readInternal(`issues/${D2}.json`).topicIds[0]}.json`);
   assert.equal(held.status, 'held');
-  assert.equal(held.rounds.length, 3, '수정 상한(2회) 후 보류');
+  assert.equal(held.tracks.main.rounds.length, 3, '수정 상한(2회) 후 보류');
   assert.ok(!publicTopics().some((f) => f.includes('나래시')), '보류 원고는 공개되지 않음');
   const th = readPublic(`threads/${pub.threadId}.json`);
   assert.equal(th.updates.length, 1);
