@@ -99,6 +99,31 @@ const commands = {
     const entry = applyCorrection({ topicId: values.topic, reason: values.reason, replaceAnswerText: text, notice: values.notice || null, by: values.by || process.env.GITHUB_ACTOR || 'admin', kind: text ? 'fact_correction' : 'notice' });
     log(JSON.stringify(entry));
   },
+  async diagnose() {
+    const { diagnoseIssue } = await import('./pipeline/diagnose.js');
+    const { kstDateOf } = await import('./lib/time.js');
+    for (const line of diagnoseIssue(values.date || kstDateOf(nowMs()))) console.log(line);
+  },
+  async 'probe-articles'() {
+    const { fetchArticle } = await import('./collect/extract.js');
+    const src = loadSources();
+    for (const s of src.sources.filter((x) => x.enabled !== false && x.type !== 'aggregator')) {
+      try {
+        const r = await safeFetch(s.url, { timeoutMs: 12000, maxBytes: 5_000_000, allowHosts: src.fetchAllowHosts });
+        const items = parseFeed(r.text, { defaultTz: s.defaultTz }).slice(0, 2);
+        for (const it of items) {
+          try {
+            const a = await fetchArticle(it.link, { timeoutMs: 12000, maxBytes: 2_500_000, allowHosts: src.fetchAllowHosts, defaultTz: s.defaultTz || '+00:00' });
+            console.log(`${a.accessLevel === 'full_text' ? 'OK  ' : 'THIN'} ${s.id.padEnd(22)} ${String(a.bodyChars).padStart(5)}자 ${a.accessLevel}${a.noArchive ? ' noarchive' : ''} ${new URL(it.link).hostname}`);
+          } catch (err) {
+            console.log(`FAIL ${s.id.padEnd(22)} ${err.code || ''} ${String(err.message).slice(0, 80)} ${it.link.slice(0, 80)}`);
+          }
+        }
+      } catch (err) {
+        console.log(`FEED ${s.id.padEnd(22)} ${err.code || ''} ${String(err.message).slice(0, 80)}`);
+      }
+    }
+  },
   async 'rebuild-public'() {
     rebuildIndexes();
     log('공개 목록·검색·상태를 다시 만들었습니다.');

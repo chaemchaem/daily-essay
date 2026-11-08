@@ -41,7 +41,7 @@ test('모델 이름 해석: 생성 모델만, 계열·버전·안정판 구분',
   assert.equal(parseModelId('models/text-embedding-9'), null);
 });
 
-test('auto:pro는 안정판 pro를 먼저, 그다음 flash 계열 순으로 시도', async () => {
+test('auto:pro는 최신 안정판부터(같은 버전이면 pro 먼저) 시도', async () => {
   const c = fakeClient(() => ok({ answer: '가', n: 1 }));
   setGeminiClientForTest(c);
   const r = await callGemini({ model: 'auto:pro', system: 's', prompt: 'p', schema, maxTokens: 64000, timeoutMs: 1000 });
@@ -52,7 +52,12 @@ test('auto:pro는 안정판 pro를 먼저, 그다음 flash 계열 순으로 시�
   assert.deepEqual(r.usage, { inputTokens: 100, outputTokens: 50, cacheReadTokens: 0 });
   assert.deepEqual(JSON.parse(r.text), { answer: '가', n: 1 });
   const order = candidatesFor('auto:pro', [parseModelId('models/gemini-9.0-flash'), parseModelId('models/gemini-9.0-pro'), parseModelId('models/gemini-9.5-pro-preview-01-01')]).map((m) => m.id);
-  assert.deepEqual(order, ['gemini-9.0-pro', 'gemini-9.5-pro-preview-01-01', 'gemini-9.0-flash']);
+  assert.deepEqual(order, ['gemini-9.0-pro', 'gemini-9.0-flash', 'gemini-9.5-pro-preview-01-01']);
+  // 더 새로운 flash가 오래된 pro보다 앞선다
+  const order2 = candidatesFor('auto:pro', [parseModelId('models/gemini-2.5-pro'), parseModelId('models/gemini-3.8-flash'), parseModelId('models/gemini-3.8-flash-lite')]).map((m) => m.id);
+  assert.deepEqual(order2, ['gemini-3.8-flash', 'gemini-2.5-pro', 'gemini-3.8-flash-lite']);
+  const order3 = candidatesFor('auto:flash', [parseModelId('models/gemini-2.5-pro'), parseModelId('models/gemini-2.5-flash'), parseModelId('models/gemini-3.8-flash')]).map((m) => m.id);
+  assert.deepEqual(order3, ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-2.5-pro']);
 });
 
 test('하루 무료 한도가 소진된 모델은 건너뛰고 다음 후보로', async () => {
@@ -62,7 +67,7 @@ test('하루 무료 한도가 소진된 모델은 건너뛰고 다음 후보로'
   });
   setGeminiClientForTest(c);
   const r = await callGemini({ model: 'auto:pro', system: 's', prompt: 'p', schema, maxTokens: 1000, timeoutMs: 1000 });
-  assert.equal(r.servedModel, 'gemini-9.5-pro-preview-01-01');
+  assert.equal(r.servedModel, 'gemini-9.0-flash');
   // 같은 실행 안에서는 소진된 모델을 다시 부르지 않는다
   await callGemini({ model: 'auto:pro', system: 's', prompt: 'p', schema, maxTokens: 1000, timeoutMs: 1000 });
   assert.equal(c.calls.filter((x) => x.model === 'gemini-9.0-pro').length, 1);

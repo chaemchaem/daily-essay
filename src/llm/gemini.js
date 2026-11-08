@@ -57,16 +57,21 @@ async function loadCatalog(c) {
   return catalog;
 }
 
-const rank = (a, b) => (b.stable - a.stable) || (b.version - a.version) || a.id.localeCompare(b.id);
+const FAMILY_ORDER = { pro: 0, flash: 1, 'flash-lite': 2 };
+// 안정판 우선 → 높은 버전 우선 → 같은 버전이면 pro, flash 순
+const rank = (a, b) => (b.stable - a.stable) || (b.version - a.version) || (FAMILY_ORDER[a.family] - FAMILY_ORDER[b.family]) || a.id.localeCompare(b.id);
 
 /** 역할 설정("auto:pro" 등 또는 정확한 모델명)에 따른 시도 순서 */
 export function candidatesFor(spec, models) {
   const override = process.env.NJ_GEMINI_MODEL;
   if (override) return [{ id: override, outputTokenLimit: null }];
   if (spec && !spec.startsWith('auto')) return [{ id: spec, outputTokenLimit: models.find((m) => m.id === spec)?.outputTokenLimit || null }];
-  const want = spec === 'auto:flash' ? ['flash', 'pro', 'flash-lite'] : ['pro', 'flash', 'flash-lite'];
-  const list = [];
-  for (const fam of want) list.push(...models.filter((m) => m.family === fam).sort(rank));
+  // auto:pro(품질 우선): pro·flash를 함께 놓고 최신 안정판부터. 예: 3.x flash가 2.5 pro보다 앞선다.
+  // auto:flash(속도·한도 우선): flash 계열 먼저.
+  const main = spec === 'auto:flash'
+    ? [...models.filter((m) => m.family === 'flash').sort(rank), ...models.filter((m) => m.family === 'pro').sort(rank)]
+    : models.filter((m) => m.family === 'pro' || m.family === 'flash').sort(rank);
+  const list = [...main, ...models.filter((m) => m.family === 'flash-lite').sort(rank)];
   return list.filter((m) => !exhausted.has(m.id));
 }
 
