@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T16:55:52+09:00",
+  "generatedAt": "2026-11-08T18:53:41+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -12,17 +12,29 @@
   "lastSuccessfulPublish": null,
   "today": {
     "date": "2026-11-08",
-    "state": "delayed",
-    "stateLabel": "발행 지연",
+    "state": "all_held",
+    "stateLabel": "검토 통과 주제 없음",
     "published": 0,
-    "held": 0,
+    "held": 5,
     "failedStage": null,
     "message": null
   },
   "lock": null,
-  "recentRuns": [],
+  "recentRuns": [
+    {
+      "id": "2026-11-08T1836-manual-2026-11-08",
+      "kind": "manual",
+      "targetDate": "2026-11-08",
+      "startedAt": "2026-11-08T18:36:13+09:00",
+      "finishedAt": "2026-11-08T18:53:41+09:00",
+      "outcome": "all_held",
+      "outcomeLabel": "검토 통과 주제 없음",
+      "failedStep": null,
+      "trigger": "workflow_dispatch"
+    }
+  ],
   "models": {
-    "writer": "작성과 같은 모델(claude-opus-5-5)을 별도 역할·별도 호출로 검토 — 독립 검증은 아님"
+    "writer": "작성과 같은 모델(Gemini pro 계열(실행 시 자동 선택))을 별도 역할·별도 호출로 검토 — 독립 검증은 아님"
   },
   "promptVersions": {
     "triage": "1.0.0",
@@ -36,10 +48,6 @@
     "companion": "1.0.0",
     "final": "1.0.0"
   },
-  "policyVersion": "2026-11-07.1",
-  "test": false,
-  "setupMissing": [
-    "ANTHROPIC_API_KEY (또는 OPENAI_API_KEY + NJ_<ROLE>_PROVIDER=openai)",
-    "NJ_INTERNAL_KEY (공개 저장소에 내부 기록을 암호화해 커밋하기 위해 필요)"
-  ]
+  "policyVersion": "2026-11-08.1-gemini-free",
+  "test": false
 }

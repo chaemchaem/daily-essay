@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-08",
+  "number": 1,
+  "state": "all_held",
+  "stateLabel": "검토 통과 주제 없음",
+  "window": {
+    "primaryStart": "2026-11-07T00:00:00+09:00",
+    "primaryEnd": "2026-11-08T00:00:00+09:00",
+    "overlapStart": "2026-11-05T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-08T18:36:13+09:00",
+  "generatedAt": "2026-11-08T18:53:41+09:00",
+  "publishedAt": null,
+  "recovered": null,
+  "topics": [],
+  "counts": {
+    "published": 0,
+    "held": 5,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "근거 부족",
+      "count": 5
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-08T18:53:41+09:00",
+      "change": "상태 기록: all_held"
+    }
+  ],
+  "test": false
+}
