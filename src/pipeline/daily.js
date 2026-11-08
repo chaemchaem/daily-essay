@@ -14,6 +14,7 @@ import { Budget } from '../llm/budget.js';
 import { publishIssue, writeStatus } from '../publish/publish.js';
 import { log, errorSummary } from '../lib/log.js';
 import { sha1 } from '../lib/crypto.js';
+import { diagnoseIssue } from './diagnose.js';
 
 function newRunId(kind, date) {
   return `${toKstIso(nowMs()).replace(/[:+]/g, '').slice(0, 15)}-${kind}-${date}`;
@@ -224,6 +225,7 @@ export async function runDaily({ date, kind = 'manual', trigger = 'local', fetch
     step(stepName, 'failed', errorSummary(err));
     log(`[daily] 실패 @${stepName}: ${err.message}`);
   } finally {
+    try { for (const line of diagnoseIssue(date)) log(line); } catch (e) { log(`[진단] 요약 실패: ${e.message}`); }
     run.finishedAt = toKstIso(nowMs());
     run.budget = budget.state;
     writeInternal(`runs/${runId}.json`, run);

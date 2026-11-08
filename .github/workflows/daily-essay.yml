@@ -14,7 +14,7 @@ on:
         description: "관리자 실행"
         type: choice
         default: daily
-        options: [daily, retry, publish, recover, status, pause, resume, probe-sources, eval-adversarial, rebuild-public]
+        options: [daily, retry, publish, recover, status, diagnose, pause, resume, probe-sources, probe-articles, eval-adversarial, rebuild-public]
       date:
         description: "대상 발행호 날짜(YYYY-MM-DD, 비우면 오늘 KST)"
         required: false
@@ -77,6 +77,7 @@ jobs:
               daily)  echo "cmd=daily --kind manual --trigger workflow_dispatch $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
               retry)  echo "cmd=daily --kind retry --trigger workflow_dispatch $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
               publish) echo "cmd=publish $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
+              diagnose) echo "cmd=diagnose $DATE_ARG" >> "$GITHUB_OUTPUT" ;;
               *) echo "cmd=$INPUT_ACTION" >> "$GITHUB_OUTPUT" ;;
             esac
           fi
