@@ -54,15 +54,15 @@
   "promptVersions": {
     "triage": "1.0.0",
     "facts": "1.1.0",
-    "question": "1.0.0",
+    "question": "1.1.0",
     "design": "1.0.0",
     "draft": "1.0.0",
     "factcheck": "1.0.0",
-    "critique": "1.0.0",
+    "critique": "1.1.0",
     "revise": "1.0.0",
     "companion": "1.0.0",
     "final": "1.0.0"
   },
-  "policyVersion": "2026-11-08.1-gemini-free",
+  "policyVersion": "2026-11-08.2-procon",
   "test": true
 }

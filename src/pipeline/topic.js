@@ -63,6 +63,128 @@ async function stage(t, name, fn) {
   return res.data;
 }
 
+async function stageT(t, tr, name, fn) {
+  if (tr.stages[name]?.done) return tr.stages[name].output;
+  tr.currentStage = name;
+  t.currentStage = tr.key === 'main' ? name : `${name}(${tr.key})`;
+  saveTopic(t);
+  const res = await fn();
+  tr.stages[name] = { done: true, at: toKstIso(nowMs()), output: res.data, calls: res.calls };
+  t.calls.push(...res.calls);
+  saveTopic(t);
+  return res.data;
+}
+
+function stanceBlock(tr, debate, { reviewer = false } = {}) {
+  if (!debate || !tr.side) return '';
+  return reviewer
+    ? `\n\n[입장 지정] 이 답안은 명제 "${debate.proposition}"에 대해 '${tr.label}' 입장에서 쓰도록 지정된 답안이다. 입장을 택한 것 자체나 반대 입장을 지지하지 않는 것을 문제 삼지 말고, 그 입장 안에서 논증의 질(근거·추론·반론 처리)을 평가하라.`
+    : `\n\n[입장 지정] 이 답안은 명제 "${debate.proposition}"에 대해 '${tr.label}' 입장에서 쓴다. 결론을 중간으로 흐리거나 입장을 바꾸지 않는다. 반대편의 가장 강한 논거는 반론 문단에서 정면으로 다루고 응답한다. 의견과 평가를 서술해도 되지만, 당사자 주장을 확인된 사실처럼 단정하지는 않는다.`;
+}
+
+/** 답안 한 편(트랙)의 설계→초안→검증·비판·수정→해설→최종 검토→게이트 */
+async function runTrack(t, tr, { ctx, base, question, facts, pack, recentBrief, debate }) {
+  const { policy } = ctx;
+  const sfx = tr.key === 'main' ? '' : `_${tr.key}`;
+  const stance = stanceBlock(tr, debate);
+  const stanceR = stanceBlock(tr, debate, { reviewer: true });
+
+  // ③ 논증 설계
+  const design = await stageT(t, tr, 'design', () => callLLM({ ...base, role: 'writer', stage: `design${sfx}`, promptDef: P.DESIGN, schema: S.DesignOutput,
+    prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}${stance}` }));
+  // ④ 초안
+  const draftDef = P.withLength(P.DRAFT, policy);
+  const draft = await stageT(t, tr, 'draft', () => callLLM({ ...base, role: 'writer', stage: `draft${sfx}`, promptDef: draftDef, schema: S.DraftOutput,
+    prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[논증 설계]\n${J(design)}${stance}` }));
+
+  // ⑤~⑦ 검증·비판·수정 반복
+  if (!tr.rounds.length) tr.rounds.push({ round: 0, text: draft.text, paragraphRoles: draft.paragraphRoles, producedBy: 'draft' });
+  const reviseDef = P.withLength(P.REVISE, policy);
+  for (;;) {
+    const r = tr.rounds[tr.rounds.length - 1];
+    const prior = tr.rounds.length > 1 ? tr.rounds[tr.rounds.length - 2].openIssues.filter((i) => i.source !== 'code') : [];
+    if (!r.review) {
+      tr.currentStage = `review_r${r.round}`;
+      const code = checkAnswer({ text: r.text, paragraphRoles: r.paragraphRoles, question, facts, policy, recent: ctx.recent, issueDate: t.issueDate });
+      const priorFc = prior.filter((i) => i.stage === 'factcheck');
+      const priorCr = prior.filter((i) => i.stage === 'critique');
+      const fcRes = await callLLM({ ...base, role: 'reviewer', stage: `factcheck${sfx}_r${r.round}`, promptDef: P.FACTCHECK, schema: S.FactCheckOutput,
+        prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[원출처]\n${renderSources(pack)}\n\n[검증할 답안 — 문단 번호 포함]\n${numbered(r.text)}\n\n[이전 검토에서 지적된 사실 문제 — 해결 여부 판정]\n${issueList(priorFc)}` });
+      const crRes = await callLLM({ ...base, role: 'reviewer', stage: `critique${sfx}_r${r.round}`, promptDef: P.CRITIQUE, schema: S.CritiqueOutput,
+        prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표 요약]\n${factsBrief(facts)}\n\n[최근 발행 문제의 발문과 중심 주장 — 중복 판단용]\n${recentBrief}\n\n[비판할 답안 — 문단 번호 포함]\n${numbered(r.text)}\n\n[이전 검토에서 지적된 논리 문제 — 해결 여부 판정]\n${issueList(priorCr)}\n\n${r.round > 0 ? `[직전 수정 내역(필자 기록) — 필자 주장이므로 그대로 믿지 말고 원고로 확인]\n${J(r.reviseLog || {})}` : ''}${stanceR}` });
+      t.calls.push(...fcRes.calls, ...crRes.calls);
+      const stillOpen = [];
+      const statuses = [...fcRes.data.priorIssueStatus, ...crRes.data.priorIssueStatus];
+      for (const st of statuses) {
+        const p = prior.find((i) => i.id === st.issueId);
+        if (p && st.status !== 'resolved') stillOpen.push({ ...p, carriedNote: st.note });
+      }
+      // 판정이 누락된 이전 문제는 해결되지 않은 것으로 본다.
+      for (const p of prior) if (!statuses.some((s) => s.issueId === p.id)) stillOpen.push({ ...p, carriedNote: '검토자가 해결 여부를 판정하지 않음' });
+      const fresh = [
+        ...fcRes.data.issues.map((i, n) => ({ ...i, id: `R${r.round}-F${n + 1}`, stage: 'factcheck', source: 'llm' })),
+        ...crRes.data.issues.map((i, n) => ({ ...i, id: `R${r.round}-L${n + 1}`, stage: 'critique', source: 'llm' })),
+        ...code.issues.map((i, n) => ({ ...i, id: `R${r.round}-C${n + 1}`, stage: 'code' })),
+      ];
+      r.review = { at: toKstIso(nowMs()), metrics: code.metrics, factcheck: fcRes.data, critique: crRes.data, priorStatus: statuses };
+      r.openIssues = [...stillOpen, ...fresh];
+      saveTopic(t);
+    }
+    const blocking = r.openIssues.filter((i) => isBlockingIssue(i, policy));
+    const claimProblems = (r.review.factcheck.claims || []).filter((c) => ['contradicted', 'unsupported'].includes(c.verdict) && ['factual', 'statistical', 'attribution', 'legal_or_policy_status'].includes(c.kind));
+    const majors = r.openIssues.filter((i) => i.severity !== 'minor');
+    const minors = r.openIssues.filter((i) => i.severity === 'minor');
+    const needsRevision = blocking.length || claimProblems.length || majors.length || minors.length >= 2 || r.review.factcheck.factsSheetProblems.some((p) => p.severity !== 'minor');
+    if (!needsRevision) break;
+    if (r.round >= policy.quality.maxRevisionRounds) {
+      if (blocking.length || claimProblems.length || majors.length) {
+        tr.status = 'held';
+        tr.holdReasons = [...new Set([`수정 ${r.round}회 후에도 해결되지 않은 문제`, ...[...blocking, ...majors].slice(0, 6).map((i) => `${S.ISSUE_TYPE_LABELS[i.type] || i.type}(${i.severity}): ${i.evidence}`), ...claimProblems.slice(0, 3).map((c) => `검증 실패 진술: ${c.quote}`)])];
+        tr.currentStage = null;
+        saveTopic(t);
+        return tr;
+      }
+      break; // 사소한 문제만 남음 — 공개 검토 요약에 남은 문제로 표시
+    }
+    const toFix = [...r.openIssues, ...claimProblems.map((c, n) => ({ id: `R${r.round}-V${n + 1}`, type: c.verdict === 'contradicted' ? 'factual_error' : 'unsupported_key_evidence', severity: 'critical', location: { paragraph: c.paragraph, quote: c.quote }, evidence: `사실 검증 결과 ${c.verdict}: ${c.note}`, fixDirection: '사실표 범위로 고치거나 삭제', stage: 'factcheck', source: 'llm' }))];
+    r.openIssues = toFix;
+    tr.currentStage = `revise_r${r.round + 1}`;
+    const rev = await callLLM({ ...base, role: 'writer', stage: `revise${sfx}_r${r.round + 1}`, promptDef: reviseDef, schema: S.ReviseOutput,
+      prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[현재 원고 — 문단 번호 포함]\n${numbered(r.text)}\n\n[고쳐야 할 문제 목록]\n${issueList(toFix)}${stance}\n\n문단 번호 표기([1] 등) 없이 전체 원고를 다시 출력하라.` });
+    t.calls.push(...rev.calls);
+    r.revisedBy = { at: toKstIso(nowMs()), changes: rev.data.changes, notAddressed: rev.data.notAddressed, ripple: rev.data.ripple };
+    tr.rounds.push({ round: r.round + 1, text: rev.data.text.replace(/^\[\d+\]\s*/gm, ''), paragraphRoles: rev.data.paragraphRoles, producedBy: 'revise', reviseLog: { changes: rev.data.changes, notAddressed: rev.data.notAddressed, ripple: rev.data.ripple } });
+    saveTopic(t);
+  }
+  const finalRound = tr.rounds[tr.rounds.length - 1];
+  const answerText = finalRound.text;
+  const nPara = splitParagraphs(answerText).length;
+
+  // 해설·다른 입장·학습 포인트
+  const companion = await stageT(t, tr, 'companion', () => callLLM({ ...base, role: 'writer', stage: `companion${sfx}`, promptDef: P.COMPANION, schema: S.CompanionOutput,
+    prompt: `${header(t, ctx)}\n\n${followUpBlock(t)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[확정 답안 — 문단 번호 포함]\n${numbered(answerText)}\n\n[문단 역할]\n${J(finalRound.paragraphRoles)}${stance}` }));
+  const companionIssues = checkCompanion({ companion, answerParagraphs: nPara, facts });
+
+  // ⑧ 최종 검토와 발행 판단
+  const reviewHistory = tr.rounds.map((r) => ({ round: r.round, chars: countChars(r.text), issues: (r.openIssues || []).map((i) => ({ id: i.id, type: i.type, severity: i.severity, evidence: i.evidence })), changes: r.revisedBy?.changes || null }));
+  const final = await stageT(t, tr, 'final', () => callLLM({ ...base, role: 'reviewer', stage: `final${sfx}`, promptDef: P.FINAL, schema: S.FinalReviewOutput,
+    prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[원출처]\n${renderSources(pack, { maxBodyChars: 2500 })}\n\n[최종 답안 — 문단 번호 포함]\n${numbered(answerText)}\n\n[해설·다른 입장·학습 포인트]\n${J(companion)}\n\n[해설 형식 검사(코드)]\n${J(companionIssues)}\n\n[검토 이력]\n${J(reviewHistory)}${stanceR}` }));
+  const gate = evaluateGate({ openIssues: finalRound.openIssues || [], factcheck: finalRound.review.factcheck, critique: finalRound.review.critique, final, companionIssues, policy });
+  tr.gate = { ...gate, at: toKstIso(nowMs()) };
+  tr.answer = { text: answerText, paragraphRoles: finalRound.paragraphRoles, metrics: finalRound.review.metrics };
+  tr.companion = companion;
+  tr.companionIssues = companionIssues;
+  tr.currentStage = null;
+  if (!gate.publishable) {
+    tr.status = 'held';
+    tr.holdReasons = [...new Set(gate.blockers.slice(0, 8).map((b) => `${b.kind}/${b.type}: ${b.detail}`))];
+  } else {
+    tr.status = 'ready';
+  }
+  saveTopic(t);
+  return tr;
+}
+
 function hold(t, reasons) {
   t.status = 'held';
   t.holdReasons = [...new Set(reasons)];
@@ -123,88 +245,44 @@ export async function runTopic(t, ctx) {
     saveTopic(t);
     if (qIssues.some((i) => i.severity === 'major')) return hold(t, qIssues.filter((i) => i.severity === 'major').map((i) => `문제 형식: ${i.evidence}`));
 
-    // ── ③ 논증 설계 ──
-    const design = await stage(t, 'design', () => callLLM({ ...base, role: 'writer', stage: 'design', promptDef: P.DESIGN, schema: S.DesignOutput,
-      prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}` }));
-
-    // ── ④ 초안 ──
-    const draftDef = P.withLength(P.DRAFT, policy);
-    const draft = await stage(t, 'draft', () => callLLM({ ...base, role: 'writer', stage: 'draft', promptDef: draftDef, schema: S.DraftOutput,
-      prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[논증 설계]\n${J(design)}` }));
-
-    // ── ⑤~⑦ 검증·비판·수정 반복 ──
-    if (!t.rounds.length) t.rounds.push({ round: 0, text: draft.text, paragraphRoles: draft.paragraphRoles, producedBy: 'draft' });
-    const reviseDef = P.withLength(P.REVISE, policy);
-    for (;;) {
-      const r = t.rounds[t.rounds.length - 1];
-      const prior = t.rounds.length > 1 ? t.rounds[t.rounds.length - 2].openIssues.filter((i) => i.source !== 'code') : [];
-      if (!r.review) {
-        const code = checkAnswer({ text: r.text, paragraphRoles: r.paragraphRoles, question, facts, policy, recent: ctx.recent, issueDate: t.issueDate });
-        const priorFc = prior.filter((i) => i.stage === 'factcheck');
-        const priorCr = prior.filter((i) => i.stage === 'critique');
-        const fcRes = await callLLM({ ...base, role: 'reviewer', stage: `factcheck_r${r.round}`, promptDef: P.FACTCHECK, schema: S.FactCheckOutput,
-          prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[원출처]\n${renderSources(pack)}\n\n[검증할 답안 — 문단 번호 포함]\n${numbered(r.text)}\n\n[이전 검토에서 지적된 사실 문제 — 해결 여부 판정]\n${issueList(priorFc)}` });
-        const crRes = await callLLM({ ...base, role: 'reviewer', stage: `critique_r${r.round}`, promptDef: P.CRITIQUE, schema: S.CritiqueOutput,
-          prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표 요약]\n${factsBrief(facts)}\n\n[최근 발행 문제의 발문과 중심 주장 — 중복 판단용]\n${recentBrief}\n\n[비판할 답안 — 문단 번호 포함]\n${numbered(r.text)}\n\n[이전 검토에서 지적된 논리 문제 — 해결 여부 판정]\n${issueList(priorCr)}\n\n${r.round > 0 ? `[직전 수정 내역(필자 기록) — 필자 주장이므로 그대로 믿지 말고 원고로 확인]\n${J(r.reviseLog || {})}` : ''}` });
-        t.calls.push(...fcRes.calls, ...crRes.calls);
-        const stillOpen = [];
-        for (const st of [...fcRes.data.priorIssueStatus, ...crRes.data.priorIssueStatus]) {
-          const p = prior.find((i) => i.id === st.issueId);
-          if (p && st.status !== 'resolved') stillOpen.push({ ...p, carriedNote: st.note });
-        }
-        // 판정이 누락된 이전 문제는 해결되지 않은 것으로 본다.
-        for (const p of prior) if (![...fcRes.data.priorIssueStatus, ...crRes.data.priorIssueStatus].some((s) => s.issueId === p.id)) stillOpen.push({ ...p, carriedNote: '검토자가 해결 여부를 판정하지 않음' });
-        const fresh = [
-          ...fcRes.data.issues.map((i, n) => ({ ...i, id: `R${r.round}-F${n + 1}`, stage: 'factcheck', source: 'llm' })),
-          ...crRes.data.issues.map((i, n) => ({ ...i, id: `R${r.round}-L${n + 1}`, stage: 'critique', source: 'llm' })),
-          ...code.issues.map((i, n) => ({ ...i, id: `R${r.round}-C${n + 1}`, stage: 'code' })),
-        ];
-        r.review = { at: toKstIso(nowMs()), metrics: code.metrics, factcheck: fcRes.data, critique: crRes.data, priorStatus: [...fcRes.data.priorIssueStatus, ...crRes.data.priorIssueStatus] };
-        r.openIssues = [...stillOpen, ...fresh];
+    // ── ③~⑧ 답안 트랙 ──
+    // 찬반이 합리적으로 갈리는 주제면 찬성 답안과 반대 답안을 각각 따로 설계·작성·검토한다. 아니면 답안 하나.
+    // 한쪽만 검토를 통과하면 통과한 쪽만 발행하고, 다른 쪽을 싣지 않은 이유를 남긴다.
+    const debate = question.debate?.isDebatable ? question.debate : null;
+    const trackDefs = debate
+      ? [{ key: 'pro', label: debate.proLabel || '찬성', side: 'pro' }, { key: 'con', label: debate.conLabel || '반대', side: 'con' }]
+      : [{ key: 'main', label: null, side: null }];
+    t.tracks ||= {};
+    for (const d of trackDefs) {
+      t.tracks[d.key] ||= { key: d.key, label: d.label, side: d.side, stages: {}, rounds: [], status: 'pending' };
+      const tr = t.tracks[d.key];
+      if (['ready', 'held'].includes(tr.status)) continue;
+      try {
+        await runTrack(t, tr, { ctx, base, question, facts, pack, recentBrief, debate });
+      } catch (err) {
+        if (err.calls) t.calls.push(...err.calls);
+        tr.status = ['budget_exceeded', 'quota_exhausted'].includes(err.code) ? 'deferred' : 'failed';
+        tr.error = { stage: tr.currentStage || null, message: errorSummary(err), code: err.code || null, at: toKstIso(nowMs()) };
+        tr.holdReasons = [tr.status === 'deferred' ? `무료 한도·호출 상한으로 작성 중단` : `생성 오류(${tr.currentStage || '-'}): ${errorSummary(err)}`];
         saveTopic(t);
+        if (tr.status === 'deferred') break; // 한도가 다 되면 다음 트랙도 진행하지 않는다
       }
-      const blocking = r.openIssues.filter((i) => isBlockingIssue(i, policy));
-      const claimProblems = (r.review.factcheck.claims || []).filter((c) => ['contradicted', 'unsupported'].includes(c.verdict) && ['factual', 'statistical', 'attribution', 'legal_or_policy_status'].includes(c.kind));
-      const majors = r.openIssues.filter((i) => i.severity !== 'minor');
-      const minors = r.openIssues.filter((i) => i.severity === 'minor');
-      const needsRevision = blocking.length || claimProblems.length || majors.length || minors.length >= 2 || r.review.factcheck.factsSheetProblems.some((p) => p.severity !== 'minor');
-      if (!needsRevision) break;
-      if (r.round >= policy.quality.maxRevisionRounds) {
-        if (blocking.length || claimProblems.length || majors.length) {
-          t.lastText = r.text;
-          return hold(t, [`수정 ${r.round}회 후에도 해결되지 않은 문제`, ...[...blocking, ...majors].slice(0, 6).map((i) => `${S.ISSUE_TYPE_LABELS[i.type] || i.type}(${i.severity}): ${i.evidence}`), ...claimProblems.slice(0, 3).map((c) => `검증 실패 진술: ${c.quote}`)]);
-        }
-        break; // 사소한 문제만 남음 — 공개 검토 요약에 남은 문제로 표시
-      }
-      const toFix = [...r.openIssues, ...claimProblems.map((c, n) => ({ id: `R${r.round}-V${n + 1}`, type: c.verdict === 'contradicted' ? 'factual_error' : 'unsupported_key_evidence', severity: 'critical', location: { paragraph: c.paragraph, quote: c.quote }, evidence: `사실 검증 결과 ${c.verdict}: ${c.note}`, fixDirection: '사실표 범위로 고치거나 삭제', stage: 'factcheck', source: 'llm' }))];
-      r.openIssues = toFix;
-      const rev = await callLLM({ ...base, role: 'writer', stage: `revise_r${r.round + 1}`, promptDef: reviseDef, schema: S.ReviseOutput,
-        prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[현재 원고 — 문단 번호 포함]\n${numbered(r.text)}\n\n[고쳐야 할 문제 목록]\n${issueList(toFix)}\n\n문단 번호 표기([1] 등) 없이 전체 원고를 다시 출력하라.` });
-      t.calls.push(...rev.calls);
-      r.revisedBy = { at: toKstIso(nowMs()), changes: rev.data.changes, notAddressed: rev.data.notAddressed, ripple: rev.data.ripple };
-      t.rounds.push({ round: r.round + 1, text: rev.data.text.replace(/^\[\d+\]\s*/gm, ''), paragraphRoles: rev.data.paragraphRoles, producedBy: 'revise', reviseLog: { changes: rev.data.changes, notAddressed: rev.data.notAddressed, ripple: rev.data.ripple } });
-      saveTopic(t);
     }
-    const finalRound = t.rounds[t.rounds.length - 1];
-    const answerText = finalRound.text;
-    const nPara = splitParagraphs(answerText).length;
-
-    // ── 해설·다른 입장·학습 포인트 ──
-    const companion = await stage(t, 'companion', () => callLLM({ ...base, role: 'writer', stage: 'companion', promptDef: P.COMPANION, schema: S.CompanionOutput,
-      prompt: `${header(t, ctx)}\n\n${followUpBlock(t)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[확정 답안 — 문단 번호 포함]\n${numbered(answerText)}\n\n[문단 역할]\n${J(finalRound.paragraphRoles)}` }));
-    const companionIssues = checkCompanion({ companion, answerParagraphs: nPara, facts });
-
-    // ── ⑧ 최종 검토와 발행 판단 ──
-    const reviewHistory = t.rounds.map((r) => ({ round: r.round, chars: countChars(r.text), issues: (r.openIssues || []).map((i) => ({ id: i.id, type: i.type, severity: i.severity, evidence: i.evidence })), changes: r.revisedBy?.changes || null }));
-    const final = await stage(t, 'final', () => callLLM({ ...base, role: 'reviewer', stage: 'final', promptDef: P.FINAL, schema: S.FinalReviewOutput,
-      prompt: `${header(t, ctx)}\n\n[문제]\n${questionText(question)}\n\n[사실표]\n${factsBrief(facts)}\n\n[원출처]\n${renderSources(pack, { maxBodyChars: 2500 })}\n\n[최종 답안 — 문단 번호 포함]\n${numbered(answerText)}\n\n[해설·다른 입장·학습 포인트]\n${J(companion)}\n\n[해설 형식 검사(코드)]\n${J(companionIssues)}\n\n[검토 이력]\n${J(reviewHistory)}` }));
-    const openAfter = (finalRound.openIssues || []);
-    const gate = evaluateGate({ openIssues: openAfter, factcheck: finalRound.review.factcheck, critique: finalRound.review.critique, final, companionIssues, policy });
-    t.gate = { ...gate, at: toKstIso(nowMs()) };
-    t.answer = { text: answerText, paragraphRoles: finalRound.paragraphRoles, metrics: finalRound.review.metrics };
-    t.companion = companion;
-    t.companionIssues = companionIssues;
-    if (!gate.publishable) return hold(t, gate.blockers.slice(0, 8).map((b) => `${b.kind}/${b.type}: ${b.detail}`));
+    const tracks = trackDefs.map((d) => t.tracks[d.key]);
+    const passed = tracks.filter((x) => x.status === 'ready');
+    if (!passed.length) {
+      if (tracks.some((x) => x.status === 'failed')) {
+        const e = new Error(tracks.find((x) => x.status === 'failed').error.message);
+        t.currentStage = tracks.find((x) => x.status === 'failed').error.stage;
+        throw e;
+      }
+      if (tracks.every((x) => ['deferred', 'pending'].includes(x.status))) {
+        const e = new Error('무료 한도·호출 상한으로 답안을 완성하지 못함');
+        e.code = 'quota_exhausted';
+        throw e;
+      }
+      return hold(t, tracks.flatMap((x) => (x.holdReasons || []).map((r) => (x.label ? `[${x.label}] ${r}` : r))));
+    }
     t.status = 'ready';
     t.currentStage = null;
     t.readyAt = toKstIso(nowMs());

@@ -195,7 +195,7 @@ async function issueBlock(issue) {
 }
 
 function tocItem(t, i) {
-  const flags = [t.kind === 'follow_up' ? '<span class="tag tag-red">후속 주제</span>' : '', t.lateEntry ? `<span class="tag">늦게 발견 · 발생 ${shortDate(t.lateEntry.eventDate)}</span>` : '', t.hasCorrections ? `<span class="tag tag-ink">정정 v${t.version}</span>` : ''].join('');
+  const flags = [t.kind === 'follow_up' ? '<span class="tag tag-red">후속 주제</span>' : '', t.lateEntry ? `<span class="tag">늦게 발견 · 발생 ${shortDate(t.lateEntry.eventDate)}</span>` : '', t.hasCorrections ? `<span class="tag tag-ink">정정 v${t.version}</span>` : '', t.stances?.length ? `<span class="tag">입장별 답안: ${t.stances.map((s) => esc(s.split(' — ')[0])).join('·')}</span>` : ''].join('');
   return `<li class="toc-item"><span class="toc-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><div>
     <div class="toc-top"><span class="cat" data-cat="${esc(t.category)}">${esc(t.categoryLabel)}</span><span class="toc-type">${esc(t.questionType)}</span>${flags}</div>
     <h2 class="toc-title"><a href="#/topic/${encodeURIComponent(t.id)}">${esc(t.title)}</a></h2>
@@ -213,6 +213,11 @@ async function viewTopic(id, tab, q) {
   const t = await getJSON(topicPath(id));
   if (!t) { $main.innerHTML = `<div class="empty"><h1 class="h2">주제를 찾을 수 없습니다</h1><p><a href="#/">오늘 호로</a></p></div>`; return; }
   setTitle(t.title);
+  const answers = t.answers?.length ? t.answers : null;
+  const sKey = (answers && answers.find((a) => a.key === q.get('s'))?.key) || answers?.[0]?.key || null;
+  const cur = answers?.find((a) => a.key === sKey);
+  const view = cur ? { ...t, answer: cur.answer, logic: cur.logic, alternatives: cur.alternatives, alternativesNote: cur.alternativesNote, learning: cur.learning, claims: cur.claims, review: { ...t.review, ...cur.review } } : t;
+  const sq = t.debate && sKey ? `?s=${encodeURIComponent(sKey)}` : '';
   const issue = await getJSON(`issues/${t.issueDate}.json`);
   const bookmarks = store.get('bookmarks', {});
   const draft = store.get(`draft:${id}`, null);
@@ -228,21 +233,31 @@ async function viewTopic(id, tab, q) {
       <button class="btn btn-quiet" data-act="hide-pref" aria-pressed="${prefHide() ? 'true' : 'false'}" title="켜 두면 모범답안을 바로 보여주지 않고 먼저 풀어 보도록 권합니다">${prefHide() ? '✓ ' : ''}답안 먼저 가리기</button>
     </div>
   </header>
-  <nav class="tabs" aria-label="주제 보기 전환">${tabs.map(([k, l]) => `<a href="#/topic/${encodeURIComponent(id)}/${k}" ${k === tab ? 'aria-current="page"' : ''}>${l}</a>`).join('')}</nav>`;
+  <nav class="tabs" aria-label="주제 보기 전환">${tabs.map(([k, l]) => `<a href="#/topic/${encodeURIComponent(id)}/${k}${sq}" ${k === tab ? 'aria-current="page"' : ''}>${l}</a>`).join('')}</nav>`;
   let body = '';
+  const bar = ['answer', 'logic', 'alt', 'learn', 'sources', 'compare'].includes(tab) ? stanceBar(t, tab, sKey) : '';
   if (tab === 'brief') body = await tabBrief(t);
   else if (tab === 'question') body = tabQuestion(t);
-  else if (tab === 'answer') body = tabAnswer(t);
-  else if (tab === 'logic') body = tabLogic(t);
-  else if (tab === 'alt') body = tabAlt(t);
-  else if (tab === 'learn') body = tabLearn(t);
-  else if (tab === 'sources') body = tabSources(t);
-  else if (tab === 'compare') body = tabCompare(t);
+  else if (tab === 'answer') body = tabAnswer(view);
+  else if (tab === 'logic') body = tabLogic(view);
+  else if (tab === 'alt') body = tabAlt(view);
+  else if (tab === 'learn') body = tabLearn(view);
+  else if (tab === 'sources') body = tabSources(view);
+  else if (tab === 'compare') body = tabCompare(view);
+  body = bar + body;
   $main.innerHTML = head + `<div class="tab-body">${body}</div>`;
-  bindTopic(t, tab);
+  bindTopic(view, tab);
   const focus = q.get('f');
   if (focus) document.getElementById(focus)?.scrollIntoView({ block: 'center' });
   else if (window.scrollY > 400) document.querySelector('.tabs')?.scrollIntoView();
+}
+
+/** 찬반형 주제의 입장 선택 막대 */
+function stanceBar(t, tab, sKey) {
+  if (!t.debate) return '';
+  const btns = (t.answers || []).map((a) => `<a class="btn ${a.key === sKey ? 'btn-solid' : 'btn-quiet'}" href="#/topic/${encodeURIComponent(t.id)}/${tab}?s=${encodeURIComponent(a.key)}" ${a.key === sKey ? 'aria-current="true"' : ''}>${esc(a.label)}</a>`).join('');
+  const omitted = (t.debate.omitted || []).map((o) => `<p class="small muted" style="margin:6px 0 0">${esc(o.label)} 답안: ${esc(o.reason)}</p>`).join('');
+  return `<section class="stance-bar no-print" aria-label="입장 선택"><p class="kicker" style="margin:0 0 8px">명제 — ${esc(t.debate.proposition)}</p><div class="btn-row">${btns}</div>${omitted}</section>`;
 }
 
 function prefHide() { return store.get('pref:hideAnswers', true); }
@@ -309,7 +324,8 @@ function sheet(t) {
 function tabQuestion(t) {
   const q = t.question;
   const draft = store.get(`draft:${t.id}`, { text: '', savedAt: null });
-  return `${sheet(t)}
+  const deb = t.debate ? `<div class="notice notice-quiet"><p><strong>찬반형 문제</strong> — 명제: ${esc(t.debate.proposition)}</p><p class="small">찬성·반대 중 한 입장을 택해 쓰면 됩니다. 모범답안은 입장별로 따로 실었습니다${t.debate.omitted?.length ? ` (${t.debate.omitted.map((o) => `${esc(o.label)}: ${esc(o.reason)}`).join(' / ')})` : ''}.</p></div>` : '';
+  return `${deb}${sheet(t)}
   <details class="fold"><summary>출제 의도</summary><div class="prose"><p>${esc(q.intent)}</p></div></details>
   <details class="fold"><summary>평가 기준</summary><div><div class="table-wrap"><table class="table"><thead><tr><th>기준</th><th>설명</th><th style="text-align:right">비중</th></tr></thead><tbody>${q.rubric.map((r) => `<tr><td><strong>${esc(r.criterion)}</strong></td><td>${esc(r.description)}</td><td class="num">${r.weight}</td></tr>`).join('')}</tbody></table></div><p class="small muted">평가는 특정 입장과의 일치가 아니라 요구사항 충족, 근거, 논리적 정합성, 반론 처리, 대안의 타당성을 봅니다.</p></div></details>
   <section class="writer no-print" aria-label="직접 써 보기">

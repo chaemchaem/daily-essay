@@ -11,28 +11,62 @@ import { loadThreads, saveThreads, ensureThread } from '../pipeline/threads.js';
 import * as L from './labels.js';
 import { currentLock } from '../lib/lock.js';
 
-export function publicTopic(t, issue) {
-  const facts = t.facts;
-  const c = t.companion;
-  const finalRound = t.rounds[t.rounds.length - 1];
+/** 트랙(답안 한 편)의 공개용 데이터: 답안·해설·다른 입장·학습·주장-출처 연결·검토 요약 */
+function publicTrack(tr) {
+  const c = tr.companion;
+  const finalRound = tr.rounds[tr.rounds.length - 1];
   const fc = finalRound.review.factcheck;
   const cr = finalRound.review.critique;
+  const uniqueIssues = new Map();
+  for (const r of tr.rounds) for (const i of r.openIssues || []) if (!uniqueIssues.has(i.id)) uniqueIssues.set(i.id, i);
+  const issueCounts = {};
+  for (const i of uniqueIssues.values()) issueCounts[i.severity] = (issueCounts[i.severity] || 0) + 1;
+  const text = tr.answer.text;
+  const design = tr.stages.design?.output;
+  return {
+    key: tr.key,
+    label: tr.label,
+    side: tr.side,
+    answer: { text, paragraphs: splitParagraphs(text), chars: countChars(text), charsNoSpace: countCharsNoSpace(text), countMode: '공백 포함, 줄바꿈 제외', paragraphRoles: tr.answer.paragraphRoles },
+    logic: { ...c.logic, definitions: design?.definitions || [], judgmentCriteria: design?.judgmentCriteria || null },
+    alternatives: c.alternatives,
+    alternativesNote: c.alternativesNote,
+    learning: c.learning,
+    briefingInterpretation: c.briefing,
+    followUp: c.followUp,
+    claims: fc.claims.map((x) => ({ paragraph: x.paragraph, quote: x.quote, kind: x.kind, verdict: x.verdict, verdictLabel: L.VERDICT_LABELS[x.verdict], factIds: x.factIds, sourceIds: x.sourceIds, note: x.note })),
+    review: {
+      rounds: tr.rounds.length,
+      revisions: tr.rounds.filter((r) => r.revisedBy).map((r) => ({ afterRound: r.round, changes: r.revisedBy.changes.map((ch) => ch.description), notAddressed: r.revisedBy.notAddressed })),
+      issuesFound: issueCounts,
+      issuesByType: [...uniqueIssues.values()].reduce((a, i) => { const k = ISSUE_TYPE_LABELS[i.type] || i.type; a[k] = (a[k] || 0) + 1; return a; }, {}),
+      remainingMinor: (finalRound.openIssues || []).filter((i) => i.severity === 'minor').map((i) => ({ type: ISSUE_TYPE_LABELS[i.type] || i.type, note: i.evidence, paragraph: i.location?.paragraph || 0 })),
+      checklist: cr.checklist.map((x) => ({ item: x.item, label: L.CHECKLIST_LABELS[x.item] || x.item, verdict: x.verdict, note: x.note })),
+      remainingUncertainties: tr.stages.final.output.remainingUncertainties,
+      summary: tr.stages.final.output.publicReviewSummary,
+    },
+    thesis: design?.thesis || '',
+  };
+}
+
+/** 예전 구조(트랙 없이 단일 답안)로 저장된 주제를 트랙 하나로 읽는다 */
+function tracksOf(t) {
+  if (t.tracks && Object.keys(t.tracks).length) return Object.values(t.tracks);
+  return [{ key: 'main', label: null, side: null, status: t.status === 'held' ? 'held' : 'ready', stages: t.stages, rounds: t.rounds, answer: t.answer, companion: t.companion }];
+}
+
+export function publicTopic(t, issue) {
+  const facts = t.facts;
+  const all = tracksOf(t);
+  const passed = all.filter((x) => x.status === 'ready').map(publicTrack);
+  const primary = passed[0];
   const notesBySid = Object.fromEntries((facts.sourceNotes || []).map((n) => [n.sourceId, n]));
   const supports = {};
   for (const f of facts.facts) for (const sid of f.sourceIds) (supports[sid] ||= []).push(f.id);
-  const allIssues = t.rounds.flatMap((r) => (r.openIssues || []).map((i) => ({ ...i, round: r.round })));
-  const uniqueIssues = new Map();
-  for (const i of allIssues) if (!uniqueIssues.has(i.id)) uniqueIssues.set(i.id, i);
-  const issueCounts = {};
-  for (const i of uniqueIssues.values()) {
-    const k = `${i.severity}`;
-    issueCounts[k] = (issueCounts[k] || 0) + 1;
-  }
-  const remainingMinor = (finalRound.openIssues || []).filter((i) => i.severity === 'minor').map((i) => ({ type: ISSUE_TYPE_LABELS[i.type] || i.type, note: i.evidence, paragraph: i.location?.paragraph || 0 }));
   const servedModels = [...new Set(t.calls.map((x) => x.servedModel))];
   const usage = t.calls.reduce((a, x) => ({ calls: a.calls + 1, inputTokens: a.inputTokens + (x.usage?.inputTokens || 0), outputTokens: a.outputTokens + (x.usage?.outputTokens || 0), costUsd: a.costUsd + (x.costUsd || 0) }), { calls: 0, inputTokens: 0, outputTokens: 0, costUsd: 0 });
   usage.costUsd = Math.round(usage.costUsd * 100) / 100;
-  const text = t.answer.text;
+  const debate = t.question.debate?.isDebatable ? t.question.debate : null;
   return {
     id: t.id,
     version: 1,
@@ -62,7 +96,7 @@ export function publicTopic(t, issue) {
       facts: facts.facts.map((f) => ({ id: f.id, statement: f.statement, kind: f.kind, kindLabel: L.FACT_KIND_LABELS[f.kind], attributedTo: f.attributedTo, asOf: f.asOf, sourceIds: f.sourceIds, access: f.accessBasis, accessLabel: L.ACCESS_LABELS[f.accessBasis] })),
       discrepancies: facts.discrepancies,
       uncertainties: facts.uncertainties,
-      interpretation: c.briefing,
+      interpretation: primary.briefingInterpretation,
     },
     question: {
       type: t.question.questionType,
@@ -76,19 +110,21 @@ export function publicTopic(t, issue) {
       intent: t.question.intent,
       rubric: t.question.rubric,
     },
-    answer: {
-      text,
-      paragraphs: splitParagraphs(text),
-      chars: countChars(text),
-      charsNoSpace: countCharsNoSpace(text),
-      countMode: '공백 포함, 줄바꿈 제외',
-      paragraphRoles: t.answer.paragraphRoles,
-    },
-    logic: { ...c.logic, definitions: t.stages.design?.output?.definitions || [], judgmentCriteria: t.stages.design?.output?.judgmentCriteria || null },
-    alternatives: c.alternatives,
-    alternativesNote: c.alternativesNote,
-    learning: c.learning,
-    followUp: t.kind === 'follow_up' && c.followUp ? { ...c.followUp, previous: (t.followUpContext?.previous || []).map((p) => ({ id: p.id, issueDate: p.issueDate, title: p.title })) } : null,
+    // 찬반 주제: 입장별 모범답안. 검토를 통과하지 못한 쪽은 싣지 않고 이유를 남긴다.
+    debate: debate ? {
+      proposition: debate.proposition,
+      proLabel: debate.proLabel,
+      conLabel: debate.conLabel,
+      omitted: all.filter((x) => x.status !== 'ready').map((x) => ({ key: x.key, label: x.label, reason: x.status === 'held' ? '검토를 통과하지 못해 싣지 않았습니다.' : x.status === 'deferred' ? '무료 사용 한도로 작성하지 못했습니다.' : '생성 중 오류로 싣지 않았습니다.' })),
+    } : null,
+    answers: passed.map(({ briefingInterpretation, followUp, ...rest }) => rest),
+    // 대표 답안(첫 번째로 통과한 답안) — 화면 호환용
+    answer: primary.answer,
+    logic: primary.logic,
+    alternatives: primary.alternatives,
+    alternativesNote: primary.alternativesNote,
+    learning: primary.learning,
+    followUp: t.kind === 'follow_up' && primary.followUp ? { ...primary.followUp, previous: (t.followUpContext?.previous || []).map((p) => ({ id: p.id, issueDate: p.issueDate, title: p.title })) } : null,
     sources: t.sourcePack.map((s) => ({
       id: s.sid, title: s.title, outlet: s.outlet, url: s.url, type: s.sourceType,
       publishedAt: s.publishedAt, pageModifiedAt: s.pageModifiedAt, checkedAt: s.checkedAt,
@@ -96,18 +132,11 @@ export function publicTopic(t, issue) {
       independence: notesBySid[s.sid]?.independence || null, independenceLabel: L.INDEPENDENCE_LABELS[notesBySid[s.sid]?.independence] || null,
       supportsFacts: supports[s.sid] || [],
     })),
-    claims: fc.claims.map((x) => ({ paragraph: x.paragraph, quote: x.quote, kind: x.kind, verdict: x.verdict, verdictLabel: L.VERDICT_LABELS[x.verdict], factIds: x.factIds, sourceIds: x.sourceIds, note: x.note })),
+    claims: primary.claims,
     review: {
+      ...primary.review,
       independence: reviewIndependence(),
       stages: ['자료 수집과 사실 정리', '문제·평가 기준 작성', '논증 설계', '답안 초안', '사실 검증', '논리 비판', '수정', '최종 검토와 발행 판단'],
-      rounds: t.rounds.length,
-      revisions: t.rounds.filter((r) => r.revisedBy).map((r) => ({ afterRound: r.round, changes: r.revisedBy.changes.map((ch) => ch.description), notAddressed: r.revisedBy.notAddressed })),
-      issuesFound: issueCounts,
-      issuesByType: [...uniqueIssues.values()].reduce((a, i) => { const k = ISSUE_TYPE_LABELS[i.type] || i.type; a[k] = (a[k] || 0) + 1; return a; }, {}),
-      remainingMinor,
-      checklist: cr.checklist.map((x) => ({ item: x.item, label: L.CHECKLIST_LABELS[x.item] || x.item, verdict: x.verdict, note: x.note })),
-      remainingUncertainties: t.stages.final.output.remainingUncertainties,
-      summary: t.stages.final.output.publicReviewSummary,
       accessCaveat: t.sourcePack.filter((s) => s.accessLevel !== 'full_text').map((s) => `${s.sid} ${s.outlet}: ${L.ACCESS_LABELS[s.accessLevel]}`),
       factsCheck: t.factsCheck,
       models: servedModels,
@@ -156,7 +185,7 @@ export function publishIssue(date, { force = false, now = nowMs() } = {}) {
     newly.push(t.id);
     const th = ensureThread(threads, { id: t.threadId, title: t.facts.headline, category: t.category, issueDate: t.issueDate });
     if (!th.topics.some((x) => x.id === t.id)) {
-      th.topics.push({ id: t.id, issueDate: t.issueDate, title: t.question.title, prompt: t.question.prompt, thesis: t.stages.design?.output?.thesis || '', keyFacts: t.facts.facts.slice(0, 6).map((f) => f.statement), kind: t.kind });
+      th.topics.push({ id: t.id, issueDate: t.issueDate, title: t.question.title, prompt: t.question.prompt, thesis: tracksOf(t).filter((x) => x.status === 'ready').map((x) => x.stages?.design?.output?.thesis).filter(Boolean).join(' / '), keyFacts: t.facts.facts.slice(0, 6).map((f) => f.statement), kind: t.kind });
     }
     th.articleIds = [...new Set([...(th.articleIds || []), ...t.cluster.articleIds])];
   }
@@ -185,7 +214,7 @@ export function publishIssue(date, { force = false, now = nowMs() } = {}) {
     recovered: issue.recovered ? { generatedAt: issue.generatedAt } : null,
     topics: published.map((t) => {
       const p = readPublic(`topics/${t.id}.json`);
-      return { id: t.id, title: p.title, headline: p.headline, category: p.category, categoryLabel: p.categoryLabel, kind: p.kind, questionType: p.question.typeLabel, prompt: p.question.prompt, chars: p.answer.chars, lateEntry: p.lateEntry, threadId: p.threadId, version: p.version, hasCorrections: (p.corrections || []).length > 0 };
+      return { id: t.id, title: p.title, headline: p.headline, category: p.category, categoryLabel: p.categoryLabel, kind: p.kind, questionType: p.question.typeLabel, prompt: p.question.prompt, chars: p.answer.chars, stances: (p.answers || []).filter((a) => a.label).map((a) => a.label), lateEntry: p.lateEntry, threadId: p.threadId, version: p.version, hasCorrections: (p.corrections || []).length > 0 };
     }),
     counts: { published: published.length, held: held.length, failed: failed.length, deferredBudget: deferred.length, candidates: issue.steps?.select?.counts?.candidates ?? null },
     heldSummary: summarizeHeld(held),
