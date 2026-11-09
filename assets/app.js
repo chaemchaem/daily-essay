@@ -252,12 +252,25 @@ async function viewTopic(id, tab, q) {
   else if (window.scrollY > 400) document.querySelector('.tabs')?.scrollIntoView();
 }
 
-/** 찬반형 주제의 입장 선택 막대 */
+/** 찬반형 주제의 입장 선택: 짧은 '찬성 | 반대' 탭과, 선택한 입장의 요지 한 줄 */
 function stanceBar(t, tab, sKey) {
   if (!t.debate) return '';
-  const btns = (t.answers || []).map((a) => `<a class="btn ${a.key === sKey ? 'btn-solid' : 'btn-quiet'}" href="#/topic/${encodeURIComponent(t.id)}/${tab}?s=${encodeURIComponent(a.key)}" ${a.key === sKey ? 'aria-current="true"' : ''}>${esc(a.label)}</a>`).join('');
-  const omitted = (t.debate.omitted || []).map((o) => `<p class="small muted" style="margin:6px 0 0">${esc(o.label)} 답안: ${esc(o.reason)}</p>`).join('');
-  return `<section class="stance-bar no-print" aria-label="입장 선택"><p class="kicker" style="margin:0 0 8px">명제 — ${esc(t.debate.proposition)}</p><div class="btn-row">${btns}</div>${omitted}</section>`;
+  const split = (label) => { const [short, ...rest] = String(label || '').split(' — '); return { short: short.trim(), desc: rest.join(' — ').trim() }; };
+  const cur = (t.answers || []).find((a) => a.key === sKey);
+  const tabs = (t.answers || []).map((a) => `<a href="#/topic/${encodeURIComponent(t.id)}/${tab}?s=${encodeURIComponent(a.key)}" ${a.key === sKey ? 'aria-current="true"' : ''}>${esc(split(a.label).short)}</a>`).join('');
+  const omitted = (t.debate.omitted || []).map((o) => `<p class="stance-omit">${esc(split(o.label).short)} 답안: ${esc(o.reason)}</p>`).join('');
+  const desc = cur && split(cur.label).desc ? `<p class="stance-desc">${esc(split(cur.label).desc)}</p>` : '';
+  return `<section class="stance-bar no-print" aria-label="입장 선택"><p class="stance-prop"><b>명제</b>${esc(t.debate.proposition)}</p><nav class="seg" aria-label="입장">${tabs}</nav>${desc}${omitted}</section>`;
+}
+
+const ROLE_LABELS = {
+  introduction: '서론', definition_scope: '개념·범위', definition: '개념 정의', argument: '논증', evidence_analysis: '근거 분석',
+  objection: '반론', counterargument: '반론', rebuttal: '재반박', proposal: '대안', limitation: '한계', conclusion: '결론', analysis: '분석', evaluation: '평가',
+};
+/** 문단 역할: 데이터에 영어 코드로 온 것도 한국어로 보여준다 */
+function roleLabel(r) {
+  const k = String(r || '').trim();
+  return ROLE_LABELS[k] || ROLE_LABELS[k.toLowerCase()] || k;
 }
 
 function prefHide() { return store.get('pref:hideAnswers', true); }
@@ -347,7 +360,7 @@ function answerParas(t, { notes = true } = {}) {
   return `<div class="answer ${notes ? '' : 'plain'}">${t.answer.paragraphs.map((p, i) => {
     const lr = logic.find((x) => x.index === i + 1);
     const role = lr?.role || roles[i]?.role || '';
-    return `<div class="para"><p>${esc(p)}</p><span class="para-note"><b>¶${i + 1}</b>${esc(role)}</span></div>`;
+    return `<div class="para"><p>${esc(p)}</p><span class="para-note"><b>¶${i + 1}</b>${esc(roleLabel(role))}</span></div>`;
   }).join('')}</div>`;
 }
 
@@ -370,7 +383,7 @@ function tabLogic(t) {
   ${L.definitions?.length ? `<h2 class="h2">개념과 논의 범위</h2><dl class="deflist">${L.definitions.map((d) => `<div><dt>${esc(d.term)}</dt><dd>${esc(d.meaning)}<br><span class="small muted">${esc(d.whyNeeded)}</span></dd></div>`).join('')}</dl>` : ''}
   ${L.judgmentCriteria ? `<h3 class="h3">사실에서 가치판단으로 넘어가는 기준</h3><div class="prose"><p>${esc(L.judgmentCriteria)}</p></div>` : ''}
   <h2 class="h2">문단별 주장과 역할</h2>
-  <ol class="flow">${L.paragraphs.map((p) => `<li><span class="flow-n">¶${p.index}</span><div><span class="flow-role">${esc(p.role)}</span><p class="flow-claim">${esc(p.mainClaim)}</p><p class="flow-inf">${esc(p.inference)}</p>${factChips(t, p.evidenceFactIds)}</div></li>`).join('')}</ol>
+  <ol class="flow">${L.paragraphs.map((p) => `<li><span class="flow-n">¶${p.index}</span><div><span class="flow-role">${esc(roleLabel(p.role))}</span><p class="flow-claim">${esc(p.mainClaim)}</p><p class="flow-inf">${esc(p.inference)}</p>${factChips(t, p.evidenceFactIds)}</div></li>`).join('')}</ol>
   <h2 class="h2">논증이 성립하기 위한 전제</h2><ul class="list">${L.premises.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>
   <h2 class="h2">가장 강한 반론과 재반박</h2>
   <div class="versus"><div><h3>반론</h3><p>${esc(L.strongestObjection)}</p></div><div><h3>재반박</h3><p>${esc(L.rebuttal)}</p></div></div>
@@ -447,7 +460,7 @@ function tabCompare(t) {
   return `<div class="compare-switch no-print"><button class="btn btn-quiet" data-show="mine" aria-pressed="true">내 답안</button><button class="btn btn-quiet" data-show="model" aria-pressed="false">모범답안</button></div>
   <div class="compare" data-show="mine">
     <section data-col="mine"><h2><span>내 답안</span><span class="mono">${num(c.withSpace)}자</span></h2><div class="col-text">${mine.map((p) => `<p>${esc(p)}</p>`).join('') || '<p class="muted">작성한 답안이 없습니다.</p>'}</div><p class="device-note">이 기기에 저장된 글 · ${esc(draft.savedAt || '')}</p></section>
-    <section data-col="model"><h2><span>모범답안</span><span class="mono">${num(t.answer.chars)}자</span></h2><div class="col-text">${t.answer.paragraphs.map((p, i) => `<p><span class="mono small muted">¶${i + 1} ${esc(t.logic.paragraphs.find((x) => x.index === i + 1)?.role || '')}</span><br>${esc(p)}</p>`).join('')}</div></section>
+    <section data-col="model"><h2><span>모범답안</span><span class="mono">${num(t.answer.chars)}자</span></h2><div class="col-text">${t.answer.paragraphs.map((p, i) => `<p><span class="mono small muted">¶${i + 1} ${esc(roleLabel(t.logic.paragraphs.find((x) => x.index === i + 1)?.role || ''))}</span><br>${esc(p)}</p>`).join('')}</div></section>
   </div>
   <h2 class="h2">스스로 점검해 보기</h2>
   <ul class="list">${t.question.requirements.map((r) => `<li>요구사항 — ${esc(r.text)}: 내 답안의 어느 문단이 이 요구에 답하는가?</li>`).join('')}<li>내 답안의 반론은 상대 입장의 가장 강한 형태인가? (모범답안: ${esc(t.logic.strongestObjection)})</li><li>결론이 본론에서 입증한 범위를 넘지 않는가?</li></ul>`;
@@ -594,7 +607,7 @@ async function viewSearch(q) {
   <form class="search-bar" role="search" id="sform"><label class="visually-hidden" for="sq">검색어</label><input id="sq" name="q" type="search" value="${esc(query)}" placeholder="예: 최저임금, 판결, 기후" autocomplete="off" /><button class="btn btn-solid" type="submit">검색</button></form>
   <div class="filters" role="group" aria-label="분야">${[{ id: '', label: '전체' }, ...cats].map((c) => `<button type="button" data-cat="${esc(c.id)}" aria-pressed="${c.id === cat ? 'true' : 'false'}">${esc(c.label)}</button>`).join('')}</div>
   <p class="small muted">${query || cat ? `${hits.length}건` : `발행된 주제 ${items.length}건`}</p>
-  <ul class="day-list">${(query || cat ? hits : items).slice(0, 100).map((it) => `<li><span class="d">${shortDate(it.date)}<br><span class="cat" data-cat="${esc(it.category)}">${esc(it.categoryLabel)}</span></span><div><a href="#/topic/${encodeURIComponent(it.id)}" style="font-family:var(--serif-display);font-weight:700;font-size:17px;text-decoration:none">${hl(it.title)}</a><p class="small muted" style="margin:4px 0 0;font-family:var(--serif)">${hl(it.prompt)}</p></div></li>`).join('')}</ul>`;
+  <ul class="day-list">${(query || cat ? hits : items).slice(0, 100).map((it) => `<li><span class="d">${shortDate(it.date)}<br><span class="cat" data-cat="${esc(it.category)}">${esc(it.categoryLabel)}</span></span><div><a href="#/topic/${encodeURIComponent(it.id)}" style="font-family:var(--serif-display);font-weight:600;font-size:17px;text-decoration:none">${hl(it.title)}</a><p class="small muted" style="margin:4px 0 0;font-family:var(--serif)">${hl(it.prompt)}</p></div></li>`).join('')}</ul>`;
   const go = (nq, nc) => { const p = new URLSearchParams(); if (nq) p.set('q', nq); if (nc) p.set('cat', nc); location.hash = `#/search${p.toString() ? `?${p}` : ''}`; };
   document.getElementById('sform').addEventListener('submit', (e) => { e.preventDefault(); go(document.getElementById('sq').value.trim(), cat); });
   $main.querySelectorAll('.filters button').forEach((b) => b.addEventListener('click', () => go(query, b.dataset.cat)));
@@ -609,9 +622,9 @@ function viewMe() {
   $main.innerHTML = `<p class="kicker">이 기기에 저장</p><h1 class="h1">내 공부</h1>
   <div class="notice notice-quiet"><p>북마크와 내 답안은 <strong>이 기기(브라우저)에만</strong> 저장됩니다. 서버로 보내지 않으며 다른 기기와 동기화되지 않습니다. 브라우저 데이터를 지우면 사라지므로 필요하면 아래에서 파일로 내려받으세요.</p></div>
   <h2 class="h2">내 답안 <span class="mono small muted">${drafts.length}</span></h2>
-  ${drafts.length ? `<ul class="day-list">${drafts.map((d) => `<li><span class="d">${d.issueDate ? shortDate(d.issueDate) : ''}<br><span class="muted">${esc(d.savedAt || '')}</span></span><div><a href="#/topic/${encodeURIComponent(d.id)}/question" style="font-family:var(--serif-display);font-weight:700;font-size:17px;text-decoration:none">${esc(d.title || d.id)}</a><p class="small muted mono" style="margin:4px 0 0">${num(textCount(d.text).withSpace)}자 · <a href="#/topic/${encodeURIComponent(d.id)}/compare">모범답안과 비교</a></p></div></li>`).join('')}</ul>` : '<p class="muted">아직 작성한 답안이 없습니다. 주제의 문제 탭에서 직접 써 볼 수 있습니다.</p>'}
+  ${drafts.length ? `<ul class="day-list">${drafts.map((d) => `<li><span class="d">${d.issueDate ? shortDate(d.issueDate) : ''}<br><span class="muted">${esc(d.savedAt || '')}</span></span><div><a href="#/topic/${encodeURIComponent(d.id)}/question" style="font-family:var(--serif-display);font-weight:600;font-size:17px;text-decoration:none">${esc(d.title || d.id)}</a><p class="small muted mono" style="margin:4px 0 0">${num(textCount(d.text).withSpace)}자 · <a href="#/topic/${encodeURIComponent(d.id)}/compare">모범답안과 비교</a></p></div></li>`).join('')}</ul>` : '<p class="muted">아직 작성한 답안이 없습니다. 주제의 문제 탭에서 직접 써 볼 수 있습니다.</p>'}
   <h2 class="h2">북마크 <span class="mono small muted">${Object.keys(bm).length}</span></h2>
-  ${Object.keys(bm).length ? `<ul class="day-list">${Object.entries(bm).map(([id, b]) => `<li><span class="d">${b.issueDate ? shortDate(b.issueDate) : ''}<br><span class="muted">${esc(b.category || '')}</span></span><div><a href="#/topic/${encodeURIComponent(id)}" style="font-family:var(--serif-display);font-weight:700;font-size:17px;text-decoration:none">${esc(b.title)}</a></div></li>`).join('')}</ul>` : '<p class="muted">북마크한 주제가 없습니다.</p>'}
+  ${Object.keys(bm).length ? `<ul class="day-list">${Object.entries(bm).map(([id, b]) => `<li><span class="d">${b.issueDate ? shortDate(b.issueDate) : ''}<br><span class="muted">${esc(b.category || '')}</span></span><div><a href="#/topic/${encodeURIComponent(id)}" style="font-family:var(--serif-display);font-weight:600;font-size:17px;text-decoration:none">${esc(b.title)}</a></div></li>`).join('')}</ul>` : '<p class="muted">북마크한 주제가 없습니다.</p>'}
   <div class="btn-row" style="margin-top:28px"><button class="btn" data-act="export">내 데이터 내려받기(JSON)</button><button class="btn btn-quiet" data-act="wipe">이 기기의 내 데이터 모두 지우기</button></div>`;
   $main.querySelector('[data-act="export"]').addEventListener('click', () => {
     const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), bookmarks: bm, drafts }, null, 2)], { type: 'application/json' });
