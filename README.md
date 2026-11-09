@@ -80,6 +80,10 @@ pnpm eval:adversarial                   # 결함 주입 사례를 실제 검토 
 
 관리 작업은 [docs/OPERATIONS.md](docs/OPERATIONS.md)를 보세요.
 
+## 디자인 점검
+
+화면 다듬기에는 [unslop](https://github.com/heydamir/unslop)(Damir Sokolovsky, [@heydamir](https://x.com/heydamir), CC BY 4.0)의 점검 기준을 적용했습니다. 2026-11-10 점검 결과 AI 생성 화면의 대표적 흔적은 없었고, 문단 역할의 영어 표기, 한글이 고정폭 글꼴로 벌어지는 문제, 입장 선택 막대, 제목 굵기, 글자 크기 단계, 4px 여백 단위를 정리했습니다.
+
 ## 모델과 비용
 
 - **기본은 무료**: 모든 역할에 Google Gemini API의 **무료 등급**을 씁니다(공식 SDK `@google/genai`). 비용은 0원이고, 대신 무료 한도 안에서 돌도록 다음처럼 맞춰 두었습니다.
