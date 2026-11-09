@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T22:01:04+09:00",
+  "generatedAt": "2026-11-09T10:02:24+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -8,23 +8,34 @@
     "timezone": "Asia/Seoul",
     "daily": true
   },
-  "nextScheduledPublish": "2026-11-09T09:00:00+09:00",
+  "nextScheduledPublish": "2026-11-10T09:00:00+09:00",
   "lastSuccessfulPublish": {
-    "date": "2026-11-08",
-    "publishedAt": "2026-11-08T22:01:04+09:00",
+    "date": "2026-11-09",
+    "publishedAt": "2026-11-09T10:02:24+09:00",
     "count": 1
   },
   "today": {
-    "date": "2026-11-08",
+    "date": "2026-11-09",
     "state": "partial",
     "stateLabel": "일부 발행",
     "published": 1,
-    "held": 3,
-    "failedStage": "topics",
-    "message": "작업 중 오류가 발생해 재시도가 필요합니다."
+    "held": 1,
+    "failedStage": null,
+    "message": null
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-09T0938-scheduled-2026-11-09",
+      "kind": "scheduled",
+      "targetDate": "2026-11-09",
+      "startedAt": "2026-11-09T09:38:28+09:00",
+      "finishedAt": "2026-11-09T10:02:24+09:00",
+      "outcome": "partial",
+      "outcomeLabel": "일부 발행",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-08T2107-retry-2026-11-08",
       "kind": "retry",
@@ -54,15 +65,15 @@
   "promptVersions": {
     "triage": "1.0.0",
     "facts": "1.1.0",
-    "question": "1.0.0",
+    "question": "1.1.0",
     "design": "1.0.0",
     "draft": "1.0.0",
     "factcheck": "1.0.0",
-    "critique": "1.0.0",
+    "critique": "1.1.0",
     "revise": "1.0.0",
     "companion": "1.0.0",
     "final": "1.0.0"
   },
-  "policyVersion": "2026-11-08.1-gemini-free",
+  "policyVersion": "2026-11-08.2-procon",
   "test": false
 }

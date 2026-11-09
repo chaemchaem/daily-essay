@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-09",
+  "number": 2,
+  "state": "partial",
+  "stateLabel": "일부 발행",
+  "window": {
+    "primaryStart": "2026-11-08T00:00:00+09:00",
+    "primaryEnd": "2026-11-09T00:00:00+09:00",
+    "overlapStart": "2026-11-06T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-09T09:38:28+09:00",
+  "generatedAt": "2026-11-09T10:02:24+09:00",
+  "publishedAt": "2026-11-09T10:02:24+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-09-e98a2615",
+      "title": "지방 소방 재정 확충을 위한 국비 지원 방식과 재원 조달 정책 평가",
+      "headline": "당정, 지방 소방 재정 부담 완화 위해 2조 원 재정 지원 검토",
+      "category": "economy",
+      "categoryLabel": "경제",
+      "kind": "new",
+      "questionType": "정책 평가형",
+      "prompt": "제시문 (가)와 (나)는 소방공무원의 국가직 전환에 따른 소방 재정 부담 완화 방안과 재원 조달 방식을 둘러싼 서로 다른 시각을 보여준다. 소방 예산의 90%를 지방정부가 부담하는 현 재정 구조의 원인과 문제점을 분석하고, 정부가 검토 중인 재원 조달 방안(미래대응기금 활용 및 담배소비세분 지방교육세의 소방분 전환)에 대해 찬성과 반대 중 한 입장을 선택하여 논리적으로 평가하시오. 나아가 선택한 입장에 대한 반론을 고려하면서 지속 가능한 중앙-지방 간 소방 재정 분담 체계의 발전 방향을 논하시오.",
+      "chars": 1503,
+      "stances": [
+        "찬성 — 기금 및 목적세 전환을 통한 신속한 소방 재원 확충 필요",
+        "반대 — 근본적 일반회계 국비 확대 우선 및 목적세 전용 지양"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-09-e98a2615",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 1,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "근거 부족",
+      "count": 1
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-09T10:02:24+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}
