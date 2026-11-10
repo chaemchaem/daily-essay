@@ -116,6 +116,8 @@ export async function callGemini({ model: spec, system, prompt, schema, maxToken
     throw e;
   }
   let lastErr = null;
+  let transientErr = null;
+  let sawQuota = false;
   for (const m of cands) {
     const maxOutputTokens = Math.min(maxTokens, m.outputTokenLimit || 32768);
     let useSchema = true;
@@ -146,17 +148,20 @@ export async function callGemini({ model: spec, system, prompt, schema, maxToken
         };
       } catch (err) {
         lastErr = err;
-        if (isDailyQuota(err)) { exhausted.add(m.id); log(`[gemini] ${m.id} 오늘 한도 소진 → 다음 후보`); break; }
+        if (isDailyQuota(err)) { sawQuota = true; exhausted.add(m.id); log(`[gemini] ${m.id} 오늘 한도 소진 → 다음 후보`); break; }
         // 스키마 지정 요청이 400으로 거부되면 스키마를 지시문으로 옮겨 한 번 더 시도(결과는 어차피 zod로 검증한다)
         if (useSchema && err instanceof ApiError && err.status === 400) { log(`[gemini] 스키마 지정 요청 거부(${String(err.message).slice(0, 120)}) → 지시문 방식으로 재시도`); useSchema = false; continue; }
         if (err instanceof ApiError && err.status === 404) { exhausted.add(m.id); break; }
         // 서버 붐빔·시간 초과는 이 모델만의 일시 문제일 수 있으므로 다음 후보 모델로 넘어간다(한도 소진으로 표시하지는 않음).
-        if (isTransient(err)) { log(`[gemini] ${m.id} 일시 오류(${err.status || err.code || '-'}) → 다음 후보`); break; }
+        if (isTransient(err)) { transientErr = err; log(`[gemini] ${m.id} 일시 오류(${err.status || err.code || '-'}) → 다음 후보`); break; }
         throw err;
       }
     }
   }
-  if (lastErr && isDailyQuota(lastErr)) {
+  // 후보를 다 돌았다면, 마지막 오류가 아니라 '다시 시도하면 될 수 있는 오류'를 우선 올린다.
+  // (예: 앞 모델들은 붐빔 503, 마지막 모델은 사용 불가 404 → 503을 올려 잠시 뒤 재시도)
+  if (transientErr) throw transientErr;
+  if (sawQuota) {
     const e = new Error('오늘 Gemini 무료 한도를 모두 썼습니다.');
     e.code = 'quota_exhausted';
     throw e;
