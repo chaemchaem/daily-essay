@@ -1,21 +1,41 @@
 {
   "date": "2026-11-10",
   "number": 3,
-  "state": "failed_generation",
-  "stateLabel": "생성 실패",
+  "state": "partial",
+  "stateLabel": "일부 발행",
   "window": {
     "primaryStart": "2026-11-09T00:00:00+09:00",
     "primaryEnd": "2026-11-10T00:00:00+09:00",
     "overlapStart": "2026-11-07T00:00:00+09:00"
   },
   "infoCutoff": "2026-11-10T12:18:02+09:00",
-  "generatedAt": "2026-11-10T12:41:11+09:00",
-  "publishedAt": null,
+  "generatedAt": "2026-11-10T14:04:54+09:00",
+  "publishedAt": "2026-11-10T14:04:54+09:00",
   "recovered": null,
-  "topics": [],
+  "topics": [
+    {
+      "id": "2026-11-10-7ac8df11",
+      "title": "국유 해상 수송로 안보 확보를 위한 청해부대 작전구역 확대 및 추가 파병의 타당성",
+      "headline": "이란 외무부, 한국의 청해부대 작전구역 확대·파병에 우려 표명",
+      "category": "world",
+      "categoryLabel": "국제",
+      "kind": "new",
+      "questionType": "가치 충돌형",
+      "prompt": "제시문 (가)와 (나)는 중동 지역 내 청해부대 작전구역 확대 및 추가 자산 파견을 둘러싼 한국 정부의 명분과 이란 정부의 반발 입장을 각각 보여준다. 자국 선박·국민 보호 및 경제적 안보 확보라는 국익 우선주의와, 분쟁 지역 내 불개입 원칙 준수 및 대외 외교 마찰 최소화라는 가치 간의 충돌 구조를 분석하고, '정부는 청해부대의 작전구역 확대 및 추가 전력 파출을 포함한 파견 연장 수정 동의안을 추진해야 하는가'라는 명제에 대해 찬성과 반대 중 한 입장을 선택하여 자신의 논지를 전개하시오.",
+      "chars": 1606,
+      "stances": [
+        "찬성 — 작전구역 확대 및 추가 파병 추진",
+        "반대 — 작전구역 확대 및 추가 파병 철회"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-10-7ac8df11",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
   "counts": {
-    "published": 0,
-    "held": 3,
+    "published": 1,
+    "held": 2,
     "failed": 1,
     "deferredBudget": 0,
     "candidates": 30
@@ -23,7 +43,7 @@
   "heldSummary": [
     {
       "reason": "근거 부족",
-      "count": 3
+      "count": 2
     }
   ],
   "noTopicReason": null,
@@ -44,6 +64,11 @@
       "version": 1,
       "at": "2026-11-10T13:47:52+09:00",
       "change": "상태 기록: failed_generation"
+    },
+    {
+      "version": 2,
+      "at": "2026-11-10T14:04:54+09:00",
+      "change": "주제 1건 발행"
     }
   ],
   "test": false

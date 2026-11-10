@@ -1,30 +1,41 @@
 {
-  "generatedAt": "2026-11-10T13:47:52+09:00",
+  "generatedAt": "2026-11-10T14:04:54+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
     "publishAtKst": "09:00",
-    "generateStartKst": "06:05",
+    "generateStartKst": "00:20",
     "timezone": "Asia/Seoul",
     "daily": true
   },
   "nextScheduledPublish": "2026-11-11T09:00:00+09:00",
   "lastSuccessfulPublish": {
-    "date": "2026-11-09",
-    "publishedAt": "2026-11-09T10:02:24+09:00",
+    "date": "2026-11-10",
+    "publishedAt": "2026-11-10T14:04:54+09:00",
     "count": 1
   },
   "today": {
     "date": "2026-11-10",
-    "state": "failed_generation",
-    "stateLabel": "생성 실패",
-    "published": 0,
-    "held": 3,
+    "state": "partial",
+    "stateLabel": "일부 발행",
+    "published": 1,
+    "held": 2,
     "failedStage": "topics",
     "message": "작업 중 오류가 발생해 재시도가 필요합니다."
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-10T1359-retry-2026-11-10",
+      "kind": "retry",
+      "targetDate": "2026-11-10",
+      "startedAt": "2026-11-10T13:59:22+09:00",
+      "finishedAt": "2026-11-10T14:04:54+09:00",
+      "outcome": "partial",
+      "outcomeLabel": "일부 발행",
+      "failedStep": null,
+      "trigger": "workflow_dispatch"
+    },
     {
       "id": "2026-11-10T1218-scheduled-2026-11-10",
       "kind": "scheduled",
@@ -85,6 +96,6 @@
     "companion": "1.1.0",
     "final": "1.0.0"
   },
-  "policyVersion": "2026-11-08.2-procon",
+  "policyVersion": "2026-11-10.1-reliability",
   "test": false
 }
