@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-10",
+  "number": 3,
+  "state": "failed_generation",
+  "stateLabel": "생성 실패",
+  "window": {
+    "primaryStart": "2026-11-09T00:00:00+09:00",
+    "primaryEnd": "2026-11-10T00:00:00+09:00",
+    "overlapStart": "2026-11-07T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-10T12:18:02+09:00",
+  "generatedAt": "2026-11-10T12:41:11+09:00",
+  "publishedAt": null,
+  "recovered": null,
+  "topics": [],
+  "counts": {
+    "published": 0,
+    "held": 3,
+    "failed": 1,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "근거 부족",
+      "count": 3
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [
+    {
+      "threadId": "th-2026-11-09-e98a2615",
+      "summary": "기존 고위당정협의회에서 논의된 미래대응기금 활용 등에 대해 국회 예결위 심사 과정에서 여야 공방이 개시됨",
+      "eventDate": "2026-11-09"
+    },
+    {
+      "threadId": "th-2026-11-09-e98a2615",
+      "summary": "당정 협의에 이어 국무총리가 소방의 날을 맞아 소방 재정 확충 정부 의지를 재차 확인 발언함",
+      "eventDate": "2026-11-09"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-10T13:47:52+09:00",
+      "change": "상태 기록: failed_generation"
+    }
+  ],
+  "test": false
+}

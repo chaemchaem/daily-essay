@@ -3,7 +3,7 @@
   "title": "당정, 지방 소방 재정 부담 완화 위해 2조 원 재정 지원 검토",
   "category": "economy",
   "firstDate": "2026-11-09",
-  "lastDate": "2026-11-09",
+  "lastDate": "2026-11-10",
   "topics": [
     {
       "id": "2026-11-09-e98a2615",
@@ -12,5 +12,42 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-10",
+      "summary": "기존 고위당정협의회에서 논의된 미래대응기금 활용 등에 대해 국회 예결위 심사 과정에서 여야 공방이 개시됨",
+      "articles": [
+        {
+          "title": "예결위, 오늘(9일)부터 부처별 내년도 예산안 심사",
+          "outlet": "KBS 뉴스",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5VdWt1U2V3OTV1ZmtGQ19MS2hkWkF5Z3lnUVUwSmpBclhhM2RyNWt5eWlHZlVTVG15WTY5MktDWDBUeThXN0FNbnFVYXpNWHFtcXJLTVFGa1VIYVk?oc=5",
+          "publishedAt": "2026-11-09T01:08:00+09:00"
+        },
+        {
+          "title": "예결위, 경제부처 예산안 심사 이틀차…미래대응기금 공방 지속",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261109135600001",
+          "publishedAt": "2026-11-10T05:00:02+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "summary": "당정 협의에 이어 국무총리가 소방의 날을 맞아 소방 재정 확충 정부 의지를 재차 확인 발언함",
+      "articles": [
+        {
+          "title": "韓총리 \"소방관 안전까지 국가가 책임…소방 재정 확충 추진\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261109098600001",
+          "publishedAt": "2026-11-09T14:23:09+09:00"
+        },
+        {
+          "title": "한 총리 \"소방관 안전까지 국가가 책임…소방 재정 확충 추진\"",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008837766&cooper=RSSREADER",
+          "publishedAt": "2026-11-09T17:21:00+09:00"
+        }
+      ]
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T12:41:11+09:00",
+  "generatedAt": "2026-11-10T13:47:52+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -19,7 +19,7 @@
     "state": "failed_generation",
     "stateLabel": "생성 실패",
     "published": 0,
-    "held": 0,
+    "held": 3,
     "failedStage": "topics",
     "message": "작업 중 오류가 발생해 재시도가 필요합니다."
   },
