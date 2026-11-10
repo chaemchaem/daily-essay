@@ -50,3 +50,19 @@ test('9시 대기 계산: 지났으면 0, 5시간 반 이내면 남은 시간, �
   assert.equal(publishWaitMs('2026-11-11', policy, at('2026-11-11T06:00:00+09:00')), 3 * 3600000);
   assert.equal(publishWaitMs('2026-11-11', policy, at('2026-11-11T01:00:00+09:00')), null);
 });
+
+test('붐빔(503) 뒤 마지막 모델이 사용 불가(404)여도 재시도 가능한 503을 올린다', async () => {
+  setGeminiClientForTest(client((req) => {
+    if (req.model === 'gemini-9.0-flash') throw new ApiError({ message: 'high demand', status: 503 });
+    throw new ApiError({ message: 'models/gemini-8.0-flash is no longer available to new users', status: 404 });
+  }));
+  await assert.rejects(callGemini({ model: 'auto:pro', system: 's', prompt: 'p', schema: z.object({ a: z.string() }), maxTokens: 100, timeoutMs: 100 }), (e) => e instanceof ApiError && e.status === 503);
+});
+
+test('한도 소진과 사용 불가만 섞이면 무료 한도 소진으로 본다', async () => {
+  setGeminiClientForTest(client((req) => {
+    if (req.model === 'gemini-9.0-flash') throw new ApiError({ message: 'quota exceeded per day', status: 429 });
+    throw new ApiError({ message: 'no longer available', status: 404 });
+  }));
+  await assert.rejects(callGemini({ model: 'auto:pro', system: 's', prompt: 'p', schema: z.object({ a: z.string() }), maxTokens: 100, timeoutMs: 100 }), (e) => e.code === 'quota_exhausted');
+});
