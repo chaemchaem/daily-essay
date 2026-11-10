@@ -265,6 +265,14 @@ export async function runPublish({ date, waitUntilDue = false, maxWaitMinutes = 
   return res;
 }
 
+/** 발행 시각까지 기다릴 시간(ms). 이미 지났으면 0, 너무 멀면(최대 대기 초과) null */
+export function publishWaitMs(date, policy, now = nowMs(), maxWaitMinutes = 330) {
+  const due = kstTimeMs(date, policy.schedule.publishAtKst);
+  const wait = due - now;
+  if (wait <= 0) return 0;
+  return wait <= maxWaitMinutes * 60000 ? wait : null;
+}
+
 /** 누락 날짜 탐지: 출범일 이후 발행 기록이 없거나 실패한 날짜 */
 export function findMissingDates({ lookbackDays } = {}) {
   const policy = loadPolicy();

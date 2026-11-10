@@ -9,7 +9,7 @@ const TYPE_ORDER = { official: 0, wire: 1, press: 1, international: 2, aggregato
 
 export function findRelated({ seedArticles, eventSummary, all, max = 6, minShared = 3, minRatio = 0.34, perGroup = 1 }) {
   const seedIds = new Set(seedArticles.map((a) => a.id));
-  const query = wordTokens([eventSummary || '', ...seedArticles.map((a) => a.title)].join(' '));
+  const query = wordTokens([eventSummary || '', ...seedArticles.map((a) => `${a.title} ${a.feedSummary || ''}`)].join(' '));
   if (query.size < 3) return [];
   const scored = [];
   for (const a of all) {
@@ -19,7 +19,13 @@ export function findRelated({ seedArticles, eventSummary, all, max = 6, minShare
     let shared = 0;
     for (const w of words) if (query.has(w)) shared += 1;
     const ratio = shared / words.size;
+    // 제목만으로 부족하면 피드 요약문까지 합쳐 핵심어가 충분히(5개 이상, 30% 이상) 겹치는지 본다.
+    const wide = wordTokens(`${a.title} ${a.feedSummary || ''}`);
+    let sharedWide = 0;
+    for (const w of wide) if (query.has(w)) sharedWide += 1;
+    const ratioWide = wide.size ? sharedWide / wide.size : 0;
     if (shared >= minShared && ratio >= minRatio) scored.push({ a, shared, ratio });
+    else if (sharedWide >= 5 && ratioWide >= 0.3) scored.push({ a, shared: sharedWide - 2, ratio: ratioWide });
   }
   scored.sort((x, y) => (y.shared - x.shared) || (y.ratio - x.ratio) || (TYPE_ORDER[x.a.sourceType] - TYPE_ORDER[y.a.sourceType]) || (Number(y.a.fetchable) - Number(x.a.fetchable)));
   const seedGroups = new Set(seedArticles.map((a) => a.group));

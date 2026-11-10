@@ -150,6 +150,8 @@ export async function callGemini({ model: spec, system, prompt, schema, maxToken
         // 스키마 지정 요청이 400으로 거부되면 스키마를 지시문으로 옮겨 한 번 더 시도(결과는 어차피 zod로 검증한다)
         if (useSchema && err instanceof ApiError && err.status === 400) { log(`[gemini] 스키마 지정 요청 거부(${String(err.message).slice(0, 120)}) → 지시문 방식으로 재시도`); useSchema = false; continue; }
         if (err instanceof ApiError && err.status === 404) { exhausted.add(m.id); break; }
+        // 서버 붐빔·시간 초과는 이 모델만의 일시 문제일 수 있으므로 다음 후보 모델로 넘어간다(한도 소진으로 표시하지는 않음).
+        if (isTransient(err)) { log(`[gemini] ${m.id} 일시 오류(${err.status || err.code || '-'}) → 다음 후보`); break; }
         throw err;
       }
     }
@@ -160,6 +162,11 @@ export async function callGemini({ model: spec, system, prompt, schema, maxToken
     throw e;
   }
   throw lastErr || new Error('Gemini 호출 실패');
+}
+
+function isTransient(err) {
+  if (err instanceof ApiError) return [500, 503, 504].includes(err.status);
+  return /(ECONNRESET|ETIMEDOUT|fetch failed|socket hang up)/i.test(String(err?.message || ''));
 }
 
 export function isRetryableGemini(err) {
