@@ -1,8 +1,8 @@
 {
-  "policyVersion": "2026-11-08.2-procon",
+  "policyVersion": "2026-11-10.1-reliability",
   "schedule": {
     "publishAtKst": "09:00",
-    "generateStartKst": "06:05",
+    "generateStartKst": "00:20",
     "note": "실제 실행 시각은 .github/workflows/daily-essay.yml의 cron이 결정한다. 이 값은 지연 판단과 화면 표시용이다."
   },
   "window": {

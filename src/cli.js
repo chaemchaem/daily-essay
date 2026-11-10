@@ -17,7 +17,7 @@ const { values } = parseArgs({
   options: {
     date: { type: 'string' }, kind: { type: 'string' }, trigger: { type: 'string' }, 'publish-now': { type: 'boolean' },
     wait: { type: 'boolean' }, max: { type: 'string' }, reason: { type: 'string' }, by: { type: 'string' },
-    topic: { type: 'string' }, 'redo-evidence-holds': { type: 'boolean' }, 'answer-file': { type: 'string' }, notice: { type: 'string' }, json: { type: 'boolean' },
+    topic: { type: 'string' }, 'redo-evidence-holds': { type: 'boolean' }, 'wait-publish': { type: 'boolean' }, 'answer-file': { type: 'string' }, notice: { type: 'string' }, json: { type: 'boolean' },
   },
   allowPositionals: true,
 });
@@ -46,6 +46,18 @@ const commands = {
     const run = await runDaily({ date: values.date, kind: values.kind || 'manual', trigger: values.trigger || 'local', publishNow: values['publish-now'], redoEvidenceHolds: values['redo-evidence-holds'] });
     log(JSON.stringify({ run: run.id, outcome: run.outcome, failedStep: run.failedStep || null, budget: run.budget }, null, 1));
     if (['failed_collect', 'failed_generation', 'lock_held'].includes(run.outcome)) process.exitCode = 1;
+    // 예약 실행이 9시 전에 끝나면, 이 실행이 9시까지 기다렸다가 직접 발행한다(GitHub 예약 지연 대비).
+    if (values['wait-publish'] && ['ready', 'partial', 'already_published'].includes(run.outcome)) {
+      const { publishWaitMs } = await import('./pipeline/daily.js');
+      const { kstDateOf } = await import('./lib/time.js');
+      const date = values.date || kstDateOf(nowMs());
+      const wait = publishWaitMs(date, loadPolicy(), nowMs(), Number(process.env.NJ_MAX_PUBLISH_WAIT_MIN || 330));
+      if (wait === null) log('[publish] 발행 시각까지 너무 많이 남아 기다리지 않음 — 이후 예약 실행이 발행한다');
+      else {
+        if (wait > 0) { log(`[publish] ${Math.round(wait / 60000)}분 뒤 발행 시각까지 대기`); await new Promise((r) => setTimeout(r, wait + 1000)); }
+        log(JSON.stringify(await runPublish({ date })));
+      }
+    }
   },
   async publish() {
     const res = await runPublish({ date: values.date, waitUntilDue: values.wait });

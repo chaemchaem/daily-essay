@@ -2,10 +2,13 @@ name: 논점 — 일일 논술 발행
 
 # 논점(daily-essay) 예약 작업. 서버(GitHub Actions)에서 실행되므로 브라우저를 닫아도 동작한다.
 # cron은 UTC 기준이다(한국시간 = UTC+9). GitHub 예약 실행은 혼잡 시 수 분~수십 분 늦게 시작될 수 있어
-# 생성은 발행 3시간 전에 시작하고, 발행 작업은 09:00 직전에 시작해 정각까지 기다린다.
+# 생성은 자정 직후 시작하고(예비 실행 2회), 9시 전에 끝나면 그 실행이 9시까지 기다렸다가 발행한다.
+# 08:47 발행 작업은 그래도 발행되지 않았을 때를 위한 안전망이다.
 on:
   schedule:
-    - cron: "5 21 * * *"   # 06:05 KST — 수집·선별·작성·검토(주말·공휴일 포함 매일)
+    - cron: "20 15 * * *"  # 00:20 KST — 수집·선별·작성·검토 시작(전날 하루치가 자정에 마감되므로 바로 시작)
+    - cron: "20 17 * * *"  # 02:20 KST — 예비 실행(앞 실행이 늦게 시작되거나 실패했을 때 이어서 처리)
+    - cron: "20 19 * * *"  # 04:20 KST — 예비 실행
     - cron: "47 23 * * *"  # 08:47 KST — 09:00까지 기다렸다가 검토 완료된 주제만 공개
     - cron: "40 1 * * *"   # 10:40 KST — 오늘 실패분·누락 날짜 복구(재시도 상한 있음)
   workflow_dispatch:
@@ -35,7 +38,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 355
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v4
@@ -65,7 +68,7 @@ jobs:
         run: |
           if [ "$EVENT" = "schedule" ]; then
             case "$SCHEDULE" in
-              "5 21 * * *")  echo "cmd=daily --kind scheduled --trigger cron" >> "$GITHUB_OUTPUT" ;;
+              "20 15 * * *"|"20 17 * * *"|"20 19 * * *") echo "cmd=daily --kind scheduled --wait-publish --trigger cron" >> "$GITHUB_OUTPUT" ;;
               "47 23 * * *") echo "cmd=publish --wait" >> "$GITHUB_OUTPUT" ;;
               "40 1 * * *")  echo "cmd=recover --trigger cron" >> "$GITHUB_OUTPUT" ;;
               *) echo "알 수 없는 일정: $SCHEDULE"; exit 1 ;;
@@ -85,7 +88,7 @@ jobs:
           echo "kst_now=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')"
 
       - name: 실행
-        timeout-minutes: 270
+        timeout-minutes: 345
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
