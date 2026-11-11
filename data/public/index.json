@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-10T14:04:54+09:00",
-  "latestPublished": "2026-11-10",
+  "generatedAt": "2026-11-11T09:00:01+09:00",
+  "latestPublished": "2026-11-11",
   "issues": [
+    {
+      "date": "2026-11-11",
+      "number": 4,
+      "state": "partial",
+      "stateLabel": "일부 발행",
+      "count": 1,
+      "held": 1,
+      "topics": [
+        {
+          "id": "2026-11-11-ed6e3a2f",
+          "title": "진행 중인 형사사법 절차에 대한 특검 도입과 사법권 독립 및 법치주의의 한계",
+          "category": "politics",
+          "categoryLabel": "정치",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-10",
       "number": 3,

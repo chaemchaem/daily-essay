@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-11",
+  "number": 4,
+  "state": "partial",
+  "stateLabel": "일부 발행",
+  "window": {
+    "primaryStart": "2026-11-10T00:00:00+09:00",
+    "primaryEnd": "2026-11-11T00:00:00+09:00",
+    "overlapStart": "2026-11-08T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-11T06:21:27+09:00",
+  "generatedAt": "2026-11-11T07:10:21+09:00",
+  "publishedAt": "2026-11-11T09:00:01+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-11-ed6e3a2f",
+      "title": "진행 중인 형사사법 절차에 대한 특검 도입과 사법권 독립 및 법치주의의 한계",
+      "headline": "정부, '조작기소 특검법' 10일 국무회의 미상정…법리 검토 착수",
+      "category": "politics",
+      "categoryLabel": "정치",
+      "kind": "new",
+      "questionType": "가치 충돌형",
+      "prompt": "제시문 (가)와 (나)는 진행 중인 형사재판 및 수사 과정에 특별검사를 도입하는 법안을 둘러싼 상반된 헌법적 가치를 제시하고 있다. '조작기소 특검법'에 규정된 수사 협조자 필요적 형 감면 및 재판기록 열람 허가 조항 등을 둘러싼 사법권 독립 침해 우려와, 수사기관의 권한 남용을 규명하기 위한 특별검사제 도입의 정당성 간의 충돌 구조를 분석하시오. 이를 바탕으로 '정부는 국회를 통과한 조작기소 특검법 공포안에 대해 헌법상 재의요구권(거부권)을 행사해야 하는가'라는 명제에 대해 찬성과 반대 중 한 입장을 택하여, 예상되는 반론을 검토하고 자신의 논지를 1,500~2,000자(공백 포함)로 전개하시오.",
+      "chars": 1776,
+      "stances": [
+        "찬성 — 거부권을 행사해야 한다",
+        "반대 — 법안을 공포해야 한다"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-11-ed6e3a2f",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 1,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "근거 부족",
+      "count": 1
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-11T09:00:01+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}
