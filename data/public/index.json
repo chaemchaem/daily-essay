@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-11T12:01:49+09:00",
-  "latestPublished": "2026-11-11",
+  "generatedAt": "2026-11-12T09:00:01+09:00",
+  "latestPublished": "2026-11-12",
   "issues": [
+    {
+      "date": "2026-11-12",
+      "number": 5,
+      "state": "partial",
+      "stateLabel": "일부 발행",
+      "count": 1,
+      "held": 1,
+      "topics": [
+        {
+          "id": "2026-11-12-ea615cd6",
+          "title": "북한의 '적대적 두 국가' 헌법 명문화와 대한민국 통일·대북 정책의 기본 방향",
+          "category": "politics",
+          "categoryLabel": "정치",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-11",
       "number": 4,

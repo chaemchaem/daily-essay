@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T12:01:49+09:00",
+  "generatedAt": "2026-11-12T09:00:01+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -8,14 +8,14 @@
     "timezone": "Asia/Seoul",
     "daily": true
   },
-  "nextScheduledPublish": "2026-11-12T09:00:00+09:00",
+  "nextScheduledPublish": "2026-11-13T09:00:00+09:00",
   "lastSuccessfulPublish": {
-    "date": "2026-11-11",
-    "publishedAt": "2026-11-11T09:00:01+09:00",
+    "date": "2026-11-12",
+    "publishedAt": "2026-11-12T09:00:01+09:00",
     "count": 1
   },
   "today": {
-    "date": "2026-11-11",
+    "date": "2026-11-12",
     "state": "partial",
     "stateLabel": "일부 발행",
     "published": 1,
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-12T0704-scheduled-2026-11-12",
+      "kind": "scheduled",
+      "targetDate": "2026-11-12",
+      "startedAt": "2026-11-12T07:04:02+09:00",
+      "finishedAt": "2026-11-12T07:59:45+09:00",
+      "outcome": "ready",
+      "outcomeLabel": "발행 대기",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-11T0913-scheduled-2026-11-11",
       "kind": "scheduled",

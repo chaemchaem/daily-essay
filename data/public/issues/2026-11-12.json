@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-12",
+  "number": 5,
+  "state": "partial",
+  "stateLabel": "일부 발행",
+  "window": {
+    "primaryStart": "2026-11-11T00:00:00+09:00",
+    "primaryEnd": "2026-11-12T00:00:00+09:00",
+    "overlapStart": "2026-11-09T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-12T07:04:02+09:00",
+  "generatedAt": "2026-11-12T07:59:45+09:00",
+  "publishedAt": "2026-11-12T09:00:01+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-12-ea615cd6",
+      "title": "북한의 '적대적 두 국가' 헌법 명문화와 대한민국 통일·대북 정책의 기본 방향",
+      "headline": "북 선전매체, '적대적 두 국가' 반영 개정 헌법 전문 공개",
+      "category": "politics",
+      "categoryLabel": "정치",
+      "kind": "new",
+      "questionType": "정책 평가형",
+      "prompt": "제시문 (가)는 북한이 개정 헌법을 통해 '적대적 두 국가' 체제를 성문화한 사실과 주요 내용을 보여주며, 제시문 (나)는 대한민국 헌법 및 남북기본합의서가 전제해 온 남북관계 규범 체계를 설명한다. 북한의 헌법 개정이 갖는 대남·안보적 함의를 분석하고, '대한민국 정부는 기존의 특수관계에 기반한 평화통일 패러다임을 유지해야 하는가, 아니면 별개의 두 국가 현실을 반영한 현실주의적 공존·억제 정책으로 공식 전환해야 하는가'라는 쟁점에 대해 자신의 입장을 정하여 논하시오. 예상되는 반론을 함께 검토하며 자신의 주장을 정당화하시오.",
+      "chars": 1647,
+      "stances": [
+        "반대 — 헌법상 평화통일 규범 및 특수관계 기조 유지"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-12-ea615cd6",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 1,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "근거 부족",
+      "count": 1
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [
+    {
+      "threadId": "th-2026-11-11-ed6e3a2f",
+      "summary": "법무부 장관 후보자가 특검 및 공소취소 논란에 대해 원론적 입장을 재확인함.",
+      "eventDate": "2026-11-11"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-12T09:00:01+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}

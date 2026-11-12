@@ -3,7 +3,7 @@
   "title": "정부, '조작기소 특검법' 10일 국무회의 미상정…법리 검토 착수",
   "category": "politics",
   "firstDate": "2026-11-11",
-  "lastDate": "2026-11-11",
+  "lastDate": "2026-11-12",
   "topics": [
     {
       "id": "2026-11-11-ed6e3a2f",
@@ -12,5 +12,36 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-12",
+      "summary": "법무부 장관 후보자가 특검 및 공소취소 논란에 대해 원론적 입장을 재확인함.",
+      "articles": [
+        {
+          "title": "[속보] 이용철 \"공소취소, 진상규명 집중해야…특검 지켜볼 것\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261111031151004",
+          "publishedAt": "2026-11-11T08:45:11+09:00"
+        },
+        {
+          "title": "이용철, 공소취소 논란에 또 \"진상규명 집중…특검 지켜보겠다\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261111031152004",
+          "publishedAt": "2026-11-11T09:09:08+09:00"
+        },
+        {
+          "title": "이용철, 공소취소 논란에 또 \"진상규명 집중…특검 지켜보겠다\"(종합)",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261111031153004",
+          "publishedAt": "2026-11-11T09:28:34+09:00"
+        },
+        {
+          "title": "이용철, '공소 취소' 질문에 또 \"진상 규명 집중\"",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008841701&cooper=RSSREADER",
+          "publishedAt": "2026-11-11T22:01:00+09:00"
+        }
+      ]
+    }
+  ]
 }
