@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T09:00:01+09:00",
+  "generatedAt": "2026-11-12T10:33:33+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-12T1033-scheduled-2026-11-12",
+      "kind": "scheduled",
+      "targetDate": "2026-11-12",
+      "startedAt": "2026-11-12T10:33:33+09:00",
+      "finishedAt": "2026-11-12T10:33:33+09:00",
+      "outcome": "partial",
+      "outcomeLabel": "일부 발행",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-12T0704-scheduled-2026-11-12",
       "kind": "scheduled",
