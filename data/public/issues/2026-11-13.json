@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-13",
+  "number": 6,
+  "state": "partial",
+  "stateLabel": "일부 발행",
+  "window": {
+    "primaryStart": "2026-11-12T00:00:00+09:00",
+    "primaryEnd": "2026-11-13T00:00:00+09:00",
+    "overlapStart": "2026-11-10T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-13T06:51:53+09:00",
+  "generatedAt": "2026-11-13T07:40:17+09:00",
+  "publishedAt": "2026-11-13T09:00:01+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-13-449ccb80",
+      "title": "방송통신위원회 재승인 심사의 적법성과 정책 결정의 형사적 책임 한계",
+      "headline": "한상혁 전 방통위원장, TV조선 재승인 의혹 1심 무죄",
+      "category": "politics",
+      "categoryLabel": "정치",
+      "kind": "new",
+      "questionType": "가치 충돌형",
+      "prompt": "방송통신위원회와 같은 독립적 행정위원회의 정책 결정 과정에서 나타나는 '행정의 자율적 재량'과 '사법적 통제의 정당성'이라는 두 가치가 충돌하는 지점을 분석하시오. 이를 바탕으로, 위 사례와 같이 행정 심사 과정에서의 점수 조정이 정책적 판단의 영역인지 아니면 형사적 처벌 대상인 범죄 행위인지를 판가름하는 기준을 제시하고, 독립적 행정기관의 책임 있는 행정을 구현하기 위한 제도적 개선 방안을 논하시오.",
+      "chars": 1588,
+      "stances": [],
+      "lateEntry": null,
+      "threadId": "th-2026-11-13-449ccb80",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 1,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "검토 미통과(수정 상한 도달 또는 차단 항목)",
+      "count": 1
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-13T09:00:01+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}

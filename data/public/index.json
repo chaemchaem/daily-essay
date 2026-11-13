@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-12T13:15:14+09:00",
-  "latestPublished": "2026-11-12",
+  "generatedAt": "2026-11-13T09:00:01+09:00",
+  "latestPublished": "2026-11-13",
   "issues": [
+    {
+      "date": "2026-11-13",
+      "number": 6,
+      "state": "partial",
+      "stateLabel": "일부 발행",
+      "count": 1,
+      "held": 1,
+      "topics": [
+        {
+          "id": "2026-11-13-449ccb80",
+          "title": "방송통신위원회 재승인 심사의 적법성과 정책 결정의 형사적 책임 한계",
+          "category": "politics",
+          "categoryLabel": "정치",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-12",
       "number": 5,
