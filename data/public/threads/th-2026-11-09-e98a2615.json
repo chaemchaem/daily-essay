@@ -3,7 +3,7 @@
   "title": "당정, 지방 소방 재정 부담 완화 위해 2조 원 재정 지원 검토",
   "category": "economy",
   "firstDate": "2026-11-09",
-  "lastDate": "2026-11-10",
+  "lastDate": "2026-11-14",
   "topics": [
     {
       "id": "2026-11-09-e98a2615",
@@ -46,6 +46,48 @@
           "outlet": "SBS",
           "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008837766&cooper=RSSREADER",
           "publishedAt": "2026-11-09T17:21:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "summary": "국민의힘 정점식 원내대표가 더불어민주당의 종합부동산세 기본공제 14억 원 상향 요구와 청와대의 반대 입장을 짚으며 여당을 비판했다.",
+      "articles": [
+        {
+          "title": "정점식 \"與 종부세 반란쇼 4일 천하…'14억' 요구했다 꼬리내려\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261113043600001",
+          "publishedAt": "2026-11-13T09:38:04+09:00"
+        },
+        {
+          "title": "정점식 \"與 종부세 반란쇼 4일 천하…허수아비 명픽 당 대표\"",
+          "outlet": "연합뉴스TV",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9GUzlPcWh0ejN1OGYxSm9mY3BiTzB2bVJVMG1tZlFDbUtvZC0wQVNIbVYwOTN4SXQ3SlhmSkxuWEt6cVZCZm5ubk81dEN1aFY2U2F4SWRiTERkNHdockJWbjh3aEN3eHc?oc=5",
+          "publishedAt": "2026-11-13T10:35:00+09:00"
+        },
+        {
+          "title": "정점식 \"허수아비 '명픽' 김민석 대표 신세 처량\"",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008844531&cooper=RSSREADER",
+          "publishedAt": "2026-11-13T10:41:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "summary": "청와대 재정기획보좌관은 162조 원 규모의 미래대응기금 운용에 대해 모든 절차가 국회의 심의와 통제를 받으므로 자의적 재정 운용 우려는 사실과 다르다고 해명했다.",
+      "articles": [
+        {
+          "title": "靑재정보좌관 \"미래대응기금, 국회가 통제…재정운영 안정적\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261113043700001",
+          "publishedAt": "2026-11-13T09:31:38+09:00"
+        },
+        {
+          "title": "청와대 재정보좌관 \"미래대응기금, 국회가 통제…재정운영 안정적\"",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008844466&cooper=RSSREADER",
+          "publishedAt": "2026-11-13T10:22:00+09:00"
         }
       ]
     }

@@ -3,7 +3,7 @@
   "title": "정부, '조작기소 특검법' 10일 국무회의 미상정…법리 검토 착수",
   "category": "politics",
   "firstDate": "2026-11-11",
-  "lastDate": "2026-11-12",
+  "lastDate": "2026-11-14",
   "topics": [
     {
       "id": "2026-11-11-ed6e3a2f",
@@ -40,6 +40,24 @@
           "outlet": "SBS",
           "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008841701&cooper=RSSREADER",
           "publishedAt": "2026-11-11T22:01:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "summary": "더불어민주당은 '조작기소 특검법' 통과 이후 장외투쟁을 진행 중인 국민의힘에 대해 국회에 복귀하여 민생 법안 심사에 협조할 것을 촉구했다.",
+      "articles": [
+        {
+          "title": "與, '장외투쟁' 국힘에 \"국회로 돌아와 민생 챙겨야\"",
+          "outlet": "연합인포맥스",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE81enNEanMzMVBZc280SEhEWVdhSmZEZUJyazBBS2hXSzZLTFpiLU9mNktCa002Y3BhRnIyRDA0VC1XUG5wRFpXMm15SVVqeDM4RHJGV01YRUdCd3ZtQTZBeWNKcEVIZkgxc0NZNHlVdDc?oc=5",
+          "publishedAt": "2026-11-13T10:19:09+09:00"
+        },
+        {
+          "title": "與, 국힘 장외투쟁에 \"민생 배임\"…한병도 \"달나라 말고 국회로\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261113073900001",
+          "publishedAt": "2026-11-13T11:15:48+09:00"
         }
       ]
     }

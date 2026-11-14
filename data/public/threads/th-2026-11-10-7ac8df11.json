@@ -3,7 +3,7 @@
   "title": "이란 외무부, 한국의 청해부대 작전구역 확대·파병에 우려 표명",
   "category": "world",
   "firstDate": "2026-11-10",
-  "lastDate": "2026-11-10",
+  "lastDate": "2026-11-14",
   "topics": [
     {
       "id": "2026-11-10-7ac8df11",
@@ -12,5 +12,36 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-14",
+      "summary": "이란 외무부가 한국 속담을 인용해 청해부대의 임무 및 작전구역 확대 방침을 비판하자, 한국 외교부는 전쟁 불관여 및 불개입 원칙을 재확인했다.",
+      "articles": [
+        {
+          "title": "이란 외무부 \"뱁새가 황새 따라가다 가랑이…\" 청해부대 겨냥",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261113109900009",
+          "publishedAt": "2026-11-13T14:41:48+09:00"
+        },
+        {
+          "title": "이란 외무부 \"뱁새가 황새 따라가다 가랑이…\" 청해부대 겨냥(종합)",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261113109951009",
+          "publishedAt": "2026-11-13T17:06:54+09:00"
+        },
+        {
+          "title": "[D리포트] 이란, 청해부대 겨냥해 \"뱁새가 황새 따라가면 가랑이가…\"",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008845250&cooper=RSSREADER",
+          "publishedAt": "2026-11-13T17:46:00+09:00"
+        },
+        {
+          "title": "‘뱁새가 황새 따라가면’ 이란 메시지에…외교부 “전쟁 불관여 원칙”",
+          "outlet": "매일경제",
+          "url": "https://www.mk.co.kr/news/politics/12208402",
+          "publishedAt": "2026-11-13T21:16:39+09:00"
+        }
+      ]
+    }
+  ]
 }

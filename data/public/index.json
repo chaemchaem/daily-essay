@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-13T12:36:17+09:00",
-  "latestPublished": "2026-11-13",
+  "generatedAt": "2026-11-14T09:00:01+09:00",
+  "latestPublished": "2026-11-14",
   "issues": [
+    {
+      "date": "2026-11-14",
+      "number": 7,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-14-c2e85401",
+          "title": "첨단 전략기술 기업의 안보 심사 의무화와 기업 자율성 간의 조율 방안",
+          "category": "world",
+          "categoryLabel": "국제",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-13",
       "number": 6,
