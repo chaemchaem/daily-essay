@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T09:00:01+09:00",
+  "generatedAt": "2026-11-14T09:21:44+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-14T0921-scheduled-2026-11-14",
+      "kind": "scheduled",
+      "targetDate": "2026-11-14",
+      "startedAt": "2026-11-14T09:21:44+09:00",
+      "finishedAt": "2026-11-14T09:21:44+09:00",
+      "outcome": "already_published",
+      "outcomeLabel": "already_published",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-14T0627-scheduled-2026-11-14",
       "kind": "scheduled",
