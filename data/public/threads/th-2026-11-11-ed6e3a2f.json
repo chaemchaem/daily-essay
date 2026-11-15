@@ -3,7 +3,7 @@
   "title": "정부, '조작기소 특검법' 10일 국무회의 미상정…법리 검토 착수",
   "category": "politics",
   "firstDate": "2026-11-11",
-  "lastDate": "2026-11-14",
+  "lastDate": "2026-11-15",
   "topics": [
     {
       "id": "2026-11-11-ed6e3a2f",
@@ -58,6 +58,36 @@
           "outlet": "연합뉴스",
           "url": "https://www.yna.co.kr/view/AKR20261113073900001",
           "publishedAt": "2026-11-13T11:15:48+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "summary": "국민의힘이 조작기소 특검법 거부권 행사를 요구하며 부산에서 장외 규탄 집회를 열음",
+      "articles": [
+        {
+          "title": "국힘, 오늘서 부산서 '조작 기소 특검법' 규탄 집회",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261113148300001",
+          "publishedAt": "2026-11-14T05:00:00+09:00"
+        },
+        {
+          "title": "국힘, 부산서 ‘조작기소 특검법’ 규탄 장외 집회",
+          "outlet": "경향신문",
+          "url": "https://www.khan.co.kr/article/202611140852001/?amp%3Butm_medium=rss&amp%3Butm_campaign=total_news",
+          "publishedAt": "2026-11-14T08:52:00+09:00"
+        },
+        {
+          "title": "국힘 \"특검 의결시 국무위원들도 감옥갈 것\"…부산서 규탄 집회",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261114041600001",
+          "publishedAt": "2026-11-14T17:39:45+09:00"
+        },
+        {
+          "title": "국힘 \"특검 의결하면 국무위원도 감옥행\"…부산서 규탄 집회",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026111465577",
+          "publishedAt": "2026-11-14T17:58:22+09:00"
         }
       ]
     }
