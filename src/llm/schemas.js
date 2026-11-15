@@ -2,7 +2,7 @@
 // OpenAI strict 모드와 Anthropic structured outputs 양쪽에서 쓰도록 선택 필드 대신 nullable을 쓴다.
 import { z } from 'zod';
 
-export const CATEGORY_IDS = ['politics', 'economy', 'society', 'world', 'scitech', 'environment', 'education', 'labor', 'culture', 'ethics'];
+export const CATEGORY_IDS = ['politics', 'economy', 'finance', 'society', 'world', 'scitech', 'environment', 'education', 'labor', 'culture', 'ethics'];
 export const Category = z.enum(CATEGORY_IDS);
 
 export const ISSUE_TYPES = [

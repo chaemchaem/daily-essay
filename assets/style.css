@@ -29,7 +29,7 @@
   --gutter: 16px;
 
   --c-politics: #44588a; --c-economy: #876c22; --c-society: #9a4a3f; --c-world: #2d6c72; --c-scitech: #5b4f8f;
-  --c-environment: #3c6b3f; --c-education: #8a6236; --c-labor: #6d4a3a; --c-culture: #7d3f6e; --c-ethics: #50525a;
+  --c-environment: #3c6b3f; --c-education: #8a6236; --c-labor: #6d4a3a; --c-culture: #7d3f6e; --c-ethics: #50525a; --c-finance: #2f5d55;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -123,7 +123,7 @@ img, svg { max-width: 100%; }
 .cat[data-cat="society"] { --cat: var(--c-society); } .cat[data-cat="world"] { --cat: var(--c-world); }
 .cat[data-cat="scitech"] { --cat: var(--c-scitech); } .cat[data-cat="environment"] { --cat: var(--c-environment); }
 .cat[data-cat="education"] { --cat: var(--c-education); } .cat[data-cat="labor"] { --cat: var(--c-labor); }
-.cat[data-cat="culture"] { --cat: var(--c-culture); } .cat[data-cat="ethics"] { --cat: var(--c-ethics); }
+.cat[data-cat="culture"] { --cat: var(--c-culture); } .cat[data-cat="ethics"] { --cat: var(--c-ethics); } .cat[data-cat="finance"] { --cat: var(--c-finance); }
 
 .tag { display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; padding: 1px 8px; border: 1px solid var(--rule); color: var(--ink-2); background: var(--sheet); white-space: nowrap; }
 .tag-red { border-color: var(--red); color: var(--red-ink); background: transparent; }
