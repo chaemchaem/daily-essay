@@ -10,6 +10,10 @@
       "label": "경제"
     },
     {
+      "id": "finance",
+      "label": "금융"
+    },
+    {
       "id": "society",
       "label": "사회"
     },
@@ -193,6 +197,44 @@
       "url": "https://www.hankyung.com/feed/all-news",
       "defaultTz": "+09:00",
       "enabled": true
+    },
+    {
+      "id": "yna-market",
+      "name": "연합뉴스 마켓+",
+      "outlet": "연합뉴스",
+      "group": "yonhap",
+      "type": "wire",
+      "lang": "ko",
+      "url": "https://www.yna.co.kr/rss/market.xml",
+      "hint": "finance",
+      "defaultTz": "+09:00",
+      "enabled": true,
+      "note": "2026-11-15 추가. 응답 여부는 probe-sources로 확인"
+    },
+    {
+      "id": "hankyung-finance",
+      "name": "한국경제 금융",
+      "outlet": "한국경제",
+      "group": "hankyung",
+      "type": "press",
+      "lang": "ko",
+      "url": "https://www.hankyung.com/feed/finance",
+      "hint": "finance",
+      "defaultTz": "+09:00",
+      "enabled": true,
+      "note": "2026-11-15 추가. 응답 여부는 probe-sources로 확인"
+    },
+    {
+      "id": "gnews-kr-finance",
+      "name": "Google 뉴스 검색: 금융 정책",
+      "outlet": "Google 뉴스",
+      "group": "aggregator",
+      "type": "aggregator",
+      "lang": "ko",
+      "url": "https://news.google.com/rss/search?q=%EA%B8%88%EC%9C%B5%EC%9C%84%EC%9B%90%ED%9A%8C+OR+%EA%B8%88%EC%9C%B5%EA%B0%90%EB%8F%85%EC%9B%90+OR+%ED%95%9C%EA%B5%AD%EC%9D%80%ED%96%89+OR+%EA%B8%B0%EC%A4%80%EA%B8%88%EB%A6%AC+OR+%EA%B0%80%EA%B3%84%EB%8C%80%EC%B6%9C+when:2d&hl=ko&gl=KR&ceid=KR:ko",
+      "hint": "finance",
+      "enabled": true,
+      "note": "금융위원회·금융감독원·한국은행·기준금리·가계대출 관련 최근 2일 기사 검색. 제목 수준이라 후보 발견·교차 확인용"
     },
     {
       "id": "mk-all",
