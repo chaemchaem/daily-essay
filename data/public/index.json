@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-15T12:05:42+09:00",
-  "latestPublished": "2026-11-15",
+  "generatedAt": "2026-11-16T09:00:01+09:00",
+  "latestPublished": "2026-11-16",
   "issues": [
+    {
+      "date": "2026-11-16",
+      "number": 9,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-16-f055949e",
+          "title": "흉악 범죄 대책으로서 '가석방 없는 무기형' 도입의 헌법적·형사정책적 정당성",
+          "category": "society",
+          "categoryLabel": "사회",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-15",
       "number": 8,
@@ -153,6 +170,10 @@
     {
       "id": "economy",
       "label": "경제"
+    },
+    {
+      "id": "finance",
+      "label": "금융"
     },
     {
       "id": "society",

@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-16",
+  "number": 9,
+  "state": "published",
+  "stateLabel": "발행",
+  "window": {
+    "primaryStart": "2026-11-15T00:00:00+09:00",
+    "primaryEnd": "2026-11-16T00:00:00+09:00",
+    "overlapStart": "2026-11-13T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-16T05:26:45+09:00",
+  "generatedAt": "2026-11-16T05:57:49+09:00",
+  "publishedAt": "2026-11-16T09:00:01+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-16-f055949e",
+      "title": "흉악 범죄 대책으로서 '가석방 없는 무기형' 도입의 헌법적·형사정책적 정당성",
+      "headline": "청와대, 국민안전 프로젝트 발표 및 가석방 없는 무기형 논의",
+      "category": "society",
+      "categoryLabel": "사회",
+      "kind": "new",
+      "questionType": "가치 충돌형",
+      "prompt": "제시문 (가)와 (나)는 흉악범죄에 대한 형벌 제도를 바라보는 상반된 가치와 관점을 대변한다. 무고한 시민의 안전 확보 및 사회 방위라는 법익과, 수형자의 인간 존엄성 존중 및 교화주의 원칙 간의 헌법적 긴장 관계를 분석하시오. 이를 바탕으로 '정부는 형법을 개정하여 가석방 없는 무기형을 도입해야 하는가'라는 명제에 대해 찬성과 반대 중 한 입장을 선택하여 자신의 논지를 1,500~2,000자(공백 포함)로 전개하시오. 이때 자신의 입장과 대립하는 견해의 논거를 합리적으로 검토하고 이에 대한 재반박을 포함하시오.",
+      "chars": 1848,
+      "stances": [
+        "반대 — 도입해서는 안 된다 (인간 존엄성 침해 및 교화주의 훼손)"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-16-f055949e",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 0,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [],
+  "noTopicReason": null,
+  "followUpNews": [
+    {
+      "threadId": "th-2026-11-14-c2e85401",
+      "summary": "미중 정상회담 의제 조율 과정에서 젠슨 황 스캔들의 비거론 방침이 전해짐",
+      "eventDate": "2026-11-14"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-16T09:00:01+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}

@@ -3,7 +3,7 @@
   "title": "엔비디아 젠슨 황 스파이 의혹 사임 후폭풍과 미 정부 갈등",
   "category": "world",
   "firstDate": "2026-11-14",
-  "lastDate": "2026-11-14",
+  "lastDate": "2026-11-16",
   "topics": [
     {
       "id": "2026-11-14-c2e85401",
@@ -12,5 +12,30 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-16",
+      "summary": "미중 정상회담 의제 조율 과정에서 젠슨 황 스캔들의 비거론 방침이 전해짐",
+      "articles": [
+        {
+          "title": "\"트럼프, 시진핑 회담서 '젠슨황-中간첩 불륜' 거론 안할듯\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261114034500009",
+          "publishedAt": "2026-11-14T15:07:37+09:00"
+        },
+        {
+          "title": "“트럼프, 시진핑에 ‘젠슨 황 사태’ 거론 안할듯”",
+          "outlet": "동아일보",
+          "url": "https://www.donga.com/news/Inter/article/all/20261116/135028772/2",
+          "publishedAt": "2026-11-16T04:30:00+09:00"
+        },
+        {
+          "title": "“트럼프, 시진핑에 ‘젠슨 황 사태’ 거론 안할듯”",
+          "outlet": "동아일보",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1Db2REeUpJdGNaZEQ3UTEyZ29ydUI0VlpJVDdNcVJBSXZPS1h0ZW9fb0J0UWxMb2NXVkZ5aXZZU3huc192UmdDNUNGWlYwMEpXY1k3MWRzUC1XWHRpUThseW5vcEo5TjdTdVpGclJWZjBYbTDSAWZBVV95cUxONzdqbklScHhpcDkyUzR5OHY1cmRVU2pCZElLVTREeW1OTGVTWmR4UkR0QTVBVTZKdDdrZHd5SHAzMXVIVmRIVW1MbFRTa1hCUnBiZmZCb0l4cWNWUkVLem1jZkkxMXc?oc=5",
+          "publishedAt": "2026-11-16T04:30:00+09:00"
+        }
+      ]
+    }
+  ]
 }
