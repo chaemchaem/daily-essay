@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T10:22:10+09:00",
+  "generatedAt": "2026-11-17T10:22:25+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-17T1022-scheduled-2026-11-17",
+      "kind": "scheduled",
+      "targetDate": "2026-11-17",
+      "startedAt": "2026-11-17T10:22:25+09:00",
+      "finishedAt": "2026-11-17T10:22:25+09:00",
+      "outcome": "already_published",
+      "outcomeLabel": "already_published",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-17T0846-scheduled-2026-11-17",
       "kind": "scheduled",
@@ -176,17 +187,6 @@
       "finishedAt": "2026-11-10T12:41:11+09:00",
       "outcome": "failed_generation",
       "outcomeLabel": "생성 실패",
-      "failedStep": null,
-      "trigger": "cron"
-    },
-    {
-      "id": "2026-11-09T0938-scheduled-2026-11-09",
-      "kind": "scheduled",
-      "targetDate": "2026-11-09",
-      "startedAt": "2026-11-09T09:38:28+09:00",
-      "finishedAt": "2026-11-09T10:02:24+09:00",
-      "outcome": "partial",
-      "outcomeLabel": "일부 발행",
       "failedStep": null,
       "trigger": "cron"
     }
