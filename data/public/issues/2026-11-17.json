@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-17",
+  "number": 10,
+  "state": "published",
+  "stateLabel": "발행",
+  "window": {
+    "primaryStart": "2026-11-16T00:00:00+09:00",
+    "primaryEnd": "2026-11-17T00:00:00+09:00",
+    "overlapStart": "2026-11-14T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-17T08:46:33+09:00",
+  "generatedAt": "2026-11-17T10:22:10+09:00",
+  "publishedAt": "2026-11-17T10:22:10+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-17-7449b04c",
+      "title": "첨단 AI·스마트기기 부정행위 방지를 위한 국가시험 통제 및 제재 강화의 타당성",
+      "headline": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
+      "category": "education",
+      "categoryLabel": "교육",
+      "kind": "new",
+      "questionType": "정책 평가형",
+      "prompt": "제시문 (가)와 (나)는 AI 및 초소형 스마트기기를 활용한 국가시험 부정행위에 대응하는 정부 정책을 바라보는 서로 다른 관점을 담고 있다. 첨단 디지털 기술의 발전이 국가시험의 공정성과 평가 체계에 던지는 구조적 위기를 분석하시오. 이를 바탕으로 '정부는 시험 공정성 수호를 위해 시험장 일대 통신망 차단 및 부정행위자 응시 자격 10년 이상 제한·영구 박탈 등 고강도 규제 대책을 전면 도입해야 하는가'라는 명제에 대해 찬성과 반대 중 한 입장을 선택하여 자신의 논지를 1,500~2,000자(공백 포함)로 전개하시오. 이때 자신이 선택하지 않은 입장의 핵심 논거를 검토하고 이에 대한 재반박을 반드시 포함하시오.",
+      "chars": 1768,
+      "stances": [
+        "반대 — 실효성이 낮고 과잉금지원칙을 위배하므로 기술적 전면 차단과 영구적 자격 박탈 정책을 도입해서는 안 된다"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-17-7449b04c",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 0,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [],
+  "noTopicReason": null,
+  "followUpNews": [
+    {
+      "threadId": "th-2026-11-14-c2e85401",
+      "summary": "트럼프 미 대통령이 앨리스 황의 중국 스파이 의혹에 대해 수위 조절성 발언을 추가함",
+      "eventDate": "2026-11-16"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-17T10:22:10+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}

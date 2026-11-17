@@ -3,7 +3,7 @@
   "title": "엔비디아 젠슨 황 스파이 의혹 사임 후폭풍과 미 정부 갈등",
   "category": "world",
   "firstDate": "2026-11-14",
-  "lastDate": "2026-11-16",
+  "lastDate": "2026-11-17",
   "topics": [
     {
       "id": "2026-11-14-c2e85401",
@@ -34,6 +34,36 @@
           "outlet": "동아일보",
           "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1Db2REeUpJdGNaZEQ3UTEyZ29ydUI0VlpJVDdNcVJBSXZPS1h0ZW9fb0J0UWxMb2NXVkZ5aXZZU3huc192UmdDNUNGWlYwMEpXY1k3MWRzUC1XWHRpUThseW5vcEo5TjdTdVpGclJWZjBYbTDSAWZBVV95cUxONzdqbklScHhpcDkyUzR5OHY1cmRVU2pCZElLVTREeW1OTGVTWmR4UkR0QTVBVTZKdDdrZHd5SHAzMXVIVmRIVW1MbFRTa1hCUnBiZmZCb0l4cWNWUkVLem1jZkkxMXc?oc=5",
           "publishedAt": "2026-11-16T04:30:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "summary": "트럼프 미 대통령이 앨리스 황의 중국 스파이 의혹에 대해 수위 조절성 발언을 추가함",
+      "articles": [
+        {
+          "title": "트럼프 \"앨리스 황 中스파이 아닐 수도…中 자극하고 싶지 않아\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261117002100071",
+          "publishedAt": "2026-11-17T02:11:08+09:00"
+        },
+        {
+          "title": "트럼프 “앨리스 황, 스파이 아닐 수도… 中 자극하고 싶지 않아”",
+          "outlet": "조선일보",
+          "url": "https://www.chosun.com/international/us/2026/11/17/VLFZCTUEAFFU5PREM5W25I7EYM/",
+          "publishedAt": "2026-11-17T05:38:05+09:00"
+        },
+        {
+          "title": "트럼프 \"젠슨황 불륜녀 中스파이 아닐 수도…中자극 원치않아\"(종합)",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261117002151071",
+          "publishedAt": "2026-11-17T06:20:05+09:00"
+        },
+        {
+          "title": "젠슨 황 구하기 나선 트럼프…\"앨리스 황, 中스파이 아닐 수도\"",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026111706357",
+          "publishedAt": "2026-11-17T06:40:42+09:00"
         }
       ]
     }

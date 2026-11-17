@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-16T12:07:56+09:00",
-  "latestPublished": "2026-11-16",
+  "generatedAt": "2026-11-17T10:22:10+09:00",
+  "latestPublished": "2026-11-17",
   "issues": [
+    {
+      "date": "2026-11-17",
+      "number": 10,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-17-7449b04c",
+          "title": "첨단 AI·스마트기기 부정행위 방지를 위한 국가시험 통제 및 제재 강화의 타당성",
+          "category": "education",
+          "categoryLabel": "교육",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-16",
       "number": 9,
