@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-17T14:15:07+09:00",
-  "latestPublished": "2026-11-17",
+  "generatedAt": "2026-11-18T09:04:52+09:00",
+  "latestPublished": "2026-11-18",
   "issues": [
+    {
+      "date": "2026-11-18",
+      "number": 11,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-18-9f6582b2",
+          "title": "대통령 본인 관련 사건에 대한 특검법 국무회의 공포 의결과 공직상 이해충돌 및 권력분립의 한계",
+          "category": "politics",
+          "categoryLabel": "정치",
+          "kind": "follow_up"
+        }
+      ]
+    },
     {
       "date": "2026-11-17",
       "number": 10,

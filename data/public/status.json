@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T14:15:07+09:00",
+  "generatedAt": "2026-11-18T09:04:52+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -8,14 +8,14 @@
     "timezone": "Asia/Seoul",
     "daily": true
   },
-  "nextScheduledPublish": "2026-11-18T09:00:00+09:00",
+  "nextScheduledPublish": "2026-11-19T09:00:00+09:00",
   "lastSuccessfulPublish": {
-    "date": "2026-11-17",
-    "publishedAt": "2026-11-17T10:22:10+09:00",
+    "date": "2026-11-18",
+    "publishedAt": "2026-11-18T09:04:52+09:00",
     "count": 1
   },
   "today": {
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "state": "published",
     "stateLabel": "발행",
     "published": 1,
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-18T0759-scheduled-2026-11-18",
+      "kind": "scheduled",
+      "targetDate": "2026-11-18",
+      "startedAt": "2026-11-18T07:59:51+09:00",
+      "finishedAt": "2026-11-18T09:04:52+09:00",
+      "outcome": "published",
+      "outcomeLabel": "발행",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-17T1130-scheduled-2026-11-17",
       "kind": "scheduled",
@@ -178,17 +189,6 @@
       "outcomeLabel": "발행 대기",
       "failedStep": null,
       "trigger": "cron"
-    },
-    {
-      "id": "2026-11-10T1359-retry-2026-11-10",
-      "kind": "retry",
-      "targetDate": "2026-11-10",
-      "startedAt": "2026-11-10T13:59:22+09:00",
-      "finishedAt": "2026-11-10T14:04:54+09:00",
-      "outcome": "partial",
-      "outcomeLabel": "일부 발행",
-      "failedStep": null,
-      "trigger": "workflow_dispatch"
     }
   ],
   "models": {
