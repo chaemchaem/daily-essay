@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-19",
+  "number": 12,
+  "state": "published",
+  "stateLabel": "발행",
+  "window": {
+    "primaryStart": "2026-11-18T00:00:00+09:00",
+    "primaryEnd": "2026-11-19T00:00:00+09:00",
+    "overlapStart": "2026-11-16T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-19T07:37:51+09:00",
+  "generatedAt": "2026-11-19T09:07:04+09:00",
+  "publishedAt": "2026-11-19T09:07:04+09:00",
+  "recovered": null,
+  "topics": [
+    {
+      "id": "2026-11-19-060e9fd6",
+      "title": "비상계엄 상황에서 정당 원내지도부의 의회 통제 행위에 대한 내란죄 적용과 사법적 책임의 한계",
+      "headline": "추경호 '계엄 표결 방해' 혐의 1심 무죄 선고",
+      "category": "politics",
+      "categoryLabel": "정치",
+      "kind": "new",
+      "questionType": "가치 충돌형",
+      "prompt": "제시문 (가)와 (나)는 비상계엄 선포라는 국가적 위기 상황에서 정당 원내지도부의 의회 통제 및 지휘 행위를 평가하는 상반된 시각을 보여준다. '헌정질서 수호와 국회의원의 헌법상 표결권 보장'이라는 가치와 '죄형법정주의에 기초한 엄격한 증거주의 및 정당정치의 자율성'이라는 가치 간의 긴장 관계를 분석하시오. 이를 바탕으로 '비상계엄 상황에서 계엄 해제 표결 지연 논란을 초래한 정당 지도부의 원내 통제 행위는 내란죄(내란중요임무종사)로 형사 처벌되어야 하는가'라는 명제에 대해 찬성과 반대 중 한 입장을 택하여, 상대 입장의 핵심 논거를 비판적으로 검토하고 자신의 논지를 1,500~2,000자(공백 포함)로 전개하시오.",
+      "chars": 1907,
+      "stances": [
+        "찬성 — 헌정질서 수호와 표결권 보장을 위해 형사 처벌되어야 한다"
+      ],
+      "lateEntry": null,
+      "threadId": "th-2026-11-19-060e9fd6",
+      "version": 1,
+      "hasCorrections": false
+    }
+  ],
+  "counts": {
+    "published": 1,
+    "held": 0,
+    "failed": 0,
+    "deferredBudget": 0,
+    "candidates": 30
+  },
+  "heldSummary": [],
+  "noTopicReason": null,
+  "followUpNews": [],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-19T09:07:04+09:00",
+      "change": "주제 1건 발행"
+    }
+  ],
+  "test": false
+}
