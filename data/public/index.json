@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-19T13:30:52+09:00",
-  "latestPublished": "2026-11-19",
+  "generatedAt": "2026-11-20T09:00:01+09:00",
+  "latestPublished": "2026-11-20",
   "issues": [
+    {
+      "date": "2026-11-20",
+      "number": 13,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-20-1d9d7f6e",
+          "title": "사법부의 개별 판결 결과를 이유로 한 대법원장 탄핵소추의 헌법적 정당성",
+          "category": "politics",
+          "categoryLabel": "정치",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-19",
       "number": 12,

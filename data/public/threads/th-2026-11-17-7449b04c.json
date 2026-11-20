@@ -3,7 +3,7 @@
   "title": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
   "category": "education",
   "firstDate": "2026-11-17",
-  "lastDate": "2026-11-18",
+  "lastDate": "2026-11-20",
   "topics": [
     {
       "id": "2026-11-17-7449b04c",
@@ -40,6 +40,30 @@
           "outlet": "연합뉴스",
           "url": "https://www.yna.co.kr/view/AKR20261117042652004",
           "publishedAt": "2026-11-17T23:25:26+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "summary": "2027학년도 대학수학능력시험이 치러진 가운데 수험생 과반이 난이도가 높았다고 평가했고, 생성형 인공지능이 20~30초 만에 수능 국어·수학 영역에서 만점을 받았다는 결과가 발표되었다.",
+      "articles": [
+        {
+          "title": "제미나이 20~30초 만에… 수능 국어·수학 만점",
+          "outlet": "조선일보",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQRFVKUzZOLW9MbG9YNHJKNTlVX0NQZlZBZ25KRU04T1BwalZJYUg5SGdyM1VuVjRka3hyeU5nVDM4QWJiOWh1N2d0a3Y3cUJVQkd4RWUwYkI4b1hSdUVnVXJSNThsSk5HVnQwcUF4bzBTWXo3bHZkMlNFbHJoMkxSejZEdjdFZzBrMFdUdjE1akQ?oc=5",
+          "publishedAt": "2026-11-19T15:23:00+09:00"
+        },
+        {
+          "title": "생성형 인공지능, 20초 만에 수능 국어·수학 ‘만점’",
+          "outlet": "조선일보",
+          "url": "https://www.chosun.com/national/national_general/2026/11/19/VKGHUPNIABAFVAHCIKEKZSQBXE/",
+          "publishedAt": "2026-11-19T15:23:22+09:00"
+        },
+        {
+          "title": "“수능 어려웠다” 57%…1등급 컷 국어 129점·수학 128점 예상",
+          "outlet": "매일경제",
+          "url": "https://www.mk.co.kr/news/society/12214020",
+          "publishedAt": "2026-11-19T22:43:56+09:00"
         }
       ]
     }
