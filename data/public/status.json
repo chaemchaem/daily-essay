@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T13:18:11+09:00",
+  "generatedAt": "2026-11-21T07:58:54+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -15,16 +15,27 @@
     "count": 1
   },
   "today": {
-    "date": "2026-11-20",
-    "state": "published",
-    "stateLabel": "발행",
-    "published": 1,
+    "date": "2026-11-21",
+    "state": "all_held",
+    "stateLabel": "검토 통과 주제 없음",
+    "published": 0,
     "held": 0,
     "failedStage": null,
     "message": null
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-21T0716-scheduled-2026-11-21",
+      "kind": "scheduled",
+      "targetDate": "2026-11-21",
+      "startedAt": "2026-11-21T07:16:03+09:00",
+      "finishedAt": "2026-11-21T07:58:54+09:00",
+      "outcome": "all_held",
+      "outcomeLabel": "검토 통과 주제 없음",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-20T1017-scheduled-2026-11-20",
       "kind": "scheduled",
@@ -174,17 +185,6 @@
       "targetDate": "2026-11-16",
       "startedAt": "2026-11-16T05:26:45+09:00",
       "finishedAt": "2026-11-16T05:57:49+09:00",
-      "outcome": "ready",
-      "outcomeLabel": "발행 대기",
-      "failedStep": null,
-      "trigger": "cron"
-    },
-    {
-      "id": "2026-11-15T0458-scheduled-2026-11-15",
-      "kind": "scheduled",
-      "targetDate": "2026-11-15",
-      "startedAt": "2026-11-15T04:58:37+09:00",
-      "finishedAt": "2026-11-15T06:26:54+09:00",
       "outcome": "ready",
       "outcomeLabel": "발행 대기",
       "failedStep": null,
