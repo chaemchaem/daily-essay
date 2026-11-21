@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-21",
+  "number": 14,
+  "state": "all_held",
+  "stateLabel": "검토 통과 주제 없음",
+  "window": {
+    "primaryStart": "2026-11-20T00:00:00+09:00",
+    "primaryEnd": "2026-11-21T00:00:00+09:00",
+    "overlapStart": "2026-11-18T00:00:00+09:00"
+  },
+  "infoCutoff": "2026-11-21T07:16:03+09:00",
+  "generatedAt": "2026-11-21T09:49:47+09:00",
+  "publishedAt": null,
+  "recovered": null,
+  "topics": [],
+  "counts": {
+    "published": 0,
+    "held": 3,
+    "failed": 0,
+    "deferredBudget": 1,
+    "candidates": 30
+  },
+  "heldSummary": [
+    {
+      "reason": "근거 부족",
+      "count": 1
+    },
+    {
+      "reason": "검토 미통과(수정 상한 도달 또는 차단 항목)",
+      "count": 2
+    }
+  ],
+  "noTopicReason": null,
+  "followUpNews": [
+    {
+      "threadId": "th-2026-11-17-7449b04c",
+      "summary": "피의자 사망 이후 법학적성시험 부정행위 의혹 고발인이 전자기기 포렌식 등 철저한 수사를 거듭 촉구함",
+      "eventDate": "2026-11-20"
+    }
+  ],
+  "versions": [
+    {
+      "version": 1,
+      "at": "2026-11-21T09:49:47+09:00",
+      "change": "상태 기록: all_held"
+    }
+  ],
+  "test": false
+}

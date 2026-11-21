@@ -3,7 +3,7 @@
   "title": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
   "category": "education",
   "firstDate": "2026-11-17",
-  "lastDate": "2026-11-20",
+  "lastDate": "2026-11-21",
   "topics": [
     {
       "id": "2026-11-17-7449b04c",
@@ -64,6 +64,30 @@
           "outlet": "매일경제",
           "url": "https://www.mk.co.kr/news/society/12214020",
           "publishedAt": "2026-11-19T22:43:56+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "summary": "피의자 사망 이후 법학적성시험 부정행위 의혹 고발인이 전자기기 포렌식 등 철저한 수사를 거듭 촉구함",
+      "articles": [
+        {
+          "title": "리트 만점자 고발인 \"남은 흔적 어떻게든 찾아달라\" 수사 촉구",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261120164400004",
+          "publishedAt": "2026-11-20T18:32:55+09:00"
+        },
+        {
+          "title": "\"휴대폰·노트북 흔적 찾아야\"…'리트 만점자' 고발인의 호소",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112008367",
+          "publishedAt": "2026-11-20T19:06:46+09:00"
+        },
+        {
+          "title": "압수수색 불가…'리트 만점자' 수사 난항",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008856527&cooper=RSSREADER",
+          "publishedAt": "2026-11-21T06:38:00+09:00"
         }
       ]
     }
