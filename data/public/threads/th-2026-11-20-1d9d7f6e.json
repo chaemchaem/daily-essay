@@ -3,7 +3,7 @@
   "title": "대법원 한덕수 파기환송에 민주당 '조희대 대법원장 탄핵' 추진 결의",
   "category": "politics",
   "firstDate": "2026-11-20",
-  "lastDate": "2026-11-20",
+  "lastDate": "2026-11-22",
   "topics": [
     {
       "id": "2026-11-20-1d9d7f6e",
@@ -12,5 +12,60 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-22",
+      "summary": "국민의힘이 대구에서 장외집회를 열어 민주당의 조작기소특검 및 조희대 대법원장 탄핵 추진을 규탄하는 대야 공세를 전개함",
+      "articles": [
+        {
+          "title": "국힘, 오늘 대구서 '조작기소 특검법' 규탄 집회",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261120144500001",
+          "publishedAt": "2026-11-21T05:00:01+09:00"
+        },
+        {
+          "title": "국힘, 오늘 대구서 '조작기소 특검법' 규탄 집회",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008856762&cooper=RSSREADER",
+          "publishedAt": "2026-11-21T09:47:00+09:00"
+        },
+        {
+          "title": "국힘 \"與 조작기소특검·조희대 탄핵은 반역\"…대구서 규탄집회",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121042300001",
+          "publishedAt": "2026-11-21T17:00:19+09:00"
+        },
+        {
+          "title": "국민의힘 \"조작기소특검·조희대 탄핵은 반역\"…대구서 여당 규탄 집회",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008857059&cooper=RSSREADER",
+          "publishedAt": "2026-11-21T17:18:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "summary": "더불어민주당의 조희대 대법원장 탄핵 당론 채택 이후 여야 간 정치적 공방이 이어진 일상적 후속 보도로 실질적 제도·상황 변화 없음",
+      "articles": [
+        {
+          "title": "與 \"면죄부 안돼\"·野 \"보복성 집단린치\"…'曺탄핵' 놓고 공방",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121028000001",
+          "publishedAt": "2026-11-21T10:54:35+09:00"
+        },
+        {
+          "title": "민주 \"면죄부 안 돼\"·국힘 \"보복성 집단린치\"…'조희대 탄핵' 놓고 공방",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008856865&cooper=RSSREADER",
+          "publishedAt": "2026-11-21T11:21:00+09:00"
+        },
+        {
+          "title": "‘조희대 탄핵’ 여야 공방…민주 “쪼개기 면죄부” 국힘 “보복성 탄핵”",
+          "outlet": "경향신문",
+          "url": "https://www.khan.co.kr/article/202611211146001/?amp%3Butm_medium=rss&amp%3Butm_campaign=total_news",
+          "publishedAt": "2026-11-21T11:46:00+09:00"
+        }
+      ]
+    }
+  ]
 }

@@ -3,7 +3,7 @@
   "title": "엔비디아 젠슨 황 스파이 의혹 사임 후폭풍과 미 정부 갈등",
   "category": "world",
   "firstDate": "2026-11-14",
-  "lastDate": "2026-11-17",
+  "lastDate": "2026-11-22",
   "topics": [
     {
       "id": "2026-11-14-c2e85401",
@@ -64,6 +64,36 @@
           "outlet": "한국경제",
           "url": "https://www.hankyung.com/article/2026111706357",
           "publishedAt": "2026-11-17T06:40:42+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "summary": "트럼프 대통령이 미 기업의 해외 AI 데이터센터 구축 규제 방침을 밝히는 동시에 젠슨 황의 복귀를 공개 촉구함",
+      "articles": [
+        {
+          "title": "트럼프 \"美기업, 다른 나라에 데이터센터 지으면 엄청난 세금 부과\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121006000071",
+          "publishedAt": "2026-11-21T03:56:43+09:00"
+        },
+        {
+          "title": "트럼프 \"다른 나라에 데이터센터 건설 시 막대한 세금\"…젠슨 황 복귀 촉구",
+          "outlet": "연합뉴스TV",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1XR3UzYkhOQzNTV3U0UWZ0anZTUmM0Q01QVEg5WjJPbC04SHpTY3NNNjBSMmstS1NzWTlsdXZlc3Jjdy10TldxQi1sNkk4OTZFOXFKR1k4UHBwOWhjdW4xSW1Wb1J2Tmc?oc=5",
+          "publishedAt": "2026-11-21T04:32:00+09:00"
+        },
+        {
+          "title": "트럼프, 젠슨 황 복귀 촉구…\"두 번째 기회 주어져야\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121008800075",
+          "publishedAt": "2026-11-21T06:29:04+09:00"
+        },
+        {
+          "title": "[속보]트럼프 \"美 기업, 해외 데이터센터 건설 금지\"",
+          "outlet": "파이낸셜뉴스",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBfSGI3eW9RYUFrRDk0bW1YV0RnLU9ZcjFkOG12OFZHbDJQRHpONUNMU0dKOUFXdEpVRGtiQl9QVGUtV3BJcF92aFE3eTZRQnl1NmpqRm55Zl9oQQ?oc=5",
+          "publishedAt": "2026-11-22T03:24:50+09:00"
         }
       ]
     }

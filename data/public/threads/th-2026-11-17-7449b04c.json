@@ -3,7 +3,7 @@
   "title": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
   "category": "education",
   "firstDate": "2026-11-17",
-  "lastDate": "2026-11-21",
+  "lastDate": "2026-11-22",
   "topics": [
     {
       "id": "2026-11-17-7449b04c",
@@ -88,6 +88,36 @@
           "outlet": "SBS",
           "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008856527&cooper=RSSREADER",
           "publishedAt": "2026-11-21T06:38:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "summary": "대통령이 직접 수능 부정행위 신고포상금 액수를 건당 최소 1억원 이상으로 밝히며 엄단 의지를 표명함",
+      "articles": [
+        {
+          "title": "李대통령 \"수능 부정행위 신고포상금 건당 최소 1억…행위자수만큼 가산\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121039400001",
+          "publishedAt": "2026-11-21T15:40:14+09:00"
+        },
+        {
+          "title": "李 대통령 \"수능 부정 신고포상금, 건당 최소 1억 지급할 것\"",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112114257",
+          "publishedAt": "2026-11-21T15:43:51+09:00"
+        },
+        {
+          "title": "李 대통령 \"수능 부정 신고포상금, 건당 최소 1억 지급할 것\"",
+          "outlet": "한국경제",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1uTlhhNGE3ODFaamRYbkVHTWNfR3N2a1d0N05xb2VnbjJ1MlMzbFdzMmJ4RlNMakMtbnlhUFlEUzh0WXA3RzFSWUtXRmFWSzVUbGZ3X3o0Mktodw?oc=5",
+          "publishedAt": "2026-11-21T15:43:51+09:00"
+        },
+        {
+          "title": "李 “수능 부정행위 포상금 건당 ‘최소’ 1억…행위자 수만큼 가산”",
+          "outlet": "동아일보",
+          "url": "https://www.donga.com/news/Politics/article/all/20261121/135064968/2",
+          "publishedAt": "2026-11-21T15:47:00+09:00"
         }
       ]
     }
