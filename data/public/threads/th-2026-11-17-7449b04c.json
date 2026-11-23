@@ -3,7 +3,7 @@
   "title": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
   "category": "education",
   "firstDate": "2026-11-17",
-  "lastDate": "2026-11-22",
+  "lastDate": "2026-11-23",
   "topics": [
     {
       "id": "2026-11-17-7449b04c",
@@ -118,6 +118,54 @@
           "outlet": "동아일보",
           "url": "https://www.donga.com/news/Politics/article/all/20261121/135064968/2",
           "publishedAt": "2026-11-21T15:47:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "summary": "수능 부정행위 신고포상금 기준을 건당 최소 1억 원으로 구체화하고 문제지 워터마크 도입 등 기술적 차단 법제화 지시가 추가되었다.",
+      "articles": [
+        {
+          "title": "李대통령 \"수능 부정행위 신고포상금 건당 최소 1억…행위자수만큼 가산\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121039400001",
+          "publishedAt": "2026-11-21T15:40:14+09:00"
+        },
+        {
+          "title": "이 대통령 \"수능 부정행위 신고포상금 건당 최소 1억…행위자 수만큼 가산\"",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008857020&cooper=RSSREADER",
+          "publishedAt": "2026-11-21T19:27:00+09:00"
+        },
+        {
+          "title": "李 “신고 포상, 건당 최소 1억… 수능 부정행위자 수만큼 가산”",
+          "outlet": "동아일보",
+          "url": "https://www.donga.com/news/Politics/article/all/20261123/135070117/2",
+          "publishedAt": "2026-11-23T04:30:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "summary": "수능 부정행위 논란이 공인회계사 등 금융당국 소관 전문자격시험의 관리 체계 및 정원 검토로 파급되었다.",
+      "articles": [
+        {
+          "title": "내년 회계사시험 'AI 부정' 대책 골몰…인원축소 전망",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121044700002",
+          "publishedAt": "2026-11-22T05:57:01+09:00"
+        },
+        {
+          "title": "내년 회계사시험 ’AI 부정’ 대책 골몰…인원 축소 전망",
+          "outlet": "연합뉴스TV",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1LVVI3WkJNdU1wNlF2bF9wZVJLQi1WaDBzT2tFYVBWLWEwc3FWaTlCcTNSY2xmOWZONjFsVWVoM3FDMDBYX01uNTVWSmkwNWdHUzJyTk1WdV9La0FuVkthVm1LYnRCTUU?oc=5",
+          "publishedAt": "2026-11-22T10:17:00+09:00"
+        },
+        {
+          "title": "내년 회계사시험 'AI 부정' 대책찾기…인원축소·업무역량 확인",
+          "outlet": "조세금융신문",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9xS2xjMmdXT2dza1FFNlh4SHBlMjluejh0Y2tnbjRYbnZ4am1CUElSMGlybm1vUTFfeW5najE5WTZ1QU5EampvQVlIdnktcWVpU3BINUFVZW5meWxwb2dIZ1Atdw?oc=5",
+          "publishedAt": "2026-11-22T10:24:32+09:00"
         }
       ]
     }

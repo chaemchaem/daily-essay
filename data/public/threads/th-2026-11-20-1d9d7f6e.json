@@ -3,7 +3,7 @@
   "title": "대법원 한덕수 파기환송에 민주당 '조희대 대법원장 탄핵' 추진 결의",
   "category": "politics",
   "firstDate": "2026-11-20",
-  "lastDate": "2026-11-22",
+  "lastDate": "2026-11-23",
   "topics": [
     {
       "id": "2026-11-20-1d9d7f6e",
@@ -64,6 +64,36 @@
           "outlet": "경향신문",
           "url": "https://www.khan.co.kr/article/202611211146001/?amp%3Butm_medium=rss&amp%3Butm_campaign=total_news",
           "publishedAt": "2026-11-21T11:46:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "summary": "야당(국민의힘)이 특검 및 대법원장 탄핵 추진에 반발하며 대구에서 장외 규탄 집회를 전개함.",
+      "articles": [
+        {
+          "title": "국힘, 오늘 대구서 '조작기소 특검법' 규탄 집회",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261120144500001",
+          "publishedAt": "2026-11-21T05:00:01+09:00"
+        },
+        {
+          "title": "국힘 \"與 조작기소특검·조희대 탄핵은 반역\"…대구서 규탄집회",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261121042300001",
+          "publishedAt": "2026-11-21T17:00:19+09:00"
+        },
+        {
+          "title": "당 분열만 드러낸 野 '조작기소 특검법' 규탄집회",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112224311",
+          "publishedAt": "2026-11-22T18:12:03+09:00"
+        },
+        {
+          "title": "당 분열만 드러낸 野 '조작기소 특검법' 규탄집회",
+          "outlet": "한국경제",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE55LVJfSHNWRzlIV1hXaFo5M2dDOWkyV1QwQ1M4eHdLRTVDemNpZmg3Sjh6Z1UxV1hGS3U1MkVJR0FNcTA2Rzg5eTVneW8ybVd3QWQ2Vy1EalhzZw?oc=5",
+          "publishedAt": "2026-11-22T18:12:03+09:00"
         }
       ]
     }

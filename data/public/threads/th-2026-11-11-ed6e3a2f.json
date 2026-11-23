@@ -3,7 +3,7 @@
   "title": "정부, '조작기소 특검법' 10일 국무회의 미상정…법리 검토 착수",
   "category": "politics",
   "firstDate": "2026-11-11",
-  "lastDate": "2026-11-18",
+  "lastDate": "2026-11-23",
   "topics": [
     {
       "id": "2026-11-11-ed6e3a2f",
@@ -94,6 +94,36 @@
           "outlet": "한국경제",
           "url": "https://www.hankyung.com/article/2026111465577",
           "publishedAt": "2026-11-14T17:58:22+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "summary": "이재명 대통령이 특검 수사 대상인 대장동 배임 의혹에 대해 민간업자 1100억 추가 부담 사실을 내세우며 직접 반박 주장을 펼침.",
+      "articles": [
+        {
+          "title": "이 대통령, ’대장동 의혹’ 거듭 반박…“업자에 1,100억 추가 부담“",
+          "outlet": "연합뉴스TV",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBEUnAwbTdOVmVPWUNsQ1VFRTV1TkFPbFM3OWlMSGpmZVU5VF9POXdmZkxjSDAxN05sZVB2c3VadHdFanhtWmsweExUWFd3WjZRMHo2SDNhbDFBUS15dnZBY1VxOTFkeEU?oc=5",
+          "publishedAt": "2026-11-22T18:10:00+09:00"
+        },
+        {
+          "title": "“대장동 업자에 1100억 추가 부담시켰다”…李대통령, 배임 의혹 재차 정면 반박",
+          "outlet": "매일경제",
+          "url": "https://www.mk.co.kr/news/politics/12215720",
+          "publishedAt": "2026-11-22T18:13:12+09:00"
+        },
+        {
+          "title": "李대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261122043000001",
+          "publishedAt": "2026-11-22T18:17:44+09:00"
+        },
+        {
+          "title": "\"업자 결탁했다면 불가능\"…李 대통령, '대장동 배임' 정면 반박",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112225657",
+          "publishedAt": "2026-11-22T20:00:46+09:00"
         }
       ]
     }

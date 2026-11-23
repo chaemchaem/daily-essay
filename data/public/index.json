@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-22T12:29:45+09:00",
-  "latestPublished": "2026-11-22",
+  "generatedAt": "2026-11-23T09:00:01+09:00",
+  "latestPublished": "2026-11-23",
   "issues": [
+    {
+      "date": "2026-11-23",
+      "number": 16,
+      "state": "partial",
+      "stateLabel": "일부 발행",
+      "count": 1,
+      "held": 2,
+      "topics": [
+        {
+          "id": "2026-11-23-ac280014",
+          "title": "유엔 기후총회 만장일치 합의 체제의 한계와 소다자 기후 협력 체제 전환의 정당성",
+          "category": "environment",
+          "categoryLabel": "환경",
+          "kind": "new"
+        }
+      ]
+    },
     {
       "date": "2026-11-22",
       "number": 15,
