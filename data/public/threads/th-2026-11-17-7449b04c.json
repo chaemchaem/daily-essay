@@ -3,7 +3,7 @@
   "title": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
   "category": "education",
   "firstDate": "2026-11-17",
-  "lastDate": "2026-11-23",
+  "lastDate": "2026-11-24",
   "topics": [
     {
       "id": "2026-11-17-7449b04c",
@@ -166,6 +166,30 @@
           "outlet": "조세금융신문",
           "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9xS2xjMmdXT2dza1FFNlh4SHBlMjluejh0Y2tnbjRYbnZ4am1CUElSMGlybm1vUTFfeW5najE5WTZ1QU5EampvQVlIdnktcWVpU3BINUFVZW5meWxwb2dIZ1Atdw?oc=5",
           "publishedAt": "2026-11-22T10:24:32+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "summary": "대통령의 부정행위 신고포상금 엄단 발언에 이어 국민권익위원회가 포상금 상한을 최대 5억 원으로 확정 발표함.",
+      "articles": [
+        {
+          "title": "권익위, 수능 부정행위 포상금 최대 5억 원으로 확대",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008859662&cooper=RSSREADER",
+          "publishedAt": "2026-11-23T19:04:00+09:00"
+        },
+        {
+          "title": "권익위, 수능 부정행위 신고 포상금 '최대 5억' 지급",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261123164800001",
+          "publishedAt": "2026-11-23T19:10:48+09:00"
+        },
+        {
+          "title": "권익위 “수능 부정행위 신고 포상금 건당 최대 5억원”",
+          "outlet": "조선일보",
+          "url": "https://www.chosun.com/national/education/2026/11/23/4ZR4HH42P5C6LIBDEGRLLQ7W7Q/",
+          "publishedAt": "2026-11-23T21:41:51+09:00"
         }
       ]
     }

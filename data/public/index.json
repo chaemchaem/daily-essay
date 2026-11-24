@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-23T12:59:58+09:00",
-  "latestPublished": "2026-11-23",
+  "generatedAt": "2026-11-24T11:48:26+09:00",
+  "latestPublished": "2026-11-24",
   "issues": [
+    {
+      "date": "2026-11-24",
+      "number": 17,
+      "state": "published",
+      "stateLabel": "발행",
+      "count": 1,
+      "held": 0,
+      "topics": [
+        {
+          "id": "2026-11-24-6fa2aeb1",
+          "title": "안보 리스크 의혹 최고경영자의 조기 복귀와 기업 거버넌스의 책임성",
+          "category": "world",
+          "categoryLabel": "국제",
+          "kind": "follow_up"
+        }
+      ]
+    },
     {
       "date": "2026-11-23",
       "number": 16,
