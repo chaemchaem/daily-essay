@@ -5,9 +5,26 @@
     "description": "실제 시사 이슈를 골라 논술 문제와 검토를 거친 모범답안을 매일 오전 9시에 발행합니다.",
     "launchDate": "2026-11-08"
   },
-  "generatedAt": "2026-11-24T16:06:10+09:00",
-  "latestPublished": "2026-11-24",
+  "generatedAt": "2026-11-25T09:52:30+09:00",
+  "latestPublished": "2026-11-25",
   "issues": [
+    {
+      "date": "2026-11-25",
+      "number": 18,
+      "state": "partial",
+      "stateLabel": "일부 발행",
+      "count": 1,
+      "held": 1,
+      "topics": [
+        {
+          "id": "2026-11-25-8813d64e",
+          "title": "법무부 장관의 대통령 관련 사건 공소취소 수사지휘권 행사와 헌법적 한계",
+          "category": "politics",
+          "categoryLabel": "정치",
+          "kind": "follow_up"
+        }
+      ]
+    },
     {
       "date": "2026-11-24",
       "number": 17,

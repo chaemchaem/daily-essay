@@ -3,7 +3,7 @@
   "title": "엔비디아 젠슨 황 스파이 의혹 사임 후폭풍과 미 정부 갈등",
   "category": "world",
   "firstDate": "2026-11-14",
-  "lastDate": "2026-11-24",
+  "lastDate": "2026-11-25",
   "topics": [
     {
       "id": "2026-11-14-c2e85401",
@@ -100,6 +100,36 @@
           "outlet": "파이낸셜뉴스",
           "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBfSGI3eW9RYUFrRDk0bW1YV0RnLU9ZcjFkOG12OFZHbDJQRHpONUNMU0dKOUFXdEpVRGtiQl9QVGUtV3BJcF92aFE3eTZRQnl1NmpqRm55Zl9oQQ?oc=5",
           "publishedAt": "2026-11-22T03:24:50+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "summary": "트럼프 미 대통령의 젠슨 황 복귀 개입 사실이 확인된 후 국제 외교 당국자(독일 외무장관)의 비판 반응이 이어짐",
+      "articles": [
+        {
+          "title": "독일 외무 \"젠슨황 CEO 복귀에 트럼프 개입 충격\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261124178900082",
+          "publishedAt": "2026-11-24T20:49:53+09:00"
+        },
+        {
+          "title": "젠슨 황 복귀 트럼프 개입에 “이런 정치 본 적 없어, 충격”···독일 외교장관 ‘비판’",
+          "outlet": "경향신문",
+          "url": "https://www.khan.co.kr/article/202611242130001/?amp%3Butm_medium=rss&amp%3Butm_campaign=total_news",
+          "publishedAt": "2026-11-24T21:30:00+09:00"
+        },
+        {
+          "title": "\"국가자본주의·마오이즘\"…'젠슨황 복귀' 트럼프 개입 비판 고조",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261125001900071",
+          "publishedAt": "2026-11-25T01:42:48+09:00"
+        },
+        {
+          "title": "‘젠슨황 복귀’ 트럼프 개입에 비판 고조…엔비디아 주가는 하락",
+          "outlet": "KBS 뉴스",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5sV1hwSktKcVhqbGtTTTBlUW5xS2w4NmwzWEdVYmVLNXBwLXBCSzlaNFltdGRBQkgwMUJweGlTWTNBT1ZjdTltazVDTW1neTYtaGptVGhMZzlQN1U?oc=5",
+          "publishedAt": "2026-11-25T06:09:00+09:00"
         }
       ]
     }
