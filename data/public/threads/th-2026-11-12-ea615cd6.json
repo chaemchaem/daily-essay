@@ -3,7 +3,7 @@
   "title": "북 선전매체, '적대적 두 국가' 반영 개정 헌법 전문 공개",
   "category": "politics",
   "firstDate": "2026-11-12",
-  "lastDate": "2026-11-12",
+  "lastDate": "2026-11-26",
   "topics": [
     {
       "id": "2026-11-12-ea615cd6",
@@ -12,5 +12,36 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-26",
+      "summary": "북한 김정은 국무위원장이 핵물질 생산기지와 핵무기 연구소를 방문해 전술핵의 다영역 활용화와 핵무력 강화 방침을 강조했다고 북한 매체가 26일 보도했다.",
+      "articles": [
+        {
+          "title": "[속보] 김정은, 핵시설 현지지도…\"전술핵 다영역 활용화 주목해야\"",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112608237",
+          "publishedAt": "2026-11-26T06:18:26+09:00"
+        },
+        {
+          "title": "[속보] 김정은, 핵시설 현지지도‥\"전술핵 다영역 활용화 주목해야\"",
+          "outlet": "MBC 뉴스",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE8ycENkLVJjM2NmTUdxQVF4NXJYUmhnS0RNSWRWR1c4c2FLd3FKU0hyM0dGc0lKLWFQWl9tQkF3c2h4Vkg3YVJlQXo4TjMtcmlaaEdIbTNkX3AwWF9RYzloYkIxWG5PbXRHcXVHMUQ0QnVRVWND0gF0QVVfeXFMTldNVnNNeno1NXdWMGxLSXBRY2VCb1B3SDZ4WWVoemZaQ0FmTmlLdXlyUzN1d1JPdVJUOW5xYm5IaFdaSGJYMGdFV1JBLUFMTU01d2tVUHFNVkdua1hqemxpVkJ5R2J4czZySmtVbHRJQUIwOTU?oc=5",
+          "publishedAt": "2026-11-26T06:55:40+09:00"
+        },
+        {
+          "title": "김정은, 핵시설 현지지도 “전술핵 다영역 활용화 주목해야”",
+          "outlet": "조선일보",
+          "url": "https://www.chosun.com/politics/north_korea/2026/11/26/FF3YSXX5LFAA3J3PJFNLY5GV3M/",
+          "publishedAt": "2026-11-26T07:13:29+09:00"
+        },
+        {
+          "title": "김정은, 핵시설 찾아 “전술핵 다영역 활용 절실한 과제”",
+          "outlet": "동아일보",
+          "url": "https://www.donga.com/news/Politics/article/all/20261126/135092944/1",
+          "publishedAt": "2026-11-26T07:15:00+09:00"
+        }
+      ]
+    }
+  ]
 }

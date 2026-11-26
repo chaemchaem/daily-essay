@@ -3,7 +3,7 @@
   "title": "엔비디아 젠슨 황 스파이 의혹 사임 후폭풍과 미 정부 갈등",
   "category": "world",
   "firstDate": "2026-11-14",
-  "lastDate": "2026-11-25",
+  "lastDate": "2026-11-26",
   "topics": [
     {
       "id": "2026-11-14-c2e85401",
@@ -130,6 +130,30 @@
           "outlet": "KBS 뉴스",
           "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5sV1hwSktKcVhqbGtTTTBlUW5xS2w4NmwzWEdVYmVLNXBwLXBCSzlaNFltdGRBQkgwMUJweGlTWTNBT1ZjdTltazVDTW1neTYtaGptVGhMZzlQN1U?oc=5",
           "publishedAt": "2026-11-25T06:09:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "summary": "미 법무부가 젠슨 황의 복귀에 앞서 공식 수사를 진행하지 않고 안보 혐의가 없다고 종결지은 정황 및 젠슨 황의 사과 발언 보도",
+      "articles": [
+        {
+          "title": "젠슨 황의 ‘찜찜한 사과’…후계자 없다 못박고, 트럼프 개입 반쪽해명",
+          "outlet": "매일경제",
+          "url": "https://www.mk.co.kr/news/world/12218760",
+          "publishedAt": "2026-11-25T23:00:00+09:00"
+        },
+        {
+          "title": "트럼프 행정부, 수사도 없이 “젠슨 황 불법 없다”",
+          "outlet": "조선일보",
+          "url": "https://www.chosun.com/international/international_general/2026/11/26/GI3GKMJZMZRGGNRTMM3GGNRXMM/",
+          "publishedAt": "2026-11-26T07:51:07+09:00"
+        },
+        {
+          "title": "\"안보 위험 없다\"던 美당국…정작 젠슨 황 수사는 전무",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112609007",
+          "publishedAt": "2026-11-26T07:56:47+09:00"
         }
       ]
     }
