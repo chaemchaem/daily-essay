@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T14:28:15+09:00",
+  "generatedAt": "2026-11-27T09:20:53+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -8,14 +8,14 @@
     "timezone": "Asia/Seoul",
     "daily": true
   },
-  "nextScheduledPublish": "2026-11-27T09:00:00+09:00",
+  "nextScheduledPublish": "2026-11-28T09:00:00+09:00",
   "lastSuccessfulPublish": {
-    "date": "2026-11-26",
-    "publishedAt": "2026-11-26T09:56:36+09:00",
+    "date": "2026-11-27",
+    "publishedAt": "2026-11-27T09:20:53+09:00",
     "count": 1
   },
   "today": {
-    "date": "2026-11-26",
+    "date": "2026-11-27",
     "state": "published",
     "stateLabel": "발행",
     "published": 1,
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-27T0854-scheduled-2026-11-27",
+      "kind": "scheduled",
+      "targetDate": "2026-11-27",
+      "startedAt": "2026-11-27T08:54:46+09:00",
+      "finishedAt": "2026-11-27T09:20:53+09:00",
+      "outcome": "published",
+      "outcomeLabel": "발행",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-26T1115-scheduled-2026-11-26",
       "kind": "scheduled",
@@ -176,17 +187,6 @@
       "finishedAt": "2026-11-22T06:25:22+09:00",
       "outcome": "ready",
       "outcomeLabel": "발행 대기",
-      "failedStep": null,
-      "trigger": "cron"
-    },
-    {
-      "id": "2026-11-21T0949-scheduled-2026-11-21",
-      "kind": "scheduled",
-      "targetDate": "2026-11-21",
-      "startedAt": "2026-11-21T09:49:47+09:00",
-      "finishedAt": "2026-11-21T09:49:47+09:00",
-      "outcome": "all_held",
-      "outcomeLabel": "검토 통과 주제 없음",
       "failedStep": null,
       "trigger": "cron"
     }

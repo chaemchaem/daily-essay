@@ -3,7 +3,7 @@
   "title": "대법원 한덕수 파기환송에 민주당 '조희대 대법원장 탄핵' 추진 결의",
   "category": "politics",
   "firstDate": "2026-11-20",
-  "lastDate": "2026-11-23",
+  "lastDate": "2026-11-27",
   "topics": [
     {
       "id": "2026-11-20-1d9d7f6e",
@@ -94,6 +94,36 @@
           "outlet": "한국경제",
           "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE55LVJfSHNWRzlIV1hXaFo5M2dDOWkyV1QwQ1M4eHdLRTVDemNpZmg3Sjh6Z1UxV1hGS3U1MkVJR0FNcTA2Rzg5eTVneW8ybVd3QWQ2Vy1EalhzZw?oc=5",
           "publishedAt": "2026-11-22T18:12:03+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "summary": "조희대 대법원장 탄핵 추진에 대한 전국 여론조사 결과(반대 44%, 찬성 34%)가 공표됨.",
+      "articles": [
+        {
+          "title": "개혁신당, 국힘에 '조희대 탄핵 반대 연대' 거듭 제안",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261126078900001",
+          "publishedAt": "2026-11-26T11:05:52+09:00"
+        },
+        {
+          "title": "“조희대 탄핵 찬성” 34%, “반대” 44% [NBS]",
+          "outlet": "한겨레",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5OWUdSODBQZVF2U0ZBX3U4YkVsNWZCc1RTLXdIMmdOU0xjTTNMOGl1MGIxaVdDVmxTcDlWbHpDUExRZnBEVk5SSVRyWU5udl9XYzJTa2h5UEhPNHZWRnZZQlIxdHBLZTBBUzNIZGF4enBlUEJC?oc=5",
+          "publishedAt": "2026-11-26T11:33:00+09:00"
+        },
+        {
+          "title": "'대법원장 탄핵 추진'에 '반대' 44％…'찬성'은 34％[NBS]",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261126091700001",
+          "publishedAt": "2026-11-26T11:48:01+09:00"
+        },
+        {
+          "title": "국힘, '계엄 2주년'에 대법원장 탄핵 추진 규탄 장외집회 검토",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261126095100001",
+          "publishedAt": "2026-11-26T11:58:07+09:00"
         }
       ]
     }

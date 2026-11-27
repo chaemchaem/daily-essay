@@ -3,7 +3,7 @@
   "title": "트럼프 행정부, 내년 1월 초 목표 러·우 종전 협상 추진 보도",
   "category": "world",
   "firstDate": "2026-11-22",
-  "lastDate": "2026-11-22",
+  "lastDate": "2026-11-27",
   "topics": [
     {
       "id": "2026-11-22-3063929f",
@@ -12,5 +12,30 @@
       "kind": "new"
     }
   ],
-  "updates": []
+  "updates": [
+    {
+      "date": "2026-11-27",
+      "summary": "트럼프 대통령이 푸틴과의 대화 내용을 직접 언급하며 유럽 침략 중단 요구 및 종전 가능성을 재확인함.",
+      "articles": [
+        {
+          "title": "트럼프 \"푸틴에 유럽 침략 중단 요구…우크라 종전 충분히 가능\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261127003400071",
+          "publishedAt": "2026-11-27T04:18:04+09:00"
+        },
+        {
+          "title": "트럼프 \"푸틴에 유럽 침략 중단 요구…우크라 종전 충분히 가능\"",
+          "outlet": "연합뉴스TV",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE0wMzRwZjQ0cXdQX2pCYkRDWkxZcXR5NVNEbmhiejZYbUcyTktDMVN4NElZWjRPYXhEZ2g4UkVVTm02UTZCRXc1ajdKVXV5aGkwbFNHNlVGYXZYV00ycVRUTmN4bEctVkU?oc=5",
+          "publishedAt": "2026-11-27T04:31:00+09:00"
+        },
+        {
+          "title": "트럼프 “푸틴에 유럽 공격 중단 요구…우크라와 합의 가능성 커”",
+          "outlet": "동아일보",
+          "url": "https://www.donga.com/news/Inter/article/all/20261127/135100823/1",
+          "publishedAt": "2026-11-27T06:15:00+09:00"
+        }
+      ]
+    }
+  ]
 }

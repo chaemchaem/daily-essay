@@ -3,7 +3,7 @@
   "title": "북 선전매체, '적대적 두 국가' 반영 개정 헌법 전문 공개",
   "category": "politics",
   "firstDate": "2026-11-12",
-  "lastDate": "2026-11-26",
+  "lastDate": "2026-11-27",
   "topics": [
     {
       "id": "2026-11-12-ea615cd6",
@@ -40,6 +40,36 @@
           "outlet": "동아일보",
           "url": "https://www.donga.com/news/Politics/article/all/20261126/135092944/1",
           "publishedAt": "2026-11-26T07:15:00+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "summary": "김정은이 핵잠수함 원자로 추정 장비 등 구체적인 핵동력 생산 시설 현장을 대외에 최초로 공개함.",
+      "articles": [
+        {
+          "title": "김정은, 핵잠 원자로 추정 장비-새 우라늄 농축시설 공개",
+          "outlet": "동아일보",
+          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zTHEtODRSOWFESDIxaGRjZGxpNlV2SnZWODR0dWFaUERkT2FFM1ViVEIzM0NibG9zR1dtaFNQbkZfb2FlQUdYYTJabUdQcC1jaV95M0tNRW5NSTM1QW1rVW41UnJxejB5ZkZid0Y2Uzl4VHFMYkl30gFmQVVfeXFMTllpazdVa0J3MDJZd3VCTXhfYVFvNG40c0V2UTdFZkNTZ2hKTUpYb1RzTFRNRHNIZGoxdWN6TzRvbGxnMUFPbmZjMUV6bEZ1YkN2ZC1MQU94WkI2LV9Jb0N1NTEyc1NB?oc=5",
+          "publishedAt": "2026-11-26T12:36:00+09:00"
+        },
+        {
+          "title": "김정은 “비핵화 요구, 선전포고”…핵잠용 원자로 장비 첫 공개",
+          "outlet": "경향신문",
+          "url": "https://www.khan.co.kr/article/202611262112005/?amp%3Butm_medium=rss&amp%3Butm_campaign=total_news",
+          "publishedAt": "2026-11-26T21:12:00+09:00"
+        },
+        {
+          "title": "'핵잠 원자로' 추정 장비…회담 요구에 핵으로 답하다",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008865637&cooper=RSSREADER",
+          "publishedAt": "2026-11-26T22:22:00+09:00"
+        },
+        {
+          "title": "핵잠 원자로까지? 회담 요구에 '핵'으로 답한 북한",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008865826&cooper=RSSREADER",
+          "publishedAt": "2026-11-27T00:07:00+09:00"
         }
       ]
     }

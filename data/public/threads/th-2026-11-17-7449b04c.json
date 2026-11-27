@@ -3,7 +3,7 @@
   "title": "수능 앞두고 AI 부정행위 우려…정부 와이파이 차단 등 긴급 대책 추진",
   "category": "education",
   "firstDate": "2026-11-17",
-  "lastDate": "2026-11-24",
+  "lastDate": "2026-11-27",
   "topics": [
     {
       "id": "2026-11-17-7449b04c",
@@ -190,6 +190,36 @@
           "outlet": "조선일보",
           "url": "https://www.chosun.com/national/education/2026/11/23/4ZR4HH42P5C6LIBDEGRLLQ7W7Q/",
           "publishedAt": "2026-11-23T21:41:51+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "summary": "세무사 시험 AI 부정행위 자수자에 대해 경찰이 구속영장을 신청함.",
+      "articles": [
+        {
+          "title": "[속보] 경찰 'AI커닝 자수' 세무사 수석 구속영장 신청…\"도주 우려\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261126186100004",
+          "publishedAt": "2026-11-26T19:00:02+09:00"
+        },
+        {
+          "title": "경찰, 'AI 커닝' 세무사 수석 구속영장 신청…\"증거인멸 우려\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261126187600004",
+          "publishedAt": "2026-11-26T19:19:08+09:00"
+        },
+        {
+          "title": "경찰, ‘AI 커닝’ 세무사 수석 구속영장 신청",
+          "outlet": "조선일보",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOanV0YVZsWkQ0cmtvQVBVVWFxZVd2SWtPYktObDZrTl82ZjJiSTJFdnlUMDF5NDJ1eUQtVnRrMTFMbDB0YXFaNWoyMGZnbmhEZVBuLWh2dFBtYTVUbURSeTNJNTdvSllBWDdyNXhkaFZUdnNuYVVBT1BGR2Y1VDRCQnl6Zk0yT2pGcEJ0SkJ4V3Y?oc=5",
+          "publishedAt": "2026-11-26T19:19:50+09:00"
+        },
+        {
+          "title": "경찰, 'AI 부정' 세무사 수석 합격자 구속영장 신청",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008865663&cooper=RSSREADER",
+          "publishedAt": "2026-11-26T22:20:00+09:00"
         }
       ]
     }
