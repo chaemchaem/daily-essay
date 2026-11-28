@@ -3,7 +3,7 @@
   "title": "정부, '조작기소 특검법' 10일 국무회의 미상정…법리 검토 착수",
   "category": "politics",
   "firstDate": "2026-11-11",
-  "lastDate": "2026-11-25",
+  "lastDate": "2026-11-28",
   "topics": [
     {
       "id": "2026-11-11-ed6e3a2f",
@@ -130,6 +130,36 @@
           "outlet": "한국경제",
           "url": "https://www.hankyung.com/article/2026112225657",
           "publishedAt": "2026-11-22T20:00:46+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "summary": "이용철 법무장관 후보자 청문회 이후 법사위가 야당 불참 속에서 인사청문보고서를 범여권 단독 채택함",
+      "articles": [
+        {
+          "title": "[속보] 법사위, 이용철 법무장관 후보 인사청문보고서 채택…국힘 퇴장",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261127123800001",
+          "publishedAt": "2026-11-27T15:53:31+09:00"
+        },
+        {
+          "title": "이용철 법무장관 후보자 청문보고서 채택…국힘 퇴장",
+          "outlet": "한겨레",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBacWlYZjJERDgtTGR0TURfTm1DbWYtZlUtUjV0c2h0YWdXUlZqUDRPN2RvY1NEZDlfQnlJOVpBOHY0LVQ0OGd5R2JkMkprRDMxQVJ3Y1hRaUdZOGl2RkRzSkRPUFVqSnJSSUZkOEdkdVlqaGc3?oc=5",
+          "publishedAt": "2026-11-27T16:07:00+09:00"
+        },
+        {
+          "title": "법사위, 이용철 청문보고서 與 주도 채택…국힘 표결 불참",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261127130100001",
+          "publishedAt": "2026-11-27T16:33:47+09:00"
+        },
+        {
+          "title": "법사위, 이용철 청문보고서 민주당 주도 채택…국민의힘 표결 불참",
+          "outlet": "SBS",
+          "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008867184&cooper=RSSREADER",
+          "publishedAt": "2026-11-27T17:24:00+09:00"
         }
       ]
     }

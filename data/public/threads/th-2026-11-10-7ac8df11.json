@@ -3,7 +3,7 @@
   "title": "이란 외무부, 한국의 청해부대 작전구역 확대·파병에 우려 표명",
   "category": "world",
   "firstDate": "2026-11-10",
-  "lastDate": "2026-11-14",
+  "lastDate": "2026-11-28",
   "topics": [
     {
       "id": "2026-11-10-7ac8df11",
@@ -40,6 +40,36 @@
           "outlet": "매일경제",
           "url": "https://www.mk.co.kr/news/politics/12208402",
           "publishedAt": "2026-11-13T21:16:39+09:00"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "summary": "도널드 트럼프 미국 대통령이 이란과의 전쟁을 자신이 원할 때 언제든 끝낼 수 있다며 이란을 강하게 압박하는 발언을 했다.",
+      "articles": [
+        {
+          "title": "트럼프 \"이란전, 언제든 원할때 끝내…분명히 곡괭이산 타격\"",
+          "outlet": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20261128002200071",
+          "publishedAt": "2026-11-28T01:29:17+09:00"
+        },
+        {
+          "title": "트럼프 \"이란전, 언제든 원할때 끝내…분명히 곡괭이산 타격\"",
+          "outlet": "연합뉴스TV",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE90TE1wTUVCVnNKMldQX21kdndBS3FvcHNuenZYZC1oLXNVUjlMUnVXcHlvU3drcFRyLVJUbG1CeXFLX24tUV9kNFN4a2IxaWEtc3ZGakY5RFlsOGxkNjN4dU8zWEtTVjg?oc=5",
+          "publishedAt": "2026-11-28T01:38:00+09:00"
+        },
+        {
+          "title": "트럼프 “이란전 승리 눈앞…내가 원할 때 언제든”",
+          "outlet": "매일경제",
+          "url": "https://www.mk.co.kr/news/world/12220594",
+          "publishedAt": "2026-11-28T06:31:48+09:00"
+        },
+        {
+          "title": "트럼프 \"내가 원할 때 언제든 전쟁 끝낼 것\"…이란 압박",
+          "outlet": "한국경제",
+          "url": "https://www.hankyung.com/article/2026112857907",
+          "publishedAt": "2026-11-28T07:33:36+09:00"
         }
       ]
     }
