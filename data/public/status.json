@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-28T09:46:54+09:00",
+  "generatedAt": "2026-11-28T09:47:13+09:00",
   "paused": false,
   "pausedReason": null,
   "schedule": {
@@ -25,6 +25,17 @@
   },
   "lock": null,
   "recentRuns": [
+    {
+      "id": "2026-11-28T0947-scheduled-2026-11-28",
+      "kind": "scheduled",
+      "targetDate": "2026-11-28",
+      "startedAt": "2026-11-28T09:47:13+09:00",
+      "finishedAt": "2026-11-28T09:47:13+09:00",
+      "outcome": "partial",
+      "outcomeLabel": "일부 발행",
+      "failedStep": null,
+      "trigger": "cron"
+    },
     {
       "id": "2026-11-28T0833-scheduled-2026-11-28",
       "kind": "scheduled",
@@ -174,17 +185,6 @@
       "targetDate": "2026-11-23",
       "startedAt": "2026-11-23T09:20:02+09:00",
       "finishedAt": "2026-11-23T09:20:02+09:00",
-      "outcome": "partial",
-      "outcomeLabel": "일부 발행",
-      "failedStep": null,
-      "trigger": "cron"
-    },
-    {
-      "id": "2026-11-23T0900-scheduled-2026-11-23",
-      "kind": "scheduled",
-      "targetDate": "2026-11-23",
-      "startedAt": "2026-11-23T09:00:20+09:00",
-      "finishedAt": "2026-11-23T09:00:20+09:00",
       "outcome": "partial",
       "outcomeLabel": "일부 발행",
       "failedStep": null,
